@@ -20,7 +20,7 @@ nav {
 
   .navbar-button {
     color: $light-gray;
-    font-family: 'Cairo';
+    font-family: $default-font;
     text-transform: uppercase;
     padding: 10px;
   }
@@ -31,16 +31,20 @@ nav {
 
   .right-section {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 100%;
 
     .green-button {
-      background-color: $green;
+      background-color: $green !important;
+      font-weight: normal;
+      color: $white;
+      text-decoration: none;
 
       .auth-button {
         display: flex;
         flex-direction: row;
         align-items: center;
+        border-radius: 0px;
 
         mat-icon {
           margin-right: 10px;
