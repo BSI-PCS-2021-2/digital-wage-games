@@ -1,0 +1,24 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: #262626;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .button-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-button {
+    color: #cccccc;
+    font-family: 'Cairo';
+    text-transform: uppercase;
+    padding: 10px;
+  }
+}
