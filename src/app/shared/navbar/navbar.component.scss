@@ -1,7 +1,10 @@
+@import './../../../assets/styles/variables.scss';
+@import './../../../assets/styles/search-bar.scss';
+
 nav {
   display: flex;
   flex-direction: row;
-  background-color: #262626;
+  background-color: $dark-gray;
 
   .logo {
     display: flex;
@@ -16,9 +19,35 @@ nav {
   }
 
   .navbar-button {
-    color: #cccccc;
+    color: $light-gray;
     font-family: 'Cairo';
     text-transform: uppercase;
     padding: 10px;
   }
+
+  .logo-button {
+    background-color: $gray !important;
+  }
+
+  .right-section {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+
+    .green-button {
+      background-color: $green;
+
+      .auth-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        mat-icon {
+          margin-right: 10px;
+        }
+      }
+    }
+
+  }
+
 }

@@ -1,12 +1,27 @@
 <nav>
   <div class="logo">
-    <button mat-button class="navbar-button"><img src="assets/images/dwg-logo.png" width="40" height="40" alt="logo"></button>
+    <button mat-flat-button class="navbar-button logo-button"><img src="assets/images/dwg-logo.png" width="40" height="40" alt="logo"></button>
   </div>
   <div class="button-row">
-    <button mat-button class="navbar-button">Destaque</button>
+    <button mat-button class="navbar-button">Destaques</button>
     <button mat-button class="navbar-button">Promoções</button>
     <button mat-button class="navbar-button">Lançamentos</button>
     <button mat-button class="navbar-button">Sobre</button>
     <button mat-button class="navbar-button">Suporte</button>
+  </div>
+  <div class="right-section">
+    <div class="search">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input matInput>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <button class="navbar-button green-button" mat-button>
+      <div class="auth-button">
+        <mat-icon matSuffix>account_circle</mat-icon>
+        Entrar
+      </div>
+    </button>
   </div>
 </nav>
