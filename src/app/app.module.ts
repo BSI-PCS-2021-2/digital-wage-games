@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SignupComponent } from './components/signup/signup.component';
     AppComponent,
     HomeComponent,
     NavbarComponent,
+    FooterComponent,
     LoginComponent,
     SignupComponent
   ],
