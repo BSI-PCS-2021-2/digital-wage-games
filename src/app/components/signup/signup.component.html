@@ -1,0 +1,99 @@
+<div class="signup">
+  <div class="main-section">
+    <h2>Cadastrar</h2>
+    <mat-card>
+
+      <mat-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup" errorMessage="Incompleto">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Dados da Conta</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="emailCtrl" required autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Nome de usuário</mat-label>
+              <input matInput formControlName="usernameCtrl" required autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Senha</mat-label>
+              <input matInput type="password" formControlName="passwordCtrl" required autocomplete="off">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Confirmação da Senha</mat-label>
+              <input matInput type="password" formControlName="passwordConfirmationCtrl" required autocomplete="off">
+            </mat-form-field>
+            <div>
+              <button mat-flat-button matStepperNext>Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" optional>
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Dados Pessoais</ng-template>
+            <section class="one-to-three">
+              <section class="one">
+                <mat-form-field appearance="fill">
+                  <mat-label>CEP</mat-label>
+                  <input matInput formControlName="cepCtrl" autocomplete="off">
+                </mat-form-field>
+              </section>
+              <section class="three">
+                <mat-form-field appearance="fill">
+                  <mat-label>Cidade</mat-label>
+                  <input matInput formControlName="cityCtrl" autocomplete="off">
+                </mat-form-field>
+              </section>
+            </section>
+            <section class="one-to-three">
+              <section class="one">
+                <mat-form-field appearance="fill">
+                  <mat-label>UF</mat-label>
+                  <input matInput formControlName="stateCtrl" autocomplete="off">
+                </mat-form-field>
+              </section>
+              <section class="three">
+                <mat-form-field appearance="fill">
+                  <mat-label>Bairro</mat-label>
+                  <input matInput formControlName="districtCtrl" autocomplete="off">
+                </mat-form-field>
+              </section>
+            </section>
+            <mat-form-field appearance="fill">
+              <mat-label>Rua</mat-label>
+              <input matInput formControlName="streetCtrl" autocomplete="off">
+            </mat-form-field>
+            <section class="one-to-three">
+              <section class="one">
+                <mat-form-field appearance="fill">
+                  <mat-label>Número</mat-label>
+                  <input matInput formControlName="numberCtrl" autocomplete="off">
+                </mat-form-field>
+              </section>
+              <section class="three">
+                <mat-form-field appearance="fill">
+                  <mat-label>Complemento</mat-label>
+                  <input matInput formControlName="additionalInfoCtrl" autocomplete="off">
+                </mat-form-field>
+              </section>
+            </section>
+            <div>
+              <button mat-button matStepperPrevious>Voltar</button>
+              <button mat-flat-button matStepperNext>Próximo</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Confirmação</ng-template>
+          <p class="confirmation">Ao se cadastrar, você aceita os Termos de Uso, Política de Privacidade e a Política de Cookies.</p>
+          <div>
+            <button mat-button matStepperPrevious>Voltar</button>
+            <button mat-flat-button (click)="confirmSignup()">Confirmar</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+
+
+    </mat-card>
+  </div>
+</div>
