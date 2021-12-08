@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { SignupService } from './services/signup.service';
 import { SignUpFormDTO } from './models/signupformDTO';
@@ -24,8 +24,8 @@ export class StepperIntl extends MatStepperIntl {
 })
 export class SignupComponent implements OnInit {
 
-  public firstFormGroup: FormGroup;
-  public secondFormGroup: FormGroup;
+  public accountFormGroup: FormGroup;
+  public personalFormGroup: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,42 +33,54 @@ export class SignupComponent implements OnInit {
     private signupService: SignupService) { }
 
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      emailCtrl: ['', Validators.email],
+    this.accountFormGroup = this.formBuilder.group({
+      emailCtrl: ['', [Validators.required, Validators.email]],
       usernameCtrl: ['', Validators.required],
       passwordCtrl: ['', Validators.required],
       passwordConfirmationCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this.formBuilder.group({
+    this.personalFormGroup = this.formBuilder.group({
       cepCtrl: [''],
       cityCtrl: [''],
       stateCtrl: [''],
       districtCtrl: [''],
       numberCtrl: [''],
       additionalInfoCtrl: [''],
-      streetCtrl: ['']
+      streetCtrl: [''],
+      phone1Ctrl: [''],
+      phone2Ctrl: [''],
+      phone3Ctrl: [''],
+      secondaryEmailCtrl: ['', Validators.email],
     });
 
     this.matStepperIntl.changes.next();
   }
 
-  confirmSignup (): void {
+  public confirmSignup (): void {
     const signUpForm: SignUpFormDTO = {
-      email: this.firstFormGroup.get('emailCtrl').value,
-      username: this.firstFormGroup.get('usernameCtrl').value,
-      passwordCtrl: this.firstFormGroup.get('passwordCtrl').value,
-      passwordConfirmationCtrl: this.firstFormGroup.get('passwordConfirmationCtrl').value,
-      cepCtrl: this.secondFormGroup.get('cepCtrl').value,
-      cityCtrl: this.secondFormGroup.get('cityCtrl').value,
-      stateCtrl: this.secondFormGroup.get('stateCtrl').value,
-      districtCtrl: this.secondFormGroup.get('districtCtrl').value,
-      numberCtrl: this.secondFormGroup.get('numberCtrl').value,
-      additionalInfoCtrl: this.secondFormGroup.get('additionalInfoCtrl').value,
-      streetCtrl: this.secondFormGroup.get('streetCtrl').value,
+      email: this.accountFormGroup.get('emailCtrl').value,
+      username: this.accountFormGroup.get('usernameCtrl').value,
+      password: this.accountFormGroup.get('passwordCtrl').value,
+      passwordConfirmation: this.accountFormGroup.get('passwordConfirmationCtrl').value,
+      cep: this.personalFormGroup.get('cepCtrl').value,
+      city: this.personalFormGroup.get('cityCtrl').value,
+      state: this.personalFormGroup.get('stateCtrl').value,
+      district: this.personalFormGroup.get('districtCtrl').value,
+      number: this.personalFormGroup.get('numberCtrl').value,
+      additionalInfo: this.personalFormGroup.get('additionalInfoCtrl').value,
+      street: this.personalFormGroup.get('streetCtrl').value,
+      phone1: this.personalFormGroup.get('phone1Ctrl').value,
+      phone2: this.personalFormGroup.get('phone2Ctrl').value,
+      phone3: this.personalFormGroup.get('phone3Ctrl').value,
+      secondaryEmail: this.personalFormGroup.get('secondaryEmailCtrl').value,
     }
 
-    this.signupService.signUp(signUpForm);
+    this.signupService.signUp(signUpForm).subscribe();
 
+  }
+
+  public isFormValid (): boolean {
+    return this.accountFormGroup.valid && this.personalFormGroup.valid;
   }
 
 }
