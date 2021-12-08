@@ -1,15 +1,17 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/stepper.scss';
+@import './../../../assets/styles/link.scss';
 
 .signup {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
   text-transform: uppercase;
   color: $white;
   font-family: $default-font;
+  margin-top: 80px;
+  margin-bottom: 80px;
 
   .main-section {
     display: flex;
@@ -20,7 +22,6 @@
   }
 
   mat-card {
-    height: 500px;
     width: 600px;
     background-color: $dark-gray;
     font-family: $default-font;
@@ -28,33 +29,36 @@
 
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  mat-form-field {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-  }
+mat-form-field {
+  text-transform: none;
 }
 
-.one-to-three {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+mat-form-field {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.one {
-  width: 206px;
-  margin-right: 20px;
+mat-grid-list {
+  margin-top: -10px !important;
+  margin-bottom: -10px !important;
 }
 
+.small-input {
+  width: 150px;
+}
 
-.three {
-  width: 306px;
-  margin-left: 20px;
+.medium-input {
+  width: 338px;
+}
+
+.full-width-input {
+  width: 525px;
+  margin-left: 12px;
+}
+
+.grid-layout-custom{
+  width: 200px;
+  height: 200px;
 }
 
 button {
@@ -63,4 +67,15 @@ button {
 
 .confirmation {
   margin-top: 80px;
+}
+
+h3 {
+  margin-top: 30px;
+  margin-left: 12px;
+}
+
+.navigator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
