@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -25,7 +26,8 @@ import { SignupComponent } from './components/signup/signup.component';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    CatalogoComponent
   ],
   imports: [
     BrowserModule,

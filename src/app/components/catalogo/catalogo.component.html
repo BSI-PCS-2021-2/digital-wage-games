@@ -1,0 +1,108 @@
+<div class="main">
+  <div class="main-container">
+    <div class="bar-container">
+
+      <div class="filter-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Ordenar por</mat-label>
+          <select matNativeControl required>
+            <option value="rising-price">Preço crescente</option>
+            <option value="decreasing-price">Preço decrescente</option>
+            <option value="release-date">Data de lançamento</option>
+            <option value="best-rating">Melhor avaliação</option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div class="search">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Buscar</mat-label>
+          <input matInput autocomplete="off">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="catalog-container">
+      <div class="item" *ngFor="let game of games">
+
+        <mat-card>
+          <a href="#">
+            <mat-card-header>
+              <mat-card-title>{{game.name}}</mat-card-title>
+              <mat-card-subtitle>{{game.description}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src={{game.imgPath}} alt="Photo of a Shiba Inu">
+          </a>
+          <mat-card-actions>
+            <button class="more-button" mat-button>Ver mais</button>
+            <button class="buy-button" mat-button>
+              Carrinho
+              <mat-icon matSuffix>add_shopping_cart</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+  <div class="aside-container">
+    <div class="filter price-filter">
+      Preço
+      <div class="slider slider-price" style="height: 30px">
+
+      </div>
+    </div>
+    <div class="filter rating-filter">
+      Avaliação
+
+      <div class="slider slider-rating" style="height: 30px">
+
+      </div>
+    </div>
+    <div class="plataform-filter">
+      <mat-form-field appearance="fill">
+        <mat-label>Plataforma </mat-label>
+        <select matNativeControl required>
+          <option value="ps4">PS4</option>
+          <option value="ps5">PS5</option>
+          <option value="xbox-one">XBOX ONE</option>
+          <option value="xbox-x">XBOX X</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="system-filter">
+      <mat-form-field appearance="fill">
+        <mat-label>Ordenar por: </mat-label>
+        <select matNativeControl required>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="gender-filter">
+      <mat-form-field appearance="fill">
+        <mat-label>Gênero </mat-label>
+        <select matNativeControl required>
+          <option value="acao">Ação e aventura</option>
+          <option value="terror">Terror</option>
+          <option value="rpg">RPG</option>
+          <option value="fps">FPS</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="publisher-filter">
+      <mat-form-field appearance="fill">
+        <mat-label>Publisher </mat-label>
+        <select matNativeControl required>
+          <option value="ea">EA</option>
+          <option value="sony">Sony</option>
+          <option value="blizzard">Blizzard</option>
+          <option value="from-software">From Software</option>
+        </select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
