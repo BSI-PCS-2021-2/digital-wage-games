@@ -2,7 +2,7 @@
 
 mat-form-field {
   padding: 0 5px;
-  select {
+  mat-option {
     background-color: $gray;
     color: $light-gray;
   }
@@ -13,13 +13,22 @@ a {
   color: $light-gray;
 }
 
+  .cart-button {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background-color: $green !important;
+    color: $white;
+  }
+
 .wrapper {
   display: flex;
   justify-content: center;
+  padding: $padding-page;
+  padding-top: 90px !important;
 }
 
 .main {
-    padding: $padding-page;
     display: flex;
     justify-content: space-around;
 
@@ -72,16 +81,42 @@ a {
                 border-radius: 5px;
                 max-width: 350px;
 
-                mat-card-title {
-                  font-size: 2em;
-                  text-align: center;
-                  margin: 15px 0;
+                .product-img {
+                  margin: 20px 0;
                 }
 
-                mat-card-subtitle {
+                .product-price {
                   color: $light-gray;
-                  text-align: center;
-                  margin: 30px 0;
+                  font-size: 2.2em;
+                  margin: 25px 0 25px 0;
+                }
+
+                .product-name {
+                  font-size: 1.5em;
+                  margin: 15px 0;
+                  color: $light-gray;
+                }
+                mat-card-header {
+                  display: block;
+                }
+
+                .rate-container {
+
+                  margin: 0 16px;
+
+                  .product-rate {
+                    display: flex;
+
+
+                    i {
+                      color: yellow;
+                      margin: 10px 3px 10px 0;
+                    }
+                  }
+
+                  .product-rate-amount {
+                    color: $light-gray;
+                  }
                 }
 
                 mat-card-actions {
@@ -125,6 +160,7 @@ a {
     }
 
     .aside-container {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;

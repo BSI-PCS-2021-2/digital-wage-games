@@ -1,39 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatStepperIntl } from '@angular/material/stepper';
+import { Product } from '../../../app/shared/models/product.model';
+import { ProductService } from '../../shared/services/product.service';
 
 
-interface Game {
-  name: string;
-  price: string;
-  description: string;
-  imgPath: string;
+@Injectable()
+export class StepperIntl extends MatStepperIntl {
+  override optionalLabel = '(OPCIONAL)';
 }
+
 
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
   styleUrls: ['./catalogo.component.scss']
 })
+
 export class CatalogoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.products = this.productService.getProducts();
   }
-  
-  // isso virá do banco de dados
 
-  games: Game[] = [
-    {name: 'Call of Duty',
-    price: 'R$ 299,99',
-    description: "Lorem ipsum dolor sit amet, c quis nostrud exercitation ullamco laboris nisi ut aliquip ex e.",
-    imgPath: 'assets/images/game1.png'},
-    {name: 'Call of Duty',
-    price: 'R$ 299,99',
-    description: "Lorem ipsum dolor sit amet, c quis nostrud exercitation ullamco laboris nisi ut aliquip ex e.",
-    imgPath: 'assets/images/game1.png'},
-    {name: 'Call of Duty',
-    price: 'R$ 299,99',
-    description: "Lorem ipsum dolor sit amet, c quis nostrud exercitation ullamco laboris nisi ut aliquip ex e.",
-    imgPath: 'assets/images/game1.png'},
-  ];
+  selected = 'relevant';
+
+  products: Product[];
+
+
+
+  // implementar logica para preencher os icones de avaliação.
+
+  rateArr = [1,2,3,4];
+
 }
