@@ -24,7 +24,16 @@
               <mat-label>Nome de usuário</mat-label>
               <input matInput formControlName="usernameCtrl" required autocomplete="off">
               <mat-error *ngIf="accountFormGroup.get('usernameCtrl').hasError('required')">
-                O nome é obrigatório
+                O nome de usuário é obrigatório
+              </mat-error>
+              <mat-error *ngIf="accountFormGroup.get('usernameCtrl').hasError('pattern')">
+                O nome de usuário só pode conter letras e números
+              </mat-error>
+              <mat-error *ngIf="accountFormGroup.get('usernameCtrl').hasError('minlength')">
+                O nome de usuário deve ter pelo menos 5 caracteres
+              </mat-error>
+              <mat-error *ngIf="accountFormGroup.get('usernameCtrl').hasError('maxlength')">
+                O nome de usuário deve ter no máximo 30 caracteres
               </mat-error>
             </mat-form-field>
 
@@ -34,6 +43,12 @@
               <mat-error *ngIf="accountFormGroup.get('passwordCtrl').hasError('required')">
                 A senha é obrigatória
               </mat-error>
+              <mat-error *ngIf="accountFormGroup.get('passwordCtrl').hasError('minlength')">
+                A senha deve ter pelo menos 8 caracteres
+              </mat-error>
+              <mat-error *ngIf="accountFormGroup.get('passwordCtrl').hasError('strength')">
+                Requisitos: (1) 8 caracteres; (2) uma maiúscula; (3) uma minúscula, (4) um número
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width-input" appearance="fill">
@@ -41,6 +56,9 @@
               <input matInput type="password" formControlName="passwordConfirmationCtrl" required autocomplete="off">
               <mat-error *ngIf="accountFormGroup.get('passwordConfirmationCtrl').hasError('required')">
                 A confirmação da senha é obrigatória
+              </mat-error>
+              <mat-error *ngIf="accountFormGroup.get('passwordConfirmationCtrl').hasError('mismatch')">
+                As senhas não correspondem
               </mat-error>
             </mat-form-field>
 
@@ -59,7 +77,7 @@
               <mat-grid-tile>
                 <mat-form-field class="small-input" appearance="fill">
                   <mat-label>CEP</mat-label>
-                  <input matInput formControlName="cepCtrl" autocomplete="off">
+                  <input matInput formControlName="postalCodeCtrl" autocomplete="off">
                 </mat-form-field>
               </mat-grid-tile>
               <mat-grid-tile [colspan]="2">

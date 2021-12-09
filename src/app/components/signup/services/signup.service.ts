@@ -12,17 +12,16 @@ export class SignupService {
 
   constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
-  signUp(signUpForm: SignUpFormDTO): Observable<boolean> {
+  signUp(signUpForm: SignUpFormDTO): Observable<number[]> {
 
-    return this.http.post<boolean>(`${environment.baseUrl}/clients/users`, signUpForm)
+    return this.http.post<number[]>(`${environment.baseUrl}/clients/users`, signUpForm)
       .pipe(
         take(1),
-        tap((success: boolean) => {
-
-          if (success) {
+        tap((index: number[]) => {
+          if (index.length > 0) {
             this.notificationService.success('Cadastro concluído!');
           } else {
-            this.notificationService.alert('Informações inválidas');
+            this.notificationService.alert('O nome de usuário já existe!');
           }
 
         }),

@@ -1,9 +1,9 @@
 export interface SignUpFormDTO {
   email: string;
   username: string;
+  name: string
   password: string;
-  passwordConfirmation: string;
-  cep: string;
+  postalCode: string;
   city: string;
   state: string;
   district: string;
