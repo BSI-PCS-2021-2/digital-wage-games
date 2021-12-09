@@ -5,7 +5,6 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  text-transform: uppercase;
   color: $white;
   margin-top: 120px;
   margin-bottom: 80px;
@@ -37,6 +36,7 @@
 h2 {
   font-family: $default-font !important;
   font-weight: normal;
+  text-transform: uppercase;
 }
 
 .green-button {
@@ -96,10 +96,15 @@ a {
 .ad {
   color: $light-gray;
   margin-bottom: 30px;
+  text-transform: uppercase;
 }
 
 .forgot-password {
   color: $light-gray;
   margin-top: 70px;
   font-size: 90%;
+}
+
+lottie-player {
+  height: 400px;
 }

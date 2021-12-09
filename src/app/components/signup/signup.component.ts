@@ -1,5 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { SignupService } from './services/signup.service';
@@ -35,12 +35,20 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.accountFormGroup = this.formBuilder.group({
       emailCtrl: ['', [Validators.required, Validators.email]],
-      usernameCtrl: ['', Validators.required],
+      usernameCtrl: ['', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.-]*$'),
+        Validators.minLength(5),
+        Validators.maxLength(30)
+      ]],
       passwordCtrl: ['', Validators.required],
       passwordConfirmationCtrl: ['', Validators.required]
+    },
+    {
+      validators: [this.passwordMatchValidator, this.passwordStrengthValidator]
     });
     this.personalFormGroup = this.formBuilder.group({
-      cepCtrl: [''],
+      postalCodeCtrl: [''],
       cityCtrl: [''],
       stateCtrl: [''],
       districtCtrl: [''],
@@ -60,9 +68,9 @@ export class SignupComponent implements OnInit {
     const signUpForm: SignUpFormDTO = {
       email: this.accountFormGroup.get('emailCtrl').value,
       username: this.accountFormGroup.get('usernameCtrl').value,
+      name: null,
       password: this.accountFormGroup.get('passwordCtrl').value,
-      passwordConfirmation: this.accountFormGroup.get('passwordConfirmationCtrl').value,
-      cep: this.personalFormGroup.get('cepCtrl').value,
+      postalCode: this.personalFormGroup.get('postalCodeCtrl').value,
       city: this.personalFormGroup.get('cityCtrl').value,
       state: this.personalFormGroup.get('stateCtrl').value,
       district: this.personalFormGroup.get('districtCtrl').value,
@@ -82,5 +90,38 @@ export class SignupComponent implements OnInit {
   public isFormValid (): boolean {
     return this.accountFormGroup.valid && this.personalFormGroup.valid;
   }
+
+  passwordMatchValidator(form: FormGroup): { [key: string]: any } {
+    const password = form.controls['passwordCtrl'].value;
+    const passwordConfirmation = form.controls['passwordConfirmationCtrl'].value;
+
+    if (!password || !passwordConfirmation) {
+       return null;
+    } else if (password !== passwordConfirmation) {
+      form.controls['passwordCtrl'].setErrors({mismatch: true});
+      form.controls['passwordConfirmationCtrl'].setErrors({mismatch: true});
+      return {mismatch: false}
+    } else if (password === passwordConfirmation) {
+      form.controls['passwordCtrl'].setErrors(null);
+      form.controls['passwordConfirmationCtrl'].setErrors(null);
+      return null;
+    }
+
+    return null;
+ }
+
+  passwordStrengthValidator(form: FormGroup): { [key: string]: any } {
+  let hasNumber = /\d/.test(form.controls['passwordCtrl'].value);
+  let hasUpper = /[A-Z]/.test(form.controls['passwordCtrl'].value);
+  let hasLower = /[a-z]/.test(form.controls['passwordCtrl'].value);
+  let isGreaterThan8 = form.controls['passwordCtrl'].value.length >= 8;
+
+  if (hasNumber && hasUpper && hasLower && isGreaterThan8) {
+    form.controls['passwordCtrl'].setErrors(null);
+    return null;
+  }
+  form.controls['passwordCtrl'].setErrors({strength: true});
+  return { strength: true };
+}
 
 }
