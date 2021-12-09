@@ -6,7 +6,8 @@
         <div class="filter-container">
           <mat-form-field appearance="fill">
             <mat-label>Ordenar por</mat-label>
-            <mat-select >
+            <mat-select [(value)]="selected">
+              <mat-option value="relevant">Maior relevância</mat-option>
               <mat-option value="rising-price">Preço crescente</mat-option>
               <mat-option value="decreasing-price">Preço decrescente</mat-option>
               <mat-option value="release-date">Data de lançamento</mat-option>
@@ -25,15 +26,25 @@
       </div>
 
       <div class="catalog-container">
-        <div class="item" *ngFor="let game of games">
-
+        <div class="item" *ngFor="let product of products">
         <mat-card>
           <a routerLink="/produto">
+            <img class="product-img" mat-card-image src="assets/images/game1.png">
             <mat-card-header>
-              <mat-card-title>{{game.name}}</mat-card-title>
-              <mat-card-subtitle>{{game.description}}</mat-card-subtitle>
+              <mat-card-title class="product-price">
+                {{ product.price }}
+              </mat-card-title>
+              <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
+              <div class="rate-container">
+                <div class="product-rate">
+                  <i class="fas fa-star" *ngFor="let star of rateArr"></i>
+                </div>
+                <p class="product-rate-amount">453 Avaliações</p>
+              </div>
+              <div class="product-description">
+                {{ product.description }}
+              </div>
             </mat-card-header>
-            <img mat-card-image src={{game.imgPath}} alt="Photo of a Shiba Inu">
           </a>
           <mat-card-actions>
             <button routerLink="/produto" class="more-button" mat-button>Ver mais</button>
@@ -43,28 +54,32 @@
             </button>
           </mat-card-actions>
         </mat-card>
-
         </div>
       </div>
     </div>
     <div class="aside-container">
+      <button  class="cart-button" mat-button>
+        Carrinho
+        <mat-icon matSuffix>add_shopping_cart</mat-icon>
+      </button>
       <div class="filter price-filter">
         Preço
         <div class="slider slider-price" style="height: 30px">
-
+          <-- Aqui entra o slider duplo--/>
         </div>
       </div>
       <div class="filter rating-filter">
         Avaliação
 
         <div class="slider slider-rating" style="height: 30px">
-
+            <-- Aqui entra o slider duplo--/>
         </div>
       </div>
       <div class="plataform-filter">
         <mat-form-field appearance="fill">
           <mat-label>Plataforma </mat-label>
           <mat-select >
+            <mat-option value="none">Nenhum</mat-option>
             <mat-option value="ps4">PS4</mat-option>
             <mat-option value="ps5">PS5</mat-option>
             <mat-option value="xbox-one">XBOX ONE</mat-option>
@@ -74,8 +89,9 @@
       </div>
       <div class="system-filter">
         <mat-form-field appearance="fill">
-          <mat-label>Ordenar por: </mat-label>
+          <mat-label>Sistema </mat-label>
           <mat-select >
+            <mat-option value="none">Nenhum</mat-option>
             <mat-option value="volvo">Volvo</mat-option>
             <mat-option value="saab">Saab</mat-option>
             <mat-option value="mercedes">Mercedes</mat-option>
@@ -87,6 +103,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Gênero </mat-label>
           <mat-select >
+            <mat-option value="none">Nenhum</mat-option>
             <mat-option value="acao">Ação e aventura</mat-option>
             <mat-option value="terror">Terror</mat-option>
             <mat-option value="rpg">RPG</mat-option>
@@ -98,6 +115,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Publisher </mat-label>
           <mat-select >
+            <mat-option value="none">Nenhum</mat-option>
             <mat-option value="ea">EA</mat-option>
             <mat-option value="sony">Sony</mat-option>
             <mat-option value="blizzard">Blizzard</mat-option>
