@@ -13,9 +13,15 @@ a {
   color: $light-gray;
 }
 
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .main {
     padding: $padding-page;
     display: flex;
+    justify-content: space-around;
 
     .main-container {
 

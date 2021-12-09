@@ -39,7 +39,7 @@ export class NotificationService {
 
   }
 
-  public stopedWithError() {
+  public stoppedWithError() {
 
   }
 }
