@@ -1,7 +1,7 @@
 import { Product } from '../../../app/shared/models/product.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { NotificationService } from './notification.service';
 
@@ -11,11 +11,12 @@ import { NotificationService } from './notification.service';
 })
 
 export class ProductService {
+  products: Product[];
 
-  constructor(private http: HttpClient, private notificationService: NotificationService) { }
+  constructor(private http: HttpClient) { }
 
-
-  getProduct():Observable<Product[]>{ 
-    return this.http.get<Product[]>(`${environment.baseUrl}/store/products`);                 
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.baseUrl}/store/products`);
   }
+
 }

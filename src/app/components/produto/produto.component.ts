@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../produto/services/produto.service';
+import { ProductService } from '../../shared/services/produto.service';
 
 export interface Game {
   name: string;
