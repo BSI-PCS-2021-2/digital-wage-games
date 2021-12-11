@@ -2,6 +2,7 @@
 
 mat-form-field {
   padding: 0 5px;
+
   mat-option {
     background-color: $gray;
     color: $light-gray;
@@ -13,13 +14,13 @@ a {
   color: $light-gray;
 }
 
-  .cart-button {
-    position: absolute;
-    top: -50px;
-    right: 0;
-    background-color: $green !important;
-    color: $white;
-  }
+.cart-button {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  background-color: $green !important;
+  color: $white;
+}
 
 .wrapper {
   display: flex;
@@ -29,154 +30,155 @@ a {
 }
 
 .main {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 
-    .main-container {
+  .main-container {
 
-      .bar-container {
-        background-color: $dark-gray;
-        padding: 10px;
-        display: flex;
-        align-items: flex-end;
-        color: $light-gray;
-        border-radius: 5px;
-
-        .filter-container {
-          display: flex;
-          align-items: center;
-          margin-right: 40px;
-
-          @media only screen and (max-width: 992px) {
-            margin: 10px 0;
-          }
-        }
-
-        .search {
-          mat-form-field {
-            width: 500px;
-            border-radius: 30px;
-          }
-        }
-
-        @media only screen and (max-width: 992px) {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-
-      .catalog-container {
-
-        margin: 30px 0;
-        display: grid;
-        justify-content: center;
-        grid-template-columns: auto auto auto;
-        grid-gap: 40px;
-
-        .item {
-
-            mat-card {
-                background-color: $dark-gray;
-                color: $light-gray;
-                border-radius: 5px;
-                max-width: 350px;
-
-                .product-img {
-                  margin: 20px 0;
-                }
-
-                .product-price {
-                  color: $light-gray;
-                  font-size: 2.2em;
-                  margin: 25px 0 25px 0;
-                }
-
-                .product-name {
-                  font-size: 1.5em;
-                  margin: 15px 0;
-                  color: $light-gray;
-                }
-                mat-card-header {
-                  display: block;
-                }
-
-                .rate-container {
-
-                  margin: 0 16px;
-
-                  .product-rate {
-                    display: flex;
-
-
-                    i {
-                      color: yellow;
-                      margin: 10px 3px 10px 0;
-                    }
-                  }
-
-                  .product-rate-amount {
-                    color: $light-gray;
-                  }
-                }
-
-                mat-card-actions {
-                  margin: 20px 0;
-                  display: flex;
-                  justify-content: space-around;
-                  align-items: center;
-
-                  button {
-                    font-weight: normal;
-
-                    text-decoration: none;
-                  }
-
-                  .buy-button {
-                    background-color: $green !important;
-                    color: $white;
-                  }
-
-                  .more-button {
-                    border: 2px solid $green;
-                    color: $green;
-                  }
-                }
-            }
-        }
-
-        @media only screen and (max-width: 992px) {
-          grid-template-columns: auto auto;
-        }
-
-        @media only screen and (max-width: 768px) {
-          grid-template-columns: auto;
-          justify-content: center;
-        }
-      }
-    }
-
-    .filter {
-      color: $light-gray;
-    }
-
-    .aside-container {
-      position: relative;
+    .bar-container {
+      background-color: $dark-gray;
+      padding: 10px;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 300px;
-      background: $dark-gray;
-      margin-left: 30px;
-      padding: 15px 0;
+      align-items: flex-end;
+      color: $light-gray;
+      border-radius: 5px;
 
-      mat-form-field {
+      .filter-container {
+        display: flex;
+        align-items: center;
+        margin-right: 40px;
 
-        margin: 20px 0;
+        @media only screen and (max-width: 992px) {
+          margin: 10px 0;
+        }
       }
 
-      @media only screen and (max-width: 1200px) {
-        display: none;
+      .search {
+        mat-form-field {
+          width: 500px;
+          border-radius: 30px;
+        }
       }
 
+      @media only screen and (max-width: 992px) {
+        flex-direction: column;
+        align-items: center;
+      }
     }
+
+    .catalog-container {
+
+      margin: 30px 0;
+      display: grid;
+      justify-content: center;
+      grid-template-columns: auto auto auto;
+      grid-gap: 40px;
+
+      .item {
+
+        mat-card {
+          background-color: $dark-gray;
+          color: $light-gray;
+          border-radius: 5px;
+          max-width: 350px;
+
+          .product-img {
+            margin: 20px 0;
+          }
+
+          .product-price {
+            color: $light-gray;
+            font-size: 2.2em;
+            margin: 25px 0 25px 0;
+          }
+
+          .product-name {
+            font-size: 1.5em;
+            margin: 15px 0;
+            color: $light-gray;
+          }
+
+          mat-card-header {
+            display: block;
+          }
+
+          .rate-container {
+
+            margin: 0 16px;
+
+            .product-rate {
+              display: flex;
+
+
+              i {
+                color: yellow;
+                margin: 10px 3px 10px 0;
+              }
+            }
+
+            .product-rate-amount {
+              color: $light-gray;
+            }
+          }
+
+          mat-card-actions {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            button {
+              font-weight: normal;
+
+              text-decoration: none;
+            }
+
+            .buy-button {
+              background-color: $green !important;
+              color: $white;
+            }
+
+            .more-button {
+              border: 2px solid $green;
+              color: $green;
+            }
+          }
+        }
+      }
+
+      @media only screen and (max-width: 992px) {
+        grid-template-columns: auto auto;
+      }
+
+      @media only screen and (max-width: 768px) {
+        grid-template-columns: auto;
+        justify-content: center;
+      }
+    }
+  }
+
+  .filter {
+    color: $light-gray;
+  }
+
+  .aside-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    background: $dark-gray;
+    margin-left: 30px;
+    padding: 15px 0;
+
+    mat-form-field {
+
+      margin: 20px 0;
+    }
+
+    @media only screen and (max-width: 1200px) {
+      display: none;
+    }
+
+  }
 }

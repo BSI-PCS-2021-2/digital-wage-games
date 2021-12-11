@@ -23,6 +23,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -34,7 +35,8 @@ import { ProdutoComponent } from './components/produto/produto.component';
     LoginComponent,
     SignupComponent,
     CatalogoComponent,
-    ProdutoComponent
+    ProdutoComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

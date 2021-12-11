@@ -4,6 +4,17 @@
 .main {
   padding: $padding-page;
 
+  div::-webkit-scrollbar {
+    background-color: $gray;
+    width: 10px;
+    height: 10px;
+  }
+
+  div::-webkit-scrollbar-thumb {
+    background-color: $light-gray;
+    border-radius: 5px;
+  }
+
   .title {
     display: flex;
     flex-direction: row;
@@ -64,8 +75,8 @@
           color: $light-gray;
         }
 
-        h2{
-          margin: 20px 0 0 20px; // top, right, down, left
+        h2 {
+          margin: 20px 0 0 20px;
           font-size: 26px;
           color: $light-gray;
         }
