@@ -22,7 +22,6 @@ export class ProductService {
                         products.forEach(product => {
                           let price = Number(product.price)/100;
                           product.price = "R$ "+ price.toString().replace('.', ',');
-                          console.log(product.price);
                         });
                         this.products = products
                       },

@@ -12,7 +12,7 @@ export class NotificationService {
   snackBarRef: MatSnackBarRef<any>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  snackBarAutoHide = '1000';
+  snackBarAutoHide = '2000';
 
   openSnackBar(message: string, action: string, css: string) {
     this.snackBarConfig = new MatSnackBarConfig();

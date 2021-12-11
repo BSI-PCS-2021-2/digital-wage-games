@@ -14,4 +14,5 @@ export interface SignUpFormDTO {
   phone2: string;
   phone3: string;
   secondaryEmail: string;
+  code: string;
 }

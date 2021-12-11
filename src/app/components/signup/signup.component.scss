@@ -80,8 +80,13 @@ h3 {
   justify-content: center;
 }
 
-.recaptcha-wrapper {
+.confirmation-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
+}
+
+.code-button {
+  margin: 6px;
 }
