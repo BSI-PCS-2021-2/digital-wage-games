@@ -27,6 +27,8 @@ export class SignupComponent implements OnInit {
   public accountFormGroup: FormGroup;
   public personalFormGroup: FormGroup;
 
+  private isHuman: boolean;
+
   constructor(
     private formBuilder: FormBuilder,
     private matStepperIntl: MatStepperIntl,
@@ -88,7 +90,7 @@ export class SignupComponent implements OnInit {
   }
 
   public isFormValid (): boolean {
-    return this.accountFormGroup.valid && this.personalFormGroup.valid;
+    return this.accountFormGroup.valid && this.personalFormGroup.valid && this.isHuman;
   }
 
   passwordMatchValidator(form: FormGroup): { [key: string]: any } {
@@ -111,17 +113,27 @@ export class SignupComponent implements OnInit {
  }
 
   passwordStrengthValidator(form: FormGroup): { [key: string]: any } {
-  let hasNumber = /\d/.test(form.controls['passwordCtrl'].value);
-  let hasUpper = /[A-Z]/.test(form.controls['passwordCtrl'].value);
-  let hasLower = /[a-z]/.test(form.controls['passwordCtrl'].value);
-  let isGreaterThan8 = form.controls['passwordCtrl'].value.length >= 8;
+    let hasNumber = /\d/.test(form.controls['passwordCtrl'].value);
+    let hasUpper = /[A-Z]/.test(form.controls['passwordCtrl'].value);
+    let hasLower = /[a-z]/.test(form.controls['passwordCtrl'].value);
+    let isGreaterThan8 = form.controls['passwordCtrl'].value.length >= 8;
 
-  if (hasNumber && hasUpper && hasLower && isGreaterThan8) {
-    form.controls['passwordCtrl'].setErrors(null);
-    return null;
+    if (hasNumber && hasUpper && hasLower && isGreaterThan8) {
+      form.controls['passwordCtrl'].setErrors(null);
+      return null;
+    }
+    form.controls['passwordCtrl'].setErrors({strength: true});
+    return { strength: true };
   }
-  form.controls['passwordCtrl'].setErrors({strength: true});
-  return { strength: true };
-}
+
+  resolved(captchaResponse: string) {
+
+    if (captchaResponse === null) {
+      this.isHuman = false;
+      return;
+    }
+
+    this.isHuman = true;
+  }
 
 }

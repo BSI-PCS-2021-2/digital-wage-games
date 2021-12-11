@@ -23,6 +23,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -49,7 +50,8 @@ import { ProdutoComponent } from './components/produto/produto.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    RecaptchaModule
   ],
   providers: [
     MatSnackBar
