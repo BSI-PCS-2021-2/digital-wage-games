@@ -13,24 +13,10 @@ import { NotificationService } from './notification.service';
 export class ProductService {
   products: Product[];
 
-  constructor(private http: HttpClient, private notificationService: NotificationService) { }
+  constructor(private http: HttpClient) { }
 
-  getProducts(): Product[] {
-    this.http.get<Product[]>(`${environment.baseUrl}/store/products`)
-                    .subscribe(
-                      products => {
-                        products.forEach(product => {
-                          let price = Number(product.price)/100;
-                          product.price = "R$ "+ price.toString().replace('.', ',');
-                        });
-                        this.products = products
-                      },
-                      error => {
-                        this.notificationService.error('Ocorreu um erro!');
-                        throw new Error(error)
-                      }
-                    );
-                    return this.products;
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.baseUrl}/store/products`);
   }
 
 }

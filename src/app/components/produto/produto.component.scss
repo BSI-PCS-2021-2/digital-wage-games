@@ -63,16 +63,22 @@
           margin: 15px;
           color: $light-gray;
         }
+
+        h2{
+          margin: 20px 0 0 20px; // top, right, down, left
+          font-size: 26px;
+          color: $light-gray;
+        }
       }
 
       .container-price {
         height: 10em;
-        margin: 3fr;
         display: flex;
         flex-direction: row;
         align-items: center;
 
         p {
+          padding-top: 15px;
           font-size: 26px;
           flex-grow: 1;
           text-align: center;

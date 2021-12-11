@@ -22,7 +22,18 @@ export class CatalogoComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products
+      this.convert(this.products);
+    });
+  }
+  convert(products: Product[]): void {
+    products.forEach(product => {
+      let price = Number(product.price)/100;
+      product.price = "R$ "+ price.toString().replace('.', ',');
+      console.log(product.price + " 123");
+    });
+    this.products = products
   }
 
   selected = 'relevant';
