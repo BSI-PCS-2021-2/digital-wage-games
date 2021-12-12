@@ -161,7 +161,19 @@
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Confirmação</ng-template>
+          <div class="confirmation-wrapper">
+            <button class="code-button" [disabled]="sentCode || !hasEmail()" (click)="sendCode()" mat-flat-button matStepperNext>Enviar código</button>
+            <form [formGroup]="confirmationFormGroup">
+              <mat-form-field class="medium-input" appearance="fill">
+                <mat-label>Código de confirmação</mat-label>
+                <input matInput formControlName="confirmationCodeCtrl" autocomplete="off">
+              </mat-form-field>
+            </form>
+          </div>
           <p class="confirmation">Ao se cadastrar, você aceita os <a routerLink="/">Termos de Uso</a>, <a routerLink="/">Política de Privacidade</a> e a <a routerLink="/">Política de Cookies</a>.</p>
+          <div class="confirmation-wrapper">
+            <re-captcha (resolved)="resolved($event)" siteKey="6Le4qZMdAAAAAHvjE1giImTs94Eycelxfw4wCVhc"></re-captcha>
+          </div>
           <div class="navigator">
             <button mat-button matStepperPrevious>Voltar</button>
             <button mat-flat-button [disabled]="!isFormValid()" (click)="confirmSignup()">Confirmar</button>

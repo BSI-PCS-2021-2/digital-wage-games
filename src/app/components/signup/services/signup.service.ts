@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { catchError, distinctUntilChanged, Observable, take, tap } from 'rxjs';
-import { SignUpFormDTO } from '../models/signupformDTO';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { Router } from "@angular/router"
 import { NotificationService } from '../../../../app/shared/services/notification.service';
+import { SignUpFormDTO } from '../models/signUpFormDTO';
+import { SignUpCodeDTO } from '../models/signUpCodeDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignupService {
 
-  constructor(private http: HttpClient, private notificationService: NotificationService) { }
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService,
+    private router: Router) { }
 
   signUp(signUpForm: SignUpFormDTO): Observable<number[]> {
 
@@ -18,10 +23,13 @@ export class SignupService {
       .pipe(
         take(1),
         tap((index: number[]) => {
-          if (index.length > 0) {
-            this.notificationService.success('Cadastro concluído!');
-          } else {
+          if (index[0] === -1) {
             this.notificationService.alert('O nome de usuário já existe!');
+          } else if (index[0] === -2) {
+            this.notificationService.alert('Código de verificação inválido!');
+          } else {
+            this.notificationService.success('Cadastro concluído!');
+            this.router.navigate(['/login']);
           }
 
         }),
@@ -32,5 +40,22 @@ export class SignupService {
         })
       );
 
+  }
+
+  sendConfirmationCode(signUpCode: SignUpCodeDTO): Observable<boolean> {
+    return this.http.post<boolean>(`${environment.baseUrl}/clients/confirmation-codes`, signUpCode)
+    .pipe(
+      take(1),
+      tap((success: boolean) => {
+        if (success) {
+          this.notificationService.success('Código enviado!');
+        }
+      }),
+      distinctUntilChanged(),
+      catchError(err => {
+        this.notificationService.error('Erro ao enviar email de confirmação');
+        throw new Error(err);
+      })
+    );
   }
 }

@@ -3,7 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { SignupService } from './services/signup.service';
-import { SignUpFormDTO } from './models/signupformDTO';
+import { SignUpFormDTO } from './models/signUpFormDTO';
+import { SignUpCodeDTO } from './models/signUpCodeDTO';
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
@@ -26,6 +27,10 @@ export class SignupComponent implements OnInit {
 
   public accountFormGroup: FormGroup;
   public personalFormGroup: FormGroup;
+  public confirmationFormGroup: FormGroup;
+
+  private isHuman: boolean;
+  public sentCode: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,6 +52,7 @@ export class SignupComponent implements OnInit {
     {
       validators: [this.passwordMatchValidator, this.passwordStrengthValidator]
     });
+
     this.personalFormGroup = this.formBuilder.group({
       postalCodeCtrl: [''],
       cityCtrl: [''],
@@ -59,6 +65,10 @@ export class SignupComponent implements OnInit {
       phone2Ctrl: [''],
       phone3Ctrl: [''],
       secondaryEmailCtrl: ['', Validators.email],
+    });
+
+    this.confirmationFormGroup = this.formBuilder.group({
+      confirmationCodeCtrl: ['', [Validators.required]]
     });
 
     this.matStepperIntl.changes.next();
@@ -81,6 +91,7 @@ export class SignupComponent implements OnInit {
       phone2: this.personalFormGroup.get('phone2Ctrl').value,
       phone3: this.personalFormGroup.get('phone3Ctrl').value,
       secondaryEmail: this.personalFormGroup.get('secondaryEmailCtrl').value,
+      code: this.confirmationFormGroup.get('confirmationCodeCtrl').value
     }
 
     this.signupService.signUp(signUpForm).subscribe();
@@ -88,10 +99,10 @@ export class SignupComponent implements OnInit {
   }
 
   public isFormValid (): boolean {
-    return this.accountFormGroup.valid && this.personalFormGroup.valid;
+    return this.accountFormGroup.valid && this.personalFormGroup.valid && this.isHuman;
   }
 
-  passwordMatchValidator(form: FormGroup): { [key: string]: any } {
+  private passwordMatchValidator(form: FormGroup): { [key: string]: any } {
     const password = form.controls['passwordCtrl'].value;
     const passwordConfirmation = form.controls['passwordConfirmationCtrl'].value;
 
@@ -110,18 +121,41 @@ export class SignupComponent implements OnInit {
     return null;
  }
 
-  passwordStrengthValidator(form: FormGroup): { [key: string]: any } {
-  let hasNumber = /\d/.test(form.controls['passwordCtrl'].value);
-  let hasUpper = /[A-Z]/.test(form.controls['passwordCtrl'].value);
-  let hasLower = /[a-z]/.test(form.controls['passwordCtrl'].value);
-  let isGreaterThan8 = form.controls['passwordCtrl'].value.length >= 8;
+  private passwordStrengthValidator(form: FormGroup): { [key: string]: any } {
+    let hasNumber = /\d/.test(form.controls['passwordCtrl'].value);
+    let hasUpper = /[A-Z]/.test(form.controls['passwordCtrl'].value);
+    let hasLower = /[a-z]/.test(form.controls['passwordCtrl'].value);
+    let isGreaterThan8 = form.controls['passwordCtrl'].value.length >= 8;
 
-  if (hasNumber && hasUpper && hasLower && isGreaterThan8) {
-    form.controls['passwordCtrl'].setErrors(null);
-    return null;
+    if (hasNumber && hasUpper && hasLower && isGreaterThan8) {
+      form.controls['passwordCtrl'].setErrors(null);
+      return null;
+    }
+    form.controls['passwordCtrl'].setErrors({strength: true});
+    return { strength: true };
   }
-  form.controls['passwordCtrl'].setErrors({strength: true});
-  return { strength: true };
-}
+
+  public resolved(captchaResponse: string) {
+
+    if (captchaResponse === null) {
+      this.isHuman = false;
+      return;
+    }
+
+    this.isHuman = true;
+  }
+
+  public hasEmail(): boolean {
+    return this.accountFormGroup.get('emailCtrl').valid;
+  }
+
+  public sendCode(): void {
+
+    const signUpCode: SignUpCodeDTO = {
+      email: this.accountFormGroup.get('emailCtrl').value
+    }
+
+    this.signupService.sendConfirmationCode(signUpCode).subscribe();
+  }
 
 }

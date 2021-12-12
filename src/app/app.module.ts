@@ -24,6 +24,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { CartComponent } from './components/cart/cart.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -51,7 +52,8 @@ import { CartComponent } from './components/cart/cart.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    RecaptchaModule
   ],
   providers: [
     MatSnackBar

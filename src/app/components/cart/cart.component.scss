@@ -17,16 +17,19 @@
   .title {
     display: flex;
     flex-direction: row;
-    font-size: 45px;
-    color: $light-gray;
-    border-radius: 5px;
+
+    h2 {
+      margin: 0;
+      font-size: 35px;
+      color: $light-gray;
+    }
   }
 
   .grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-gap: 10px;
-    grid-auto-rows: minmax(5em, 5em);
+    grid-auto-rows: minmax(5em, 7em);
 
 
     .lista-produto {
@@ -50,7 +53,35 @@
 
         .descricao-nome {
           display: grid;
-          grid-template-columns: 8fr 2fr 2fr;
+          grid-template-columns: 7fr 2fr 3fr;
+
+          .btn-close-dates {
+            display: flex;
+            flex-direction: column;
+            grid-column-start: 3;
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 4;
+            justify-content: space-around;
+            text-align: right;
+            margin-right: 5px;
+
+            .btn-close {
+              color: $red;
+              display: flex;
+              padding: 0;
+              width: 5px;
+              margin-right: 0;
+              margin-left: auto;
+              justify-content: center;
+            }
+
+            .dates-price {
+              display: flex;
+              flex-direction: column;
+              text-align: left;
+            }
+          }
 
           h2 {
             grid-column-start: 1;
@@ -58,22 +89,12 @@
           }
 
           .descricao {
+            margin-bottom: 5px;
             overflow-y: auto;
             grid-column-start: 1;
             grid-column-end: 2;
             grid-row-start: 2;
             grid-row-end: 4;
-          }
-
-          .close {
-            display: flex;
-            text-decoration: none;
-            color: $red;
-            margin: 10px;
-            grid-column-start: 3;
-            grid-column-end: 4;
-            grid-row: 1;
-            justify-content: right;
           }
 
           .price {
@@ -85,24 +106,26 @@
             grid-row-start: 3;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            margin: 5px;
+            margin: auto auto 10px 20px;
             grid-auto-rows: 2em;
             gap: 3px;
           }
-        .quantity{
+
+          .quantity {
             grid-column-start: 1;
             grid-column-end: 2;
             grid-row-start: 1;
             grid-row-end: 2;
             overflow: hidden;
-        
-        
-            input{
-                width: 100%;
-                height: 100%;
+
+
+            input {
+              width: 100%;
+              height: 100%;
             }
-        }
-        .buttons-container{
+          }
+
+          .buttons-container {
             grid-column-start: 2;
             grid-column-end: 3;
             grid-row-start: 1;
@@ -110,19 +133,19 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-        
-            button{
-                height: 50%;
+
+            button {
+              height: 50%;
+              text-align: center;
+
+              mat-icon {
+                display: flex;
+                width: 100%;
+                font-size: 10px;
                 text-align: center;
-                
-                mat-icon{    
-                    display: flex;
-                    width: 100%;
-                    font-size: 10px;
-                    text-align: center;
-                }
+              }
             }
-        }
+          }
         }
       }
     }
@@ -131,12 +154,13 @@
       padding: 15px;
       display: flex;
       flex-direction: column;
+      justify-content: space-around;
       border-radius: 5px;
       background-color: $dark-gray;
       grid-column-start: 2;
       grid-row-start: 1;
       grid-row-end: 4;
-      gap: 20px;
+
 
       h2 {
         margin: 0;

@@ -1,6 +1,6 @@
 <div class="main">
     <div class="title">
-        <h2>Halo</h2>
+        <h2>Seu Carrinho</h2>
     </div>
     <div class="grid">
         <div class="lista-produto">
@@ -24,13 +24,19 @@
                             </button>
                         </div>
                     </div>
-                    <button class="close" mat-button>X</button>
-                    <p class="price">Item:{{realPrice(product.id)}}</p>
+                    <div class="btn-close-dates">
+                        <button class="btn-close" mat-button>
+                            <mat-icon class="close" matSuffix>close</mat-icon>
+                        </button>
+                        <div class="dates-price">
+                            <p class="price">Total: {{realPrice(product.id)}}</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div> 
         </div>
         <div class="actions-cart">
-            <h2></h2>
+            <h2>Escolha uma ação:</h2>
             <button class="limpar" mat-button>Limpar Carrinho</button>
             <button class="continuar" routerLink="/catalogo" mat-button>Continuar Comprando</button>
             <button class="finalizar" mat-button>Finalizar pedido</button>

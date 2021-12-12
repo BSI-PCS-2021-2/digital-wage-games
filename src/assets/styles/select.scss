@@ -1,0 +1,5 @@
+@import 'variables.scss';
+
+::ng-deep .mat-select-value-text {
+  color: $white !important;
+}
