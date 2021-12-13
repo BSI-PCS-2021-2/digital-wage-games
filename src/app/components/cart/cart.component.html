@@ -1,0 +1,48 @@
+<div class="main">
+    <div class="title">
+        <h2>Seu Carrinho</h2>
+    </div>
+    <div class="grid">
+        <div class="lista-produto">
+            <div class="produto" *ngFor="let product of produto">
+                <img class="product-img" mat-card-image src="assets/images/game1.png">
+                <div class="descricao-nome">
+                    <h2>{{product.name}}</h2>
+                    <div class="descricao">
+                        <p>{{product.description}}</p>
+                    </div>
+                    <div class="add-dec">
+                        <div class="quantity">
+                            <input type="text" (keyup.enter)="updateInput(product.id, $event)" value={{product.amount}}>
+                        </div>
+                        <div class="buttons-container">
+                            <button (click)="incrementa(product.id)" class="add">
+                                <mat-icon matSuffix>add</mat-icon>
+                            </button>
+                            <button (click)="decrementa(product.id)" class="decrement">
+                                <mat-icon matSuffix>remove</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="btn-close-dates">
+                        <button class="btn-close" mat-button>
+                            <mat-icon class="close" matSuffix>close</mat-icon>
+                        </button>
+                        <div class="dates-price">
+                            <p class="price">Total: {{realPrice(product.id)}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div class="actions-cart">
+            <h2>Escolha uma ação:</h2>
+            <button class="limpar" mat-button>Limpar Carrinho</button>
+            <button class="continuar" routerLink="/catalogo" mat-button>Continuar Comprando</button>
+            <button class="finalizar" mat-button>Finalizar pedido</button>
+        </div>
+        <div class="price">
+            <h2>Preço total: {{totalPrice}}</h2>
+        </div>
+    </div>
+</div>

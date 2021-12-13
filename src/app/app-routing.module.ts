@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
+import { CartComponent } from './components/cart/cart.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'cadastrar', component: SignupComponent },
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'produto', component: ProdutoComponent },
-  { path: 'restauracao-senha', component: PasswordRecoveryComponent },
+  { path: 'carrinho', component: CartComponent },
+  { path: 'restauracao-senha', component: PasswordRecoveryComponent }
 ];
 
 @NgModule({

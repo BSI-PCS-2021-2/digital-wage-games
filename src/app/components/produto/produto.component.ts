@@ -26,7 +26,7 @@ export class ProdutoComponent implements OnInit {
     this.productService.getProduct().subscribe((games) => {
       this.game = games[0]
       this.convert(this.game.price);
-    });
+   });
   }
   convert(price: number): void {
     this.priceReal = "R$ " + (price / 100).toFixed(2).replace(".", ",");
