@@ -28,6 +28,7 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InterceptorService } from './shared/services/interceptor.service';
+import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -39,7 +40,8 @@ import { InterceptorService } from './shared/services/interceptor.service';
     LoginComponent,
     SignupComponent,
     CatalogoComponent,
-    ProdutoComponent
+    ProdutoComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     BrowserModule,
