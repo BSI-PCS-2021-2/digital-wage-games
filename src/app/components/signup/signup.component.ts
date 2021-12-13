@@ -1,10 +1,11 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { SignupService } from './services/signup.service';
-import { SignUpFormDTO } from './models/signUpFormDTO';
 import { SignUpCodeDTO } from './models/signUpCodeDTO';
+import { SignUpFormDTO } from './models/signupformDTO';
+import { PasswordValidatorService } from 'src/app/shared/validators/passwordValidator.service';
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
@@ -35,7 +36,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private matStepperIntl: MatStepperIntl,
-    private signupService: SignupService) { }
+    private signupService: SignupService,
+    private passwordValidatorService: PasswordValidatorService) { }
 
   ngOnInit() {
     this.accountFormGroup = this.formBuilder.group({
@@ -50,7 +52,7 @@ export class SignupComponent implements OnInit {
       passwordConfirmationCtrl: ['', Validators.required]
     },
     {
-      validators: [this.passwordMatchValidator, this.passwordStrengthValidator]
+      validators: [this.passwordValidatorService.passwordMatchValidator, this.passwordValidatorService.passwordStrengthValidator]
     });
 
     this.personalFormGroup = this.formBuilder.group({
@@ -100,39 +102,6 @@ export class SignupComponent implements OnInit {
 
   public isFormValid (): boolean {
     return this.accountFormGroup.valid && this.personalFormGroup.valid && this.isHuman;
-  }
-
-  private passwordMatchValidator(form: FormGroup): { [key: string]: any } {
-    const password = form.controls['passwordCtrl'].value;
-    const passwordConfirmation = form.controls['passwordConfirmationCtrl'].value;
-
-    if (!password || !passwordConfirmation) {
-       return null;
-    } else if (password !== passwordConfirmation) {
-      form.controls['passwordCtrl'].setErrors({mismatch: true});
-      form.controls['passwordConfirmationCtrl'].setErrors({mismatch: true});
-      return {mismatch: false}
-    } else if (password === passwordConfirmation) {
-      form.controls['passwordCtrl'].setErrors(null);
-      form.controls['passwordConfirmationCtrl'].setErrors(null);
-      return null;
-    }
-
-    return null;
- }
-
-  private passwordStrengthValidator(form: FormGroup): { [key: string]: any } {
-    let hasNumber = /\d/.test(form.controls['passwordCtrl'].value);
-    let hasUpper = /[A-Z]/.test(form.controls['passwordCtrl'].value);
-    let hasLower = /[a-z]/.test(form.controls['passwordCtrl'].value);
-    let isGreaterThan8 = form.controls['passwordCtrl'].value.length >= 8;
-
-    if (hasNumber && hasUpper && hasLower && isGreaterThan8) {
-      form.controls['passwordCtrl'].setErrors(null);
-      return null;
-    }
-    form.controls['passwordCtrl'].setErrors({strength: true});
-    return { strength: true };
   }
 
   public resolved(captchaResponse: string) {

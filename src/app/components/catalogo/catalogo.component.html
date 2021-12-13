@@ -50,7 +50,7 @@
             <button routerLink="/produto" class="more-button" mat-button>Ver mais</button>
             <button  routerLink="/carrinho" class="buy-button" mat-button>
               Carrinho
-              <mat-icon matSuffix>add_shopping_cart</mat-icon>
+              <i class="fas fa-cart-plus fa-lg"></i>
             </button>
           </mat-card-actions>
         </mat-card>
@@ -58,9 +58,9 @@
       </div>
     </div>
     <div class="aside-container">
-      <button  class="cart-button" mat-button>
+      <button  class="cart-button" mat-button matBadge="0" matBadgePosition="after">
         Carrinho
-        <mat-icon matSuffix>add_shopping_cart</mat-icon>
+        <i class="fas fa-shopping-cart fa-lg"></i>
       </button>
       <div class="filter price-filter">
         Preço

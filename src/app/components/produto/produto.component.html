@@ -1,9 +1,9 @@
 <div class="main">
     <div class="title">
         <h2>{{game.name}}</h2>
-        <button class="cart-button" mat-button>
+        <button class="cart-button" mat-button matBadge="0" matBadgePosition="after">
             Carrinho
-            <mat-icon matSuffix>add_shopping_cart</mat-icon>
+            <i class="fas fa-shopping-cart fa-lg"></i>
         </button>
     </div>
     <div class="grid-content">
@@ -22,7 +22,7 @@
                 <p>Preço: {{priceReal}}</p>
                 <button class="buy-button" mat-button>
                     Adicionar ao carrinho
-                    <mat-icon matSuffix>add_shopping_cart</mat-icon>
+                    <i class="fas fa-cart-plus fa-lg"></i>
                 </button>
             </div>
         </div>
