@@ -4,8 +4,8 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router"
 import { NotificationService } from '../../../../app/shared/services/notification.service';
-import { SignUpFormDTO } from '../models/signUpFormDTO';
 import { SignUpCodeDTO } from '../models/signUpCodeDTO';
+import { SignUpFormDTO } from '../models/signupformDTO';
 
 @Injectable({
   providedIn: 'root'

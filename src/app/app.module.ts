@@ -8,13 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -24,6 +27,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { InterceptorService } from './shared/services/interceptor.service';
 
 @NgModule({
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -46,6 +50,9 @@ import { RecaptchaModule } from 'ng-recaptcha';
     MatIconModule,
     MatCardModule,
     MatStepperModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatBadgeModule,
     MatGridListModule,
     ReactiveFormsModule,
     MatSnackBarModule,
@@ -54,7 +61,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     RecaptchaModule
   ],
   providers: [
-    MatSnackBar
+    { provide: MatSnackBar },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

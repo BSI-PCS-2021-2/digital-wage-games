@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { SignupService } from './services/signup.service';
-import { SignUpFormDTO } from './models/signUpFormDTO';
 import { SignUpCodeDTO } from './models/signUpCodeDTO';
+import { SignUpFormDTO } from './models/signupformDTO';
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
