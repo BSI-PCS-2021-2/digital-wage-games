@@ -48,9 +48,9 @@ export class AuthenticationService {
   }
 
   private setSession(jwt: Jwt) {
-    jwt.expiresIn = 3600;
     const expiresAt = moment().add(jwt.expiresIn,'second');
     const username = jwt.username;
+    console.log(jwt.userId);
     this.cartService.getCartByClient(jwt.userId).subscribe((cart) => {
       localStorage.setItem("cart_id", `${cart.id}`);
     });
