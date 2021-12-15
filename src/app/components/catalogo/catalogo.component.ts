@@ -5,13 +5,13 @@ import { PostCartItemDTO } from '../../../app/shared/models/dto/cartItem/postCar
 import { ProductService } from '../../shared/services/product.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { CartService } from '../../shared/services/cart.service';
+import { Options } from '@angular-slider/ngx-slider';
 
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
   override optionalLabel = '(OPCIONAL)';
 }
-
 
 @Component({
   selector: 'app-catalogo',
@@ -27,7 +27,6 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartId = this.authenticationService.getCartId();
-    
     this.getProducts();
     this.defineProductsOnCart();
     
@@ -89,6 +88,21 @@ export class CatalogoComponent implements OnInit {
   cartId = null;
   cartSize = 0;
   cartPrice = 0;
+
+  minPriceValue: number = 0;
+  maxPriceValue: number = 1000;
+  priceOptions: Options = {
+    floor: 0,
+    ceil: 1000
+  };
+
+  minRatingValue: number = 0;
+  maxRatingValue: number = 1000;
+  ratingOptions: Options = {
+    floor: 0,
+    ceil: 5
+  };
+
 
   // implementar logica para preencher os icones de avaliação.
 

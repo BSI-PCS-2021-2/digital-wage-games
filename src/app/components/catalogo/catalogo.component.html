@@ -17,7 +17,7 @@
         </div>
 
         <div class="search">
-          <mat-form-field class="example-full-width" appearance="fill">
+          <mat-form-field class="filter-search-bar" appearance="fill">
             <mat-label>Buscar</mat-label>
             <input matInput autocomplete="off">
             <mat-icon matSuffix>search</mat-icon>
@@ -26,6 +26,11 @@
       </div>
 
       <div class="catalog-container">
+        <div *ngIf="!products">
+          <mat-progress-spinner
+          mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
         <div class="item" *ngFor="let product of products">
         <mat-card>
           <a routerLink="/produto">
@@ -66,40 +71,20 @@
         Carrinho
         <i class="fas fa-shopping-cart fa-lg"></i>
       </button>
-      <div class="filter price-filter">
-        Preço
-        <div class="slider slider-price" style="height: 30px">
-          <-- Aqui entra o slider duplo--/>
-        </div>
-      </div>
-      <div class="filter rating-filter">
-        Avaliação
-
-        <div class="slider slider-rating" style="height: 30px">
-            <-- Aqui entra o slider duplo--/>
-        </div>
-      </div>
+      <p>Preço (R$)</p>
+      <ngx-slider [value]="minPriceValue" [highValue]="maxPriceValue" [options]="priceOptions"></ngx-slider>
+      <p>Avaliação</p>
+      <ngx-slider [value]="minRatingValue" [highValue]="maxRatingValue" [options]="ratingOptions"></ngx-slider>
       <div class="plataform-filter">
         <mat-form-field appearance="fill">
           <mat-label>Plataforma </mat-label>
           <mat-select >
             <mat-option value="none">Nenhum</mat-option>
-            <mat-option value="ps4">PS4</mat-option>
             <mat-option value="ps5">PS5</mat-option>
-            <mat-option value="xbox-one">XBOX ONE</mat-option>
-            <mat-option value="xbox-x">XBOX X</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="system-filter">
-        <mat-form-field appearance="fill">
-          <mat-label>Sistema </mat-label>
-          <mat-select >
-            <mat-option value="none">Nenhum</mat-option>
-            <mat-option value="volvo">Volvo</mat-option>
-            <mat-option value="saab">Saab</mat-option>
-            <mat-option value="mercedes">Mercedes</mat-option>
-            <mat-option value="audi">Audi</mat-option>
+            <mat-option value="xbox-x">Xbox Series X</mat-option>
+            <mat-option value="xbox-x">Xbox Series S</mat-option>
+            <mat-option value="ps4">PS4</mat-option>
+            <mat-option value="xbox-one">Xbox One</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -123,7 +108,7 @@
             <mat-option value="ea">EA</mat-option>
             <mat-option value="sony">Sony</mat-option>
             <mat-option value="blizzard">Blizzard</mat-option>
-            <mat-option value="from-software">From Software</mat-option>
+            <mat-option value="from-software">FromSoftware</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

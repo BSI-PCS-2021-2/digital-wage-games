@@ -15,9 +15,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -57,12 +60,14 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
     MatMenuModule,
     MatProgressBarModule,
     MatBadgeModule,
+    MatProgressSpinnerModule,
     MatGridListModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     HttpClientModule,
     MatSelectModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgxSliderModule,
   ],
   providers: [
     { provide: MatSnackBar },
