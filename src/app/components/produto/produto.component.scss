@@ -105,6 +105,22 @@
           border-color: $green;
           margin-right: 25px;
         }
+
+
+        .added-button {
+          display: none;
+          border: 2px solid $green;
+          color: $green;
+        }
+      }
+      .container-price.active {
+        .buy-button {
+          display: none;
+        }
+        
+        .added-button {
+          display: block;
+        }
       }
     }
 

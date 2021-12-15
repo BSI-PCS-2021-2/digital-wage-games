@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/product.model';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatStepperIntl } from '@angular/material/stepper';
+import { CartItem } from '../../shared/models/cartItem.model';
+import { Product } from '../../shared/models/product.model';
+import { AuthenticationService } from '../../shared/services/authentication.service';
+import { ProductService } from '../../shared/services/product.service';
+import { PutCartItemDTO } from '../../shared/models/dto/cartItem/putCartItem.dto';
+import { CartService } from '../../shared/services/cart.service';
 
-export interface Produto {
-  id: number;
+export interface CartProduct {
+  cartItemId: number;
   name: string;
-  price: number;
-  compra: string;
   description: string;
+  formatPrice: string;
+  price: number;
   amount: number;
-  buyDate: string;
-  deliveryDate: string;
+  totalPrice: number;
+  formatTotalPrice: string;
+}
+
+@Injectable()
+export class StepperIntl extends MatStepperIntl {
+  override optionalLabel = '(OPCIONAL)';
 }
 
 @Component({
@@ -17,93 +29,112 @@ export interface Produto {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
+
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartService: CartService, 
+              private authenticationService: AuthenticationService,
+              private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.total();
-  }
-
-  produto: Produto[] = [
-    {
-      id: 0,
-      name: "Nioh - PS4",
-      price: 11999,
-      compra: "05/12/2021",
-      description: "shaduhasd asdhsaudhasudhasu asudhasudhasuh asduashduhasu hasduash uashduhusahduahs saudhasudhasuhd auhdsauhdaudhasu hasduhasudhasudhasudhasu aushduashduashduashdauhudhasuh asudhasuhdasudhasudhasu hushdasuhduash ahdu huashduash uhasudhasudhasuhd uashduashduash uashduashdu hasuhduh uashduashudh uhasudhasuh usahduashduh uashduh",
-      amount: 1,
-      buyDate: "05/12/2021",
-      deliveryDate: "15/12/2021"
-    },
-    {
-      id: 1,
-      name: "Nioh - PS4",
-      price: 11999,
-      compra: "05/12/2021",
-      description: "shaduhasd asdhsaudhasudhasu asudhasudhasuh asduashduhasu hasduash uashduhusahduahs saudhasudhasuhd auhdsauhdaudhasu hasduhasudhasudhasudhasu aushduashduashduashdauhudhasuh asudhasuhdasudhasudhasu hushdasuhduash ahdu huashduash uhasudhasudhasuhd uashduashduash uashduashdu hasuhduh uashduashudh uhasudhasuh usahduashduh uashduh",
-      amount: 1,
-      buyDate: "05/12/2021",
-      deliveryDate: "15/12/2021"
-    },
-    {
-      id: 2,
-      name: "Nioh - PS4",
-      price: 11999,
-      compra: "05/12/2021",
-      description: "shaduhasd asdhsaudhasudhasu asudhasudhasuh asduashduhasu hasduash uashduhusahduahs saudhasudhasuhd auhdsauhdaudhasu hasduhasudhasudhasudhasu aushduashduashduashdauhudhasuh asudhasuhdasudhasudhasu hushdasuhduash ahdu huashduash uhasudhasudhasuhd uashduashduash uashduashdu hasuhduh uashduashudh uhasudhasuh usahduashduh uashduh",
-      amount: 1,
-      buyDate: "05/12/2021",
-      deliveryDate: "15/12/2021"
-    },
-  ]
-
-  totalPriceAux: number = 0;
-  totalPrice: string;
-  quantiaItem: number = 1;
-  amountDif: number = 0;
-  value: number = 0;
-  amount: number = 0;
-
-  total(): void {
-    this.produto.forEach(produto => {
-      this.totalPriceAux += produto.price;
-      this.totalPrice = "R$ " + (this.totalPriceAux / 100).toFixed(2).replace(".", ",");
+    this.cartId = this.authenticationService.getCartId();
+    this.cartService.getCartItems(this.cartId).subscribe((cartItems) => {
+      for (let i = 0; i< cartItems.length; i++) {
+        this.productService.getProduct(cartItems[i].productId).subscribe((product) => {
+          product.description = 'loreada a asdaknaknk ask a nakjand sjan knaknd ksjaaknd asd kakasanknsdkadnadaskjdnankaj j k a  aksdn jakda kjdak nsaj '
+          this.cartProducts.set(cartItems[i].id, {
+            cartItemId: cartItems[i].id,
+            index: i,
+            name: product.name,
+            description: product.description,
+            price: parseInt(product.price),
+            formatPrice: this.formatPrice(parseInt(product.price)/100),
+            amount: cartItems[i].amount,
+            formatTotalPrice: this.formatPrice(parseInt(product.price)/100 * cartItems[i].amount),
+            totalPrice: parseInt(product.price) * cartItems[i].amount
+          })
+          // Quando esse método esta fora do loop a array de produtos está vazio (?)
+          this.updateTotal();
+        })
+        
+      }
     });
   }
 
-  updateInput(id: number, event: any): void {
-    this.value = event.target.value;
-    this.amountDif = this.value - this.produto[id].amount;
-    if (this.amountDif > 0) {
-      for (; this.amountDif > 0; this.amountDif--) {
-        this.incrementa(id);
-      }
-    }
-    else {
-      this.amountDif *= -1;
-      for (; this.amountDif > 0; this.amountDif--) {
-        this.decrementa(id);
-      }
+  updateCartItem(putCartItemDTO: PutCartItemDTO, cartItemId: number) {
+    this.cartService.putCartItem(putCartItemDTO, cartItemId);
+  }
+
+  deleteCartItem(index: any) {
+    let p = this.cartProducts.get(index);
+    this.cartService.deleteCartItem(p.cartItemId);
+    this.cartProducts.delete(index);
+    this.updateTotal(); 
+  }
+
+  clearCart() {
+    for (const [key, value] of this.cartProducts) {
+      this.deleteCartItem(key);
     }
   }
 
-  realPrice(id: number): string {
-    return "R$ " + (this.produto[id].price * this.produto[id].amount / 100).toFixed(2).replace(".", ",");;
+  formatPrice(v: number) {
+    return v.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
   }
 
-  incrementa(id: number): void {
-    this.produto[id].amount++;
-    this.totalPriceAux += this.produto[id].price;
-    this.totalPrice = "R$ " + (this.totalPriceAux / 100).toFixed(2).replace(".", ",");
+  increaseAmount(index: any) {
+    const p = this.cartProducts.get(index);
+    p.amount++;
+    p.totalPrice += p.price;
+    p.formatTotalPrice = this.formatPrice(p.totalPrice/100);
+    this.changeDOMElementHTML(`price_${index}`, p.formatTotalPrice);
+    this.changeDOMElementHTML(`amount_input_${index}`, `value = '${p.amount}'`);
+    this.updateCartItem({amount: p.amount}, p.cartItemId);
+    this.updateTotal();
   }
 
-  decrementa(id: number): void {
-    if (this.produto[id].amount > 1) {
-      this.produto[id].amount--;
-      this.totalPriceAux -= this.produto[id].price;
-      this.totalPrice = "R$ " + (this.totalPriceAux / 100).toFixed(2).replace(".", ",");
+  decreaseAmount(index: any) {
+    const p = this.cartProducts.get(index);
+    if (p.amount <= 0) return;
+    p.amount--;
+    p.totalPrice -= p.price;
+    p.formatTotalPrice = this.formatPrice(p.totalPrice/100);
+    this.changeDOMElementHTML(`price_${index}`, p.formatTotalPrice);
+    this.changeDOMElementHTML(`amount_input_${index}`, `value = '${p.amount}'`)
+    this.updateCartItem({amount: p.amount}, p.cartItemId);
+    this.updateTotal();
+  }
+
+  updateTotal() {
+    this.finalPrice = 0;
+    for (const [key, value] of this.cartProducts) {
+      this.finalPrice += value.totalPrice;
     }
+    this.formatFinalPrice = this.formatPrice(this.finalPrice/100);
+    this.changeDOMElementHTML('final_price', this.formatFinalPrice);
   }
+
+  changeDOMElementHTML(id: string, newValue: any) {
+    document.getElementById(id).innerHTML = newValue;
+  }
+
+  updateInput(index: any, event: any) {
+    const p = this.cartProducts.get(index);
+    if (!Number.isInteger(parseInt(event.target.value))) return;
+    p.amount = event.target.value < 0 ? 0 : event.target.value;
+    event.target.value = p.amount;
+    p.totalPrice = p.amount * p.price;
+    p.formatTotalPrice = this.formatPrice(p.totalPrice/100);
+    this.changeDOMElementHTML(`price_${index}`, p.formatTotalPrice);
+    this.updateCartItem({amount: p.amount}, p.cartItemId);
+    this.updateTotal();
+  }
+
+  ptBRLocale =  Intl.NumberFormat('pt-br');
+  cartId = null;
+  cartProducts = new Map();
+  finalPrice: number = 0;
+  formatFinalPrice: string = this.ptBRLocale.format(0);
+ 
 
 }

@@ -19,4 +19,8 @@ export class ProductService {
     return this.http.get<Product[]>(`${environment.baseUrl}/store/products`);
   }
 
+  getProduct(productId: number): Observable<Product> {
+    return this.http.get<Product>(`${environment.baseUrl}/store/product/${productId}`);
+  }
+
 }

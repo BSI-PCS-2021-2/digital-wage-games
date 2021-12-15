@@ -5,8 +5,10 @@ import { catchError, distinctUntilChanged, Observable, take, tap } from "rxjs";
 import { SignInFormDTO } from "../../components/login/models/signInFormDTO";
 import { environment } from "../../../environments/environment";
 import { NotificationService } from "./notification.service";
+import { CartService } from "./cart.service";
 import * as moment from "moment";
 import { Jwt } from "../models/jwt.model";
+import { stringify } from "querystring";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class AuthenticationService {
   constructor(
     private http: HttpClient,
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
     ) { }
 
   public login(signInForm: SignInFormDTO): Observable<Jwt> {
@@ -45,18 +48,25 @@ export class AuthenticationService {
   }
 
   private setSession(jwt: Jwt) {
+    jwt.expiresIn = 3600;
     const expiresAt = moment().add(jwt.expiresIn,'second');
     const username = jwt.username;
-
+    this.cartService.getCartByClient(jwt.userId).subscribe((cart) => {
+      localStorage.setItem("cart_id", `${cart.id}`);
+    });
+    localStorage.setItem("user_id", `${jwt.userId}`);
     localStorage.setItem('id_token', jwt.idToken);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
     localStorage.setItem("username", username);
+
   }
 
   public logout() {
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
     localStorage.removeItem("username");
+    localStorage.removeItem("cart_id");
+    localStorage.removeItem("user_id");
     this.notificationService.alert('Você está desconectado!');
     this.router.navigate(['/']);
   }
@@ -77,6 +87,14 @@ export class AuthenticationService {
 
   public getUsername() {
     return localStorage.getItem('username');
+  }
+
+  public getCartId() {
+    return localStorage.getItem('cart_id');
+  }
+
+  public getUserId() {
+    return localStorage.getItem('user_id');
   }
 
 }
