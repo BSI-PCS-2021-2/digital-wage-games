@@ -7,6 +7,7 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,11 +16,12 @@ const routes: Routes = [
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'produto', component: ProdutoComponent },
   { path: 'carrinho', component: CartComponent },
-  { path: 'restauracao-senha', component: PasswordRecoveryComponent }
+  { path: 'restauracao-senha', component: PasswordRecoveryComponent },
+  { path: 'minha-conta', component: MyAccountComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

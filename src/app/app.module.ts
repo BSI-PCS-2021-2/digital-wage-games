@@ -18,6 +18,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -30,9 +33,11 @@ import { CartComponent } from './components/cart/cart.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-credits.component';
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     HomeComponent,
@@ -43,7 +48,9 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
     CatalogoComponent,
     ProdutoComponent,
     CartComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    MyAccountComponent,
+    BuyCreditsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +69,10 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
     MatSnackBarModule,
     HttpClientModule,
     MatSelectModule,
-    RecaptchaModule
+    RecaptchaModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [
     { provide: MatSnackBar },
