@@ -1,5 +1,8 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/select.scss';
+@import './../../../assets/styles/slider.scss';
+@import './../../../assets/styles/spinner.scss';
+@import './../../../assets/styles/badge.scss';
 
 mat-form-field {
   padding: 0 5px;
@@ -47,7 +50,8 @@ a {
       .filter-container {
         display: flex;
         align-items: center;
-        margin-right: 40px;
+        margin-right: 20px;
+        margin-left: 20px;
 
         @media only screen and (max-width: 992px) {
           margin: 10px 0;
@@ -55,8 +59,12 @@ a {
       }
 
       .search {
+        width: 100%;
+        margin-right: 20px;
+        margin-left: 20px;
+
         mat-form-field {
-          width: 500px;
+          width: 100%;
           border-radius: 30px;
         }
       }
@@ -132,6 +140,7 @@ a {
               font-weight: normal;
 
               text-decoration: none;
+              margin-right: 0px;
             }
 
             .buy-button {
@@ -181,5 +190,18 @@ a {
       display: none;
     }
 
+    ngx-slider {
+      width: 80% !important;
+    }
+
   }
 }
+
+p {
+  color: $light-gray;
+  margin-bottom: 8px;
+}
+
+// .filter-search-bar {
+//   width: 100% !important;
+// }

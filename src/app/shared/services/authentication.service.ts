@@ -61,11 +61,11 @@ export class AuthenticationService {
     this.router.navigate(['/']);
   }
 
-  public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+  public isLoggedIn(): boolean {
+    return moment().isBefore(this.getExpiration()) && localStorage.getItem("expires_at") !== null;
   }
 
-  public isLoggedOut() {
+  public isLoggedOut(): boolean {
     return !this.isLoggedIn();
   }
 
