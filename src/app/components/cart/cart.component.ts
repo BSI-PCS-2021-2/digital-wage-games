@@ -7,6 +7,8 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 import { ProductService } from '../../shared/services/product.service';
 import { PutCartItemDTO } from '../../shared/models/dto/cartItem/putCartItem.dto';
 import { CartService } from '../../shared/services/cart.service';
+import { Wallet } from '../../shared/models/wallet.model';
+import { WalletService } from '../../shared/services/wallet.service';
 
 export interface CartProduct {
   cartItemId: number;
@@ -33,7 +35,8 @@ export class StepperIntl extends MatStepperIntl {
 export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService,
-              private authenticationService: AuthenticationService,
+              public authenticationService: AuthenticationService,
+              private walletService: WalletService,
               private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -59,6 +62,11 @@ export class CartComponent implements OnInit {
         })
 
       }
+    });
+
+    this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
+      this.wallet = wallet;
+      this.wallet.funds = this.wallet.funds / 100;
     });
   }
 
@@ -96,7 +104,7 @@ export class CartComponent implements OnInit {
 
   decreaseAmount(index: any) {
     const p = this.cartProducts.get(index);
-    if (p.amount <= 0) return;
+    if (p.amount <= 1) return;
     p.amount--;
     p.totalPrice -= p.price;
     p.formatTotalPrice = this.formatPrice(p.totalPrice/100);
@@ -157,5 +165,6 @@ export class CartComponent implements OnInit {
   cartProducts = new Map();
   finalPrice: number = 0;
   formatFinalPrice: string = this.ptBRLocale.format(0);
+  public wallet: Wallet;
 
 }

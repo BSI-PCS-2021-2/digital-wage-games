@@ -1,6 +1,11 @@
 <div class="main">
     <div class="title">
         <h2>Seu Carrinho</h2>
+        <div *ngIf="this.authenticationService.isLoggedIn() && wallet">
+          <button class="wallet-button" mat-button #tooltip="matTooltip" matTooltip="CARTEIRA">
+            {{ wallet.funds | currency:'BRL': 'symbol' }}
+          </button>
+        </div>
     </div>
     <div class="grid">
         <div class="lista-produto">
