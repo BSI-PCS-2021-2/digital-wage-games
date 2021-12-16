@@ -7,6 +7,8 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 import { ProductService } from '../../shared/services/product.service';
 import { PutCartItemDTO } from '../../shared/models/dto/cartItem/putCartItem.dto';
 import { CartService } from '../../shared/services/cart.service';
+import { Wallet } from '../../shared/models/wallet.model';
+import { WalletService } from '../../shared/services/wallet.service';
 
 export interface CartProduct {
   cartItemId: number;
@@ -32,8 +34,9 @@ export class StepperIntl extends MatStepperIntl {
 
 export class CartComponent implements OnInit {
 
-  constructor(private cartService: CartService, 
-              private authenticationService: AuthenticationService,
+  constructor(private cartService: CartService,
+              public authenticationService: AuthenticationService,
+              private walletService: WalletService,
               private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -45,6 +48,7 @@ export class CartComponent implements OnInit {
           this.cartProducts.set(cartItems[i].id, {
             cartItemId: cartItems[i].id,
             index: i,
+            id: product.id,
             name: product.name,
             description: product.description,
             price: product.price,
@@ -56,8 +60,13 @@ export class CartComponent implements OnInit {
           // Quando esse método esta fora do loop a array de produtos está vazio (?)
           this.updateTotal();
         })
-        
+
       }
+    });
+
+    this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
+      this.wallet = wallet;
+      this.wallet.funds = this.wallet.funds / 100;
     });
   }
 
@@ -69,7 +78,7 @@ export class CartComponent implements OnInit {
     let p = this.cartProducts.get(index);
     this.cartService.deleteCartItem(p.cartItemId);
     this.cartProducts.delete(index);
-    this.updateTotal(); 
+    this.updateTotal();
   }
 
   clearCart() {
@@ -95,7 +104,7 @@ export class CartComponent implements OnInit {
 
   decreaseAmount(index: any) {
     const p = this.cartProducts.get(index);
-    if (p.amount <= 0) return;
+    if (p.amount <= 1) return;
     p.amount--;
     p.totalPrice -= p.price;
     p.formatTotalPrice = this.formatPrice(p.totalPrice/100);
@@ -130,11 +139,32 @@ export class CartComponent implements OnInit {
     this.updateTotal();
   }
 
+  getGameCover(productId: number): string {
+    switch (productId) {
+      case 2:
+        return 'game-images/halo-infinite.jpg';
+      case 3:
+        return 'game-images/deathloop.jpg';
+      case 4:
+        return 'game-images/back4blood.jpg';
+      case 5:
+        return 'game-images/psychonauts-2.jpg';
+      case 6:
+        return 'game-images/bf-2042.jpg';
+      case 7:
+        return 'game-images/re-village.jpg';
+      case 8:
+        return 'game-images/nioh-2.jpg';
+      default:
+        return 'game1.png';
+    }
+  }
+
   ptBRLocale =  Intl.NumberFormat('pt-br');
   cartId = null;
   cartProducts = new Map();
   finalPrice: number = 0;
   formatFinalPrice: string = this.ptBRLocale.format(0);
- 
+  public wallet: Wallet;
 
 }
