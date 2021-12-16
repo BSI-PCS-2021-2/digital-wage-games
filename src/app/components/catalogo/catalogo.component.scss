@@ -26,6 +26,15 @@ a {
   color: $white;
 }
 
+.wallet-button {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  background-color: #131313 !important;
+  border: 2px solid $green;
+  color: $green;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;

@@ -63,6 +63,11 @@
       </div>
     </div>
     <div class="aside-container">
+      <div *ngIf="this.authenticationService.isLoggedIn() && wallet">
+        <button class="wallet-button" mat-button #tooltip="matTooltip" matTooltip="CARTEIRA">
+          {{ wallet.funds | currency:'BRL': 'symbol' }}
+        </button>
+      </div>
       <div *ngIf="this.authenticationService.isLoggedIn(); else elseBlock">
         <button (click)="goToCart()" class="cart-button" mat-button matBadge="0" matBadgePosition="after">
           Carrinho

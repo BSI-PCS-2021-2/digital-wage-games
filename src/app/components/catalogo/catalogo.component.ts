@@ -7,6 +7,8 @@ import { Options } from '@angular-slider/ngx-slider';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { Router } from '@angular/router';
+import { WalletService } from '../../shared/services/wallet.service';
+import { Wallet } from '../../shared/models/wallet.model';
 
 
 @Injectable()
@@ -21,6 +23,15 @@ export class StepperIntl extends MatStepperIntl {
 })
 
 export class CatalogoComponent implements OnInit {
+
+  public selected = 'relevant';
+
+  public products: Product[];
+  public wallet: Wallet;
+
+  // implementar logica para preencher os icones de avaliação.
+
+  rateArr = [1,2,3,4];
 
   minPriceValue: number = 0;
   maxPriceValue: number = 1000;
@@ -38,6 +49,7 @@ export class CatalogoComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private walletService: WalletService,
     public authenticationService: AuthenticationService,
     private notificationService: NotificationService,
     private router: Router
@@ -45,8 +57,13 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe((products) => {
-      this.products = products
+      this.products = products;
       this.convert(this.products);
+    });
+
+    this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
+      this.wallet = wallet;
+      this.wallet.funds = this.wallet.funds / 100;
     });
   }
 
@@ -76,15 +93,5 @@ export class CatalogoComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-
-  selected = 'relevant';
-
-  products: Product[];
-
-
-
-  // implementar logica para preencher os icones de avaliação.
-
-  rateArr = [1,2,3,4];
 
 }
