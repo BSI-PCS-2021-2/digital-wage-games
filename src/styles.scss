@@ -56,3 +56,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 // Imports
 
 @import 'assets/styles/snackbar.scss';
+@import 'assets/styles/variables.scss';
+
+mat-dialog-container{
+  background: $dark-gray!important;
+  border-radius: 5px!important;
+}
+
+.bdrop{
+  backdrop-filter: blur(1px);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+opacity: 0 !important; /*click effect color change*/
+background-color: $green !important;  }
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+background-color: $green !important; /*inner circle color change*/  }
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+border-color: $green !important; /*outer ring color change*/  }
+
+

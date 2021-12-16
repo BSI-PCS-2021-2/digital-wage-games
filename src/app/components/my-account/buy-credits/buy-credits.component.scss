@@ -1,0 +1,88 @@
+@import '../../../../assets/styles/variables.scss';
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+
+  p{
+      color: $light-gray;
+  }
+
+  h1 {
+    color: $light-gray;
+    align-self: center;
+  }
+
+  .btn-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+
+    .OU {
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      p {
+        font-size: 20px;
+        margin: 0;
+        color: $light-gray
+      }
+    }
+
+    .input {
+      align-self: center;
+
+      mat-label {
+        color: $light-gray;
+      }
+    }
+
+    .btn-value {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 5px;
+
+      button {
+        width: 49%;
+        background: $green;
+        color: $dark-gray;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .cancel {
+      color: $red;
+    }
+
+    .submit {
+      background-color: $green;
+    }
+  }
+
+  .container-methods {
+    .title-methods {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 15px;
+      border-top: solid;
+      border-color: $black;
+      padding-top: 15px;
+    }
+    .methods-buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        color: $light-gray;
+    }
+  }
+}
