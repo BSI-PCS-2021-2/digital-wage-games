@@ -4,7 +4,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductService } from '../../shared/services/product.service';
 import { CartService } from '../../shared/services/cart.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
-import { Product } from 'src/app/shared/models/product.model';
+import { Product } from '../../shared/models/product.model';
+import { Wallet } from '../../shared/models/wallet.model';
+import { WalletService } from '../../shared/services/wallet.service';
 
 @Component({
   selector: 'app-produto',
@@ -16,8 +18,9 @@ export class ProdutoComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private cartService: CartService,
-              private authenticationService: AuthenticationService,
-              private router: ActivatedRoute) { }
+              public authenticationService: AuthenticationService,
+              private walletService: WalletService,
+              private router: ActivatedRoute,) { }
 
   priceReal: string;
 
@@ -42,12 +45,18 @@ export class ProdutoComponent implements OnInit {
         rate: product.rate,
         trailerPaths: ["../../../assets/videos/trailer.mp4", "../../../assets/videos/trailer2.mp4", "../../../assets/videos/trailer3.mp4", "../../../assets/videos/trailer4.mp4"]
       }
-      this.selectedTrailer = product.trailerPaths[0];
+      this.selectedTrailer = "../../../assets/videos/trailer.mp4";
     });
    this.defineCartSize();
    this.defineProductsOnCart();
+
+   this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
+    this.wallet = wallet;
+    this.wallet.funds = this.wallet.funds / 100;
+  });
+
   }
-  
+
   formatPrice(v: number) {
     return (v/100).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
   }
@@ -74,7 +83,7 @@ export class ProdutoComponent implements OnInit {
       productId: productId,
       amount: 1
     }
-    
+
     this.cartService.postCartItem(postCartItemDTO);
     document.getElementsByClassName(`container-price`)[0].classList.add('active');
     ++this.cartSize;
@@ -83,10 +92,11 @@ export class ProdutoComponent implements OnInit {
   selected(selection: string) {
     this.selectedTrailer = selection;
   }
- 
+
   cartId = null;
   cartSize = 0;
   product: Product = null;
+  public wallet: Wallet;
   selectedTrailer = null;
   rateArr = [1,2,3,4];
 

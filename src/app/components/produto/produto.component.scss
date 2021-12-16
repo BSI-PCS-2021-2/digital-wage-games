@@ -19,6 +19,8 @@
   .title {
     display: flex;
     flex-direction: row;
+    margin-bottom: 6px;
+    justify-content: space-between;
     font-size: 45px;
     color: $light-gray;
     border-radius: 5px;
@@ -27,16 +29,28 @@
       font-size: 35px;
     }
 
-    .cart-button {
-      background-color: $green;
-      color: $white;
-      height: 37px;
-      border-radius: 3px;
-      border-color: $green;
-      margin-right: 2px;
-      margin-left: auto;
-      text-align: center;
+    .action-menu {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .wallet-button {
+        background-color: #131313 !important;
+        color: $green;
+        border: 2px solid $green;
+      }
+
+      .cart-button {
+        background-color: $green;
+        color: $white;
+        height: 37px;
+        margin-left: 6px;
+        border-radius: 3px;
+        margin-right: 2px;
+        text-align: center;
+      }
     }
+
   }
 
   .grid-content {
@@ -47,26 +61,26 @@
 
     .trailers_container {
 
-      width: 768px;
+      width: 70%;
       margin-right: 20px;
 
       div {
         background-color: $dark-gray;
         border-radius: 5px;
       }
-  
+
       .container-trailer {
         width: 100%;
-        height: 480px;
+        height: fit-content;
       }
-  
+
       .container-extras {
         display: flex;
         align-items: left;
         grid-column-start: 1;
         grid-column-end: 2;
         overflow-x: auto;
-  
+
         video {
           max-width: 17.77em;
           margin: 1.25px;
@@ -75,26 +89,27 @@
       }
     }
     .container-description-price {
-  
+
       padding: 20px;
       background-color: $dark-gray;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      width: 30%;
 
       .container-description {
         text-align: justify;
         overflow-y: auto;
         line-height: 1.6;
-       
+
         p {
           color: $light-gray;
-          
+
         }
 
         h2 {
           margin: 20px 0;
-         
+
           font-size: 24px;
           color: $light-gray;
           text-align: center;
@@ -131,7 +146,7 @@
         .buy-button {
           display: none;
         }
-        
+
         .added-button {
           display: block;
         }
@@ -149,6 +164,7 @@
       line-height: 1.6;
       min-width: 768px;
       margin-right: 30px;
+      width: 70%;
 
       p {
         color: $light-gray;
@@ -159,6 +175,7 @@
 
       background-color: $light-gray;
       padding: 30px;
+      width: 30%;
 
       .rating_header {
         display: flex;
@@ -184,3 +201,4 @@
     }
   }
 }
+

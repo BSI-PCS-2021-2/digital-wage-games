@@ -1,4 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -33,11 +35,15 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-credits.component';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -53,7 +59,8 @@ import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-cre
     CartComponent,
     PasswordRecoveryComponent,
     MyAccountComponent,
-    BuyCreditsComponent
+    BuyCreditsComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +76,7 @@ import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-cre
     MatBadgeModule,
     MatProgressSpinnerModule,
     MatGridListModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     HttpClientModule,
@@ -81,7 +89,8 @@ import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-cre
   ],
   providers: [
     { provide: MatSnackBar },
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
   bootstrap: [AppComponent]
 })
