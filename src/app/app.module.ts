@@ -21,6 +21,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -36,12 +39,14 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { MyAccountComponent } from './components/my-account/my-account.component';
+import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-credits.component';
 import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     HomeComponent,
@@ -53,6 +58,8 @@ registerLocaleData(localePt, 'pt-BR');
     ProdutoComponent,
     CartComponent,
     PasswordRecoveryComponent,
+    MyAccountComponent,
+    BuyCreditsComponent,
     CheckoutComponent
   ],
   imports: [
@@ -75,7 +82,10 @@ registerLocaleData(localePt, 'pt-BR');
     HttpClientModule,
     MatSelectModule,
     RecaptchaModule,
-    NgxSliderModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    NgxSliderModule
   ],
   providers: [
     { provide: MatSnackBar },
