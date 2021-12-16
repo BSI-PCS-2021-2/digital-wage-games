@@ -3,6 +3,10 @@
 .main {
   padding: $padding-page;
 
+  button {
+    cursor: pointer;
+  }
+
   div::-webkit-scrollbar {
     background-color: $gray;
     width: 5px;
@@ -44,16 +48,32 @@
       border-radius: 5px;
 
       .produto {
+        position: relative;
         display: flex;
         margin-top: 10px;
+        align-items: flex-start;
         background-color: $dark-gray;
         color: $light-gray;
-        min-height: 10em;
         border-radius: 5px;
+        padding: 30px;
+
+        .btn-close {
+          position: absolute;
+          color: $red;
+          display: flex;
+          padding: 0;
+          width: 5px;
+          margin-right: 0;
+          margin-left: auto;
+          justify-content: center;
+        }
+
+        .product-img {
+          width: 350px;
+          height: 270px;
+        }
 
         .descricao-nome {
-          display: grid;
-          grid-template-columns: 7fr 2fr 3fr;
 
           .btn-close-dates {
             display: flex;
@@ -66,16 +86,6 @@
             text-align: right;
             margin-right: 5px;
 
-            .btn-close {
-              color: $red;
-              display: flex;
-              padding: 0;
-              width: 5px;
-              margin-right: 0;
-              margin-left: auto;
-              justify-content: center;
-            }
-
             .dates-price {
               display: flex;
               flex-direction: column;
@@ -83,67 +93,37 @@
             }
           }
 
-          h2 {
-            grid-column-start: 1;
-            grid-column-end: 2;
-          }
-
           .descricao {
             margin-bottom: 5px;
             overflow-y: auto;
-            grid-column-start: 1;
-            grid-column-end: 2;
-            grid-row-start: 2;
-            grid-row-end: 4;
           }
 
-          .price {
-            grid-column-start: 3;
+          .product_price_container {
+
+            margin: 48px 0;
+
+            .price {
+              font-size: 24px;
+            }
           }
 
           .add-dec {
-            grid-column-start: 2;
-            grid-row-start: 3;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            margin: auto auto 10px 20px;
-            grid-auto-rows: 2em;
-            gap: 3px;
+            display: flex;
+            align-items: center;
           }
 
           .quantity {
-            grid-column-start: 1;
-            grid-column-end: 2;
-            grid-row-start: 1;
-            grid-row-end: 2;
-            overflow: hidden;
-
 
             input {
               width: 100%;
               height: 100%;
-            }
-          }
-
-          .buttons-container {
-            grid-column-start: 2;
-            grid-column-end: 3;
-            grid-row-start: 1;
-            grid-row-end: 2;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-
-            button {
-              height: 50%;
+              padding: 8px 0;
+              outline: none;
+              background-color: $dark-gray;
+              color: $light-gray;
+              border: none;
+              box-shadow: 1px 0px 1px $light-gray;
               text-align: center;
-
-              mat-icon {
-                display: flex;
-                width: 100%;
-                font-size: 10px;
-                text-align: center;
-              }
             }
           }
         }
@@ -188,7 +168,7 @@
       }
     }
 
-    .price {
+    .final_price_container {
       border-radius: 5px;
       background-color: $dark-gray;
       grid-column-start: 2;

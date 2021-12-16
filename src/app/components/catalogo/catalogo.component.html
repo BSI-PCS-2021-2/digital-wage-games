@@ -33,11 +33,11 @@
         </div>
         <div class="item" *ngFor="let product of products">
         <mat-card>
-          <a routerLink="/produto">
-            <img class="product-img" mat-card-image src="assets/images/game1.png">
+          <a routerLink="/produto/{{ product.id }}">
+            <img class="product-img" mat-card-image src="assets/images/{{getGameCover(product.id)}}">
             <mat-card-header>
               <mat-card-title class="product-price">
-                {{ product.price }}
+                {{ product.price / 100 | currency:'BRL': 'symbol' }}
               </mat-card-title>
               <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
               <div class="rate-container">
@@ -51,10 +51,14 @@
               </div>
             </mat-card-header>
           </a>
-          <mat-card-actions>
-            <button routerLink="/produto" class="more-button" mat-button>Ver mais</button>
-            <button (click)="addToCart(product.id)" class="buy-button" mat-button>
+          <mat-card-actions id="cart_actions_container_{{ product.id }}">
+            <button routerLink="/produto/{{ product.id }}" class="more-button" mat-button>Ver mais</button>
+            <button class="buy-button" mat-button (click)="postCartItem(product.id)" *ngIf="cartId">
               Carrinho
+              <i class="fas fa-cart-plus fa-lg"></i>
+            </button>
+            <button class="added-button" mat-button>
+              Adicionado
               <i class="fas fa-cart-plus fa-lg"></i>
             </button>
           </mat-card-actions>
@@ -68,18 +72,10 @@
           {{ wallet.funds | currency:'BRL': 'symbol' }}
         </button>
       </div>
-      <div *ngIf="this.authenticationService.isLoggedIn(); else elseBlock">
-        <button (click)="goToCart()" class="cart-button" mat-button matBadge="0" matBadgePosition="after">
-          Carrinho
-          <i class="fas fa-shopping-cart fa-lg"></i>
-        </button>
-      </div>
-      <ng-template #elseBlock>
-        <button (click)="goToCart()" class="cart-button" mat-button matBadgePosition="after">
-          Carrinho
-          <i class="fas fa-shopping-cart fa-lg"></i>
-        </button>
-      </ng-template>
+      <button  routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after">
+        Carrinho
+        <i class="fas fa-shopping-cart fa-lg"></i>
+      </button>
       <p>Preço (R$)</p>
       <ngx-slider [value]="minPriceValue" [highValue]="maxPriceValue" [options]="priceOptions"></ngx-slider>
       <p>Avaliação</p>
@@ -91,7 +87,6 @@
             <mat-option value="none">Nenhum</mat-option>
             <mat-option value="ps5">PS5</mat-option>
             <mat-option value="xbox-x">Xbox Series X</mat-option>
-            <mat-option value="xbox-x">Xbox Series S</mat-option>
             <mat-option value="ps4">PS4</mat-option>
             <mat-option value="xbox-one">Xbox One</mat-option>
           </mat-select>
