@@ -19,8 +19,9 @@ div::-webkit-scrollbar-thumb {
 
   .title {
     color: $light-gray;
-    h2{
-        font-size: 30px;
+
+    h2 {
+      font-size: 30px;
     }
   }
 
@@ -77,8 +78,6 @@ div::-webkit-scrollbar-thumb {
             height: 65%;
             color: $light-gray;
             overflow-y: auto;
-
-            .desc {}
           }
         }
       }
@@ -116,15 +115,17 @@ div::-webkit-scrollbar-thumb {
         color: $light-gray;
         justify-content: space-around;
         text-align: center;
-        .credits{
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            justify-content: center;
+
+        .credits {
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          justify-content: center;
         }
+
         .add-credits {
-            background: $green;
-            color: $black;
+          background: $green;
+          color: $black;
         }
       }
 
