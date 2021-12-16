@@ -42,12 +42,12 @@ export class ProdutoComponent implements OnInit {
         rate: product.rate,
         trailerPaths: ["../../../assets/videos/trailer.mp4", "../../../assets/videos/trailer2.mp4", "../../../assets/videos/trailer3.mp4", "../../../assets/videos/trailer4.mp4"]
       }
-      this.selectedTrailer = product.trailerPaths[0];
+      this.selectedTrailer = "../../../assets/videos/trailer.mp4";
     });
    this.defineCartSize();
    this.defineProductsOnCart();
   }
-  
+
   formatPrice(v: number) {
     return (v/100).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
   }
@@ -74,7 +74,7 @@ export class ProdutoComponent implements OnInit {
       productId: productId,
       amount: 1
     }
-    
+
     this.cartService.postCartItem(postCartItemDTO);
     document.getElementsByClassName(`container-price`)[0].classList.add('active');
     ++this.cartSize;
@@ -83,7 +83,7 @@ export class ProdutoComponent implements OnInit {
   selected(selection: string) {
     this.selectedTrailer = selection;
   }
- 
+
   cartId = null;
   cartSize = 0;
   product: Product = null;

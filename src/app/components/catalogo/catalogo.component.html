@@ -72,7 +72,7 @@
           {{ wallet.funds | currency:'BRL': 'symbol' }}
         </button>
       </div>
-      <button  routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after">
+      <button id="main-cart-button" routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after">
         Carrinho
         <i class="fas fa-shopping-cart fa-lg"></i>
       </button>

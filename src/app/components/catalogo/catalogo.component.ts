@@ -44,6 +44,10 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     if (this.cartId !== null) {
       this.activeLoggedButtons();
     }
+
+    if (this.authenticationService.isLoggedIn()) {
+      document.getElementById("main-cart-button").classList.add('active');
+    }
   }
 
   defineProductsOnCart() {
