@@ -33,11 +33,11 @@
         </div>
         <div class="item" *ngFor="let product of products">
         <mat-card>
-          <a routerLink="/produto">
+          <a routerLink="/produto/{{ product.id }}">
             <img class="product-img" mat-card-image src="assets/images/game1.png">
             <mat-card-header>
               <mat-card-title class="product-price">
-                {{ product.price }}
+                {{ formatPrice(product.price) }}
               </mat-card-title>
               <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
               <div class="rate-container">
@@ -52,7 +52,7 @@
             </mat-card-header>
           </a>
           <mat-card-actions id="cart_actions_container_{{ product.id }}">
-            <button routerLink="/produto" class="more-button" mat-button>Ver mais</button>
+            <button routerLink="/produto/{{ product.id }}" class="more-button" mat-button>Ver mais</button>
             <button class="buy-button" mat-button (click)="postCartItem(product.id)" *ngIf="cartId">
               Carrinho
               <i class="fas fa-cart-plus fa-lg"></i>

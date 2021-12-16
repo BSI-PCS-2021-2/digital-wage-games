@@ -47,11 +47,11 @@ export class CartComponent implements OnInit {
             index: i,
             name: product.name,
             description: product.description,
-            price: parseInt(product.price),
-            formatPrice: this.formatPrice(parseInt(product.price)/100),
+            price: product.price,
+            formatPrice: this.formatPrice(product.price/100),
             amount: cartItems[i].amount,
-            formatTotalPrice: this.formatPrice(parseInt(product.price)/100 * cartItems[i].amount),
-            totalPrice: parseInt(product.price) * cartItems[i].amount
+            formatTotalPrice: this.formatPrice(product.price/100 * cartItems[i].amount),
+            totalPrice: product.price * cartItems[i].amount
           })
           // Quando esse método esta fora do loop a array de produtos está vazio (?)
           this.updateTotal();

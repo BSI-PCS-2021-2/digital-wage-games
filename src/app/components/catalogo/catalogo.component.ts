@@ -6,7 +6,7 @@ import { ProductService } from '../../shared/services/product.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { CartService } from '../../shared/services/cart.service';
 import { Options } from '@angular-slider/ngx-slider';
-
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
@@ -23,7 +23,8 @@ export class CatalogoComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private authenticationService: AuthenticationService,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.cartId = this.authenticationService.getCartId();
@@ -47,21 +48,12 @@ export class CatalogoComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts().subscribe((products) => {
-      this.products = products
-      this.convert(this.products);   
+      this.products = products;   
     });
   }
 
   activeLoggedButtons() {
     document.getElementsByClassName("cart-button")[0].classList.add('active');
-  }
-
-  convert(products: Product[]): void {
-    products.forEach(product => {
-      let price = Number(product.price)/100;
-      product.price = "R$ "+ price.toString().replace('.', ',');
-    });
-    this.products = products
   }
 
   formatPrice(v: number) {
@@ -78,6 +70,10 @@ export class CatalogoComponent implements OnInit {
     this.cartService.postCartItem(postCartItemDTO);
     document.getElementById(`cart_actions_container_${productId}`).classList.add('active');
     ++this.cartSize;
+  }
+
+  goProduct(id: number) {
+    this.router.navigate(['/produto/2']);
   }
 
   selected = 'relevant';

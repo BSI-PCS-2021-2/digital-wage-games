@@ -1,26 +1,29 @@
 <div class="main">
     <div class="title">
-        <h2>{{game.name}}</h2>
+        <h2>{{product.name}}</h2>
         <button  routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after" *ngIf="cartId">
             Carrinho
             <i class="fas fa-shopping-cart fa-lg"></i>
           </button>
     </div>
     <div class="grid-content">
-        <div class="container-trailer">
+        <div class="trailers_container">
+            <div class="container-trailer">
 
-            <!-- trailers serão salvos no BD? -->
-            <video width="100%" height="100%" src={{dir}} controls></video>
+                <video width="100%" height="100%" src="{{ selectedTrailer }}" controls></video>
+            </div>
+            <div class="container-extras">
+                <video *ngFor="let trailer of product.trailerPaths" src={{trailer}}  (click)="selected(trailer)" ></video>
+            </div>
         </div>
-
         <div class="container-description-price">
             <div class="container-description">
                 <h2>Descrição:</h2>
-                <p>{{game.description}}</p>
+                <p>{{product.description}}</p>
             </div>
             <div class="container-price">
-                <p>Preço: {{priceReal}}</p>
-                <button class="buy-button" mat-button *ngIf="cartId" (click)="postCartItem(game.id)">
+                <p>Preço: {{formatPrice(product.price)}}</p>
+                <button class="buy-button" mat-button *ngIf="cartId" (click)="postCartItem(product.id)">
                     Adicionar ao carrinho
                     <i class="fas fa-cart-plus fa-lg"></i>
                 </button>
@@ -29,9 +32,28 @@
                     <i class="fas fa-cart-plus fa-lg"></i>
                   </button>
             </div>
+        </div>        
+    </div>
+    <div class="more_info_container">
+        <div class="description_more">
+            <p>{{ product.description }}</p>
+            <p>{{ product.description }}</p>
         </div>
-        <div class="container-extras">
-            <video *ngFor="let game of game.video" src={{game}}  (click)="selected(game)" ></video>
+        <div class="rating">
+            <div class="rating_header">
+                <div class="rating_number">
+                    <p>4.0</p>
+                </div>
+                <div class="rating_stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="rating_body">
+                {{ product.description }}
+            </div>
         </div>
     </div>
 </div>
