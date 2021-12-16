@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'cadastrar', component: SignupComponent },
   { path: 'catalogo', component: CatalogoComponent },
-  { path: 'produto', component: ProdutoComponent },
+  { path: 'produto/:produto', component: ProdutoComponent },
   { path: 'carrinho', component: CartComponent },
   { path: 'restauracao-senha', component: PasswordRecoveryComponent },
   { path: 'minha-conta', component: MyAccountComponent }

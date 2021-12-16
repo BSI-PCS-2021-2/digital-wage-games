@@ -15,12 +15,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -64,6 +67,7 @@ import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-cre
     MatMenuModule,
     MatProgressBarModule,
     MatBadgeModule,
+    MatProgressSpinnerModule,
     MatGridListModule,
     ReactiveFormsModule,
     MatSnackBarModule,
@@ -72,7 +76,8 @@ import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-cre
     RecaptchaModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    NgxSliderModule
   ],
   providers: [
     { provide: MatSnackBar },

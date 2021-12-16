@@ -1,15 +1,17 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { Product } from '../../../app/shared/models/product.model';
+import { PostCartItemDTO } from '../../../app/shared/models/dto/cartItem/postCartItem.dto';
 import { ProductService } from '../../shared/services/product.service';
-
+import { AuthenticationService } from '../../shared/services/authentication.service';
+import { CartService } from '../../shared/services/cart.service';
+import { Options } from '@angular-slider/ngx-slider';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Injectable()
 export class StepperIntl extends MatStepperIntl {
   override optionalLabel = '(OPCIONAL)';
 }
-
 
 @Component({
   selector: 'app-catalogo',
@@ -19,27 +21,83 @@ export class StepperIntl extends MatStepperIntl {
 
 export class CatalogoComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private authenticationService: AuthenticationService,
+              private cartService: CartService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products
-      this.convert(this.products);
+    this.cartId = this.authenticationService.getCartId();
+    this.getProducts();
+    this.defineProductsOnCart();
+    
+    if (this.cartId !== null) {
+      this.activeLoggedButtons();
+    }
+    
+  }
+
+  defineProductsOnCart() {
+    this.cartService.getCartItems(this.cartId).subscribe((cartItems)  => {
+      cartItems.forEach(e => {
+        document.getElementById(`cart_actions_container_${e.productId}`).classList.add('active');
+        this.cartSize++;
+      })
     });
   }
-  convert(products: Product[]): void {
-    products.forEach(product => {
-      let price = Number(product.price)/100;
-      product.price = "R$ "+ price.toString().replace('.', ',');
-      console.log(product.price + " 123");
+
+  getProducts() {
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;   
     });
-    this.products = products
+  }
+
+  activeLoggedButtons() {
+    document.getElementsByClassName("cart-button")[0].classList.add('active');
+  }
+
+  formatPrice(v: number) {
+    return `R$ ${(v)}`.replace('.', ',');
+  }
+
+  postCartItem(productId: number) {
+    const postCartItemDTO: PostCartItemDTO = {
+      cartId: this.cartId,
+      productId: productId,
+      amount: 1
+    }
+    
+    this.cartService.postCartItem(postCartItemDTO);
+    document.getElementById(`cart_actions_container_${productId}`).classList.add('active');
+    ++this.cartSize;
+  }
+
+  goProduct(id: number) {
+    this.router.navigate(['/produto/2']);
   }
 
   selected = 'relevant';
 
   products: Product[];
+  cartProductIds: number[];
 
+  cartId = null;
+  cartSize = 0;
+  cartPrice = 0;
+
+  minPriceValue: number = 0;
+  maxPriceValue: number = 1000;
+  priceOptions: Options = {
+    floor: 0,
+    ceil: 1000
+  };
+
+  minRatingValue: number = 0;
+  maxRatingValue: number = 1000;
+  ratingOptions: Options = {
+    floor: 0,
+    ceil: 5
+  };
 
 
   // implementar logica para preencher os icones de avaliação.
