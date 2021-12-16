@@ -7,6 +7,7 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { CartComponent } from './components/cart/cart.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'produto/:produto', component: ProdutoComponent },
   { path: 'carrinho', component: CartComponent },
-  { path: 'restauracao-senha', component: PasswordRecoveryComponent }
+  { path: 'restauracao-senha', component: PasswordRecoveryComponent },
+  { path: 'checkout', component: CheckoutComponent }
 ];
 
 @NgModule({

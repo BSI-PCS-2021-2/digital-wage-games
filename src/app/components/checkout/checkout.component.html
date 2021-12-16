@@ -1,0 +1,67 @@
+<section class="checkout">
+    <h1>Finalizar compra</h1>
+    <main>       
+        <div class="buy_info_container">
+            <div class="payment_type_container">
+                <h3>Forma de pagamento</h3>
+                <div class="payment_type">
+                    <div class="slip_button option_button" (click)="choicePaymentType('slip')">
+                        <i class="fas fa-barcode"></i><br>
+                        <p>Boleto</p>
+                    </div>
+                    <div class="card_button option_button" (click)="choicePaymentType('card')">
+                        <i class="far fa-credit-card"></i><br>
+                        <p>Cartão</p>
+                    </div>
+                    <div class="pix_button option_button" (click)="choicePaymentType('pix')">
+                        <i class="fab fa-product-hunt"></i><br>
+                        <p>PIX</p>
+                    </div>
+                    <div class="wallet_button option_button" (click)="choicePaymentType('wallet')">
+                        <i class="fas fa-wallet"></i>
+                        <p>Carteira</p>
+                    </div>
+                </div>
+            </div>
+            <div class="addresses_container option_button">
+                <h3>Endereço</h3>
+                <div class="adresses">
+                    <div class="address"  *ngFor="let address of addresses">
+                        <p>{{address.city}}</p>
+                        <p>{{address.street}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="freights_container ">
+                <h3>Frete</h3>
+                <div class="freights">
+                    <div class="freight_1 option_button" (click)="choiceFreight(0)">
+                        <i class="fas fa-truck"></i>
+                        <h4>{{ freights[0].name }}</h4>
+                        <p>{{ formatPrice(freights[0].price) }}</p>
+                    </div>
+                    <div class="freight_2 option_button" (click)="choiceFreight(1)">
+                        <i class="fas fa-truck"></i>
+                        <h4>{{ freights[0].name }}</h4>
+                        <p>{{ formatPrice(freights[1].price) }}</p>
+                    </div>
+                    <div class="freight_1 option_button" (click)="choiceFreight(2)">
+                        <i class="fas fa-truck"></i>
+                        <h4>{{ freights[0].name }}</h4>
+                        <p>{{ formatPrice(freights[2].price) }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aside_container">
+            <div class="actions">
+                <button class="cancel_button" (click)="cancel()">Cancelar</button>
+                <button class="buy_button" (click)="finishPurshase()">Comprar</button>
+            </div>
+            <div class="price_container">
+                <h4>Frete: R$ {{formatPrice(freight.price)}}</h4>
+                <h2>Total: R$ {{formatPrice(totalPrice)}}</h2>
+            </div>
+        </div>
+    </main>
+</section>

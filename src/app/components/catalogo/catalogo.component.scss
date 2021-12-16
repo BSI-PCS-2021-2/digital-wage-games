@@ -24,6 +24,16 @@ a {
   right: 0;
   background-color: $green !important;
   color: $white;
+  border: 2px solid $green;
+}
+
+.wallet-button {
+  position: absolute;
+  top: -50px;
+  right: 120px;
+  background-color: #131313 !important;
+  border: 2px solid $green;
+  color: $green;
 }
 
 .wrapper {
@@ -93,6 +103,7 @@ a {
 
           .product-img {
             margin: 20px 0;
+            width: 100%;
           }
 
           .product-price {
@@ -146,15 +157,18 @@ a {
             .buy-button {
               background-color: $green !important;
               color: $white;
+              border: 2px solid $green;
+              width: 150px;
             }
 
             .added-button {
               display: none;
               border: 2px solid $green;
               color: $green;
+              width: 150px;
             }
 
-            
+
 
             .more-button {
               border: 2px solid $green;
@@ -165,7 +179,7 @@ a {
             .buy-button {
               display: none;
             }
-            
+
             .added-button {
               display: block;
             }

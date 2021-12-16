@@ -1,10 +1,17 @@
 <div class="main">
     <div class="title">
         <h2>{{product.name}}</h2>
-        <button  routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after" *ngIf="cartId">
-            Carrinho
-            <i class="fas fa-shopping-cart fa-lg"></i>
-          </button>
+        <div class="action-menu">
+          <div *ngIf="this.authenticationService.isLoggedIn() && wallet">
+            <button class="wallet-button" mat-button #tooltip="matTooltip" matTooltip="CARTEIRA">
+              {{ wallet.funds | currency:'BRL': 'symbol' }}
+            </button>
+          </div>
+          <button  routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after" *ngIf="cartId">
+              Carrinho
+              <i class="fas fa-shopping-cart fa-lg"></i>
+            </button>
+        </div>
     </div>
     <div class="grid-content">
         <div class="trailers_container">
@@ -32,7 +39,7 @@
                     <i class="fas fa-cart-plus fa-lg"></i>
                   </button>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="more_info_container">
         <div class="description_more">

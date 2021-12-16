@@ -34,10 +34,10 @@
         <div class="item" *ngFor="let product of products">
         <mat-card>
           <a routerLink="/produto/{{ product.id }}">
-            <img class="product-img" mat-card-image src="assets/images/game1.png">
+            <img class="product-img" mat-card-image src="assets/images/{{getGameCover(product.id)}}">
             <mat-card-header>
               <mat-card-title class="product-price">
-                {{ formatPrice(product.price) }}
+                {{ product.price / 100 | currency:'BRL': 'symbol' }}
               </mat-card-title>
               <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
               <div class="rate-container">
@@ -67,7 +67,12 @@
       </div>
     </div>
     <div class="aside-container">
-      <button  routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after">
+      <div *ngIf="this.authenticationService.isLoggedIn() && wallet">
+        <button class="wallet-button" mat-button #tooltip="matTooltip" matTooltip="CARTEIRA">
+          {{ wallet.funds | currency:'BRL': 'symbol' }}
+        </button>
+      </div>
+      <button id="main-cart-button" routerLink="/carrinho" class="cart-button" mat-button matBadge="{{cartSize}} " matBadgePosition="after">
         Carrinho
         <i class="fas fa-shopping-cart fa-lg"></i>
       </button>
@@ -82,7 +87,6 @@
             <mat-option value="none">Nenhum</mat-option>
             <mat-option value="ps5">PS5</mat-option>
             <mat-option value="xbox-x">Xbox Series X</mat-option>
-            <mat-option value="xbox-x">Xbox Series S</mat-option>
             <mat-option value="ps4">PS4</mat-option>
             <mat-option value="xbox-one">Xbox One</mat-option>
           </mat-select>
