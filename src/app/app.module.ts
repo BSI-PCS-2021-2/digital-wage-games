@@ -32,6 +32,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
@@ -51,7 +52,8 @@ registerLocaleData(localePt, 'pt-BR');
     CatalogoComponent,
     ProdutoComponent,
     CartComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

@@ -47,7 +47,7 @@
         <div class="actions-cart">
             <button class="limpar" mat-button (click)="clearCart()">Limpar Carrinho</button>
             <button class="continuar" routerLink="/catalogo" mat-button>Continuar Comprando</button>
-            <button class="finalizar" mat-button>Finalizar pedido</button>
+            <button routerLink="/checkout" class="finalizar" mat-button>Finalizar pedido</button>
         </div>
         <div class="final_price_container" >
             <h2>Subtotal: <span id="final_price">{{ formatFinalPrice }}</span> </h2>
