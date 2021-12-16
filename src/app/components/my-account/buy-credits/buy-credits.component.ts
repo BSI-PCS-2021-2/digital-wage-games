@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MyAccountComponent } from '../my-account.component';
 
 @Component({
   selector: 'app-buy-credits',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuyCreditsComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
+  }
+
+  constructor(
+    public dialogRef: MatDialogRef<BuyCreditsComponent>)
+    { }
+
+  cancel(): void {
+    this.dialogRef.close();
   }
 
 }
