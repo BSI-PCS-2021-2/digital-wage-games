@@ -4,7 +4,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductService } from '../../shared/services/product.service';
 import { CartService } from '../../shared/services/cart.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
-import { Product } from 'src/app/shared/models/product.model';
+import { Product } from '../../shared/models/product.model';
+import { Wallet } from '../../shared/models/wallet.model';
+import { WalletService } from '../../shared/services/wallet.service';
 
 @Component({
   selector: 'app-produto',
@@ -16,8 +18,9 @@ export class ProdutoComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private cartService: CartService,
-              private authenticationService: AuthenticationService,
-              private router: ActivatedRoute) { }
+              public authenticationService: AuthenticationService,
+              private walletService: WalletService,
+              private router: ActivatedRoute,) { }
 
   priceReal: string;
 
@@ -46,6 +49,12 @@ export class ProdutoComponent implements OnInit {
     });
    this.defineCartSize();
    this.defineProductsOnCart();
+
+   this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
+    this.wallet = wallet;
+    this.wallet.funds = this.wallet.funds / 100;
+  });
+
   }
 
   formatPrice(v: number) {
@@ -87,6 +96,7 @@ export class ProdutoComponent implements OnInit {
   cartId = null;
   cartSize = 0;
   product: Product = null;
+  public wallet: Wallet;
   selectedTrailer = null;
   rateArr = [1,2,3,4];
 

@@ -32,7 +32,7 @@ export class StepperIntl extends MatStepperIntl {
 
 export class CartComponent implements OnInit {
 
-  constructor(private cartService: CartService, 
+  constructor(private cartService: CartService,
               private authenticationService: AuthenticationService,
               private productService: ProductService) { }
 
@@ -45,6 +45,7 @@ export class CartComponent implements OnInit {
           this.cartProducts.set(cartItems[i].id, {
             cartItemId: cartItems[i].id,
             index: i,
+            id: product.id,
             name: product.name,
             description: product.description,
             price: product.price,
@@ -56,7 +57,7 @@ export class CartComponent implements OnInit {
           // Quando esse método esta fora do loop a array de produtos está vazio (?)
           this.updateTotal();
         })
-        
+
       }
     });
   }
@@ -69,7 +70,7 @@ export class CartComponent implements OnInit {
     let p = this.cartProducts.get(index);
     this.cartService.deleteCartItem(p.cartItemId);
     this.cartProducts.delete(index);
-    this.updateTotal(); 
+    this.updateTotal();
   }
 
   clearCart() {
@@ -130,11 +131,31 @@ export class CartComponent implements OnInit {
     this.updateTotal();
   }
 
+  getGameCover(productId: number): string {
+    switch (productId) {
+      case 2:
+        return 'game-images/halo-infinite.jpg';
+      case 3:
+        return 'game-images/deathloop.jpg';
+      case 4:
+        return 'game-images/back4blood.jpg';
+      case 5:
+        return 'game-images/psychonauts-2.jpg';
+      case 6:
+        return 'game-images/bf-2042.jpg';
+      case 7:
+        return 'game-images/re-village.jpg';
+      case 8:
+        return 'game-images/nioh-2.jpg';
+      default:
+        return 'game1.png';
+    }
+  }
+
   ptBRLocale =  Intl.NumberFormat('pt-br');
   cartId = null;
   cartProducts = new Map();
   finalPrice: number = 0;
   formatFinalPrice: string = this.ptBRLocale.format(0);
- 
 
 }
