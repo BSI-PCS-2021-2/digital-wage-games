@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Wallet } from 'src/app/shared/models/wallet.model';
 import { Address } from 'src/app/shared/models/address.model';
 import { AuthenticationService } from '../../shared/services/authentication.service';
@@ -78,13 +77,12 @@ export class CheckoutComponent implements OnInit {
       walletId: this.wallet.id,
       value: this.wallet.funds - this.totalPrice
     })
-    console.log(this.cartId);
-    console.log(this.addressId);
+    this.cartService.cleanCart(this.cartId);
     this.orderService.postOrder({
       cartId: this.cartId,
       addressId: this.addressId
     });
-    this.router.navigate(["/catalogo"]);
+    this.router.navigate(["/minha-conta/success"]);
   }
 
   freights = [

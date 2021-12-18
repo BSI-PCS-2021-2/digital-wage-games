@@ -32,8 +32,11 @@ export class CartService {
   }
 
   deleteCartItem(cartItemId: number) { 
-    console.log(`${environment.baseUrl}/store/cart/items/${cartItemId}`)
     return this.http.delete<void>(`${environment.baseUrl}/store/cart/items/${cartItemId}`).subscribe();
   
+  }
+
+  cleanCart(cartId: number) {
+    return this.http.delete<void>(`${environment.baseUrl}/store/cart/${cartId}/clean`).subscribe();
   }
 }

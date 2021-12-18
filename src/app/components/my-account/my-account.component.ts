@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BuyCreditsComponent } from './buy-credits/buy-credits.component';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 
 
@@ -23,8 +25,12 @@ export interface Product {
   templateUrl: './my-account.component.html',
   styleUrls: ['./my-account.component.scss']
 })
+
 export class MyAccountComponent implements OnInit {
 
+  constructor(public dialog: MatDialog,
+              private router: ActivatedRoute,
+              private notificationService: NotificationService) { }
 
   produto: Product[] = [{
     cartItemId: 0,
@@ -56,8 +62,6 @@ export class MyAccountComponent implements OnInit {
     desc: "teste"
   },]
 
-  constructor(public dialog: MatDialog) { }
-
 usuario: User = {
   id: 0,
   name: "Digital Wave Games",
@@ -68,6 +72,10 @@ usuario: User = {
 
   ngOnInit(): void {
     this.creditsReal = this.formatPrice(this.usuario.credits);
+    console.log(this.router.params)
+    if (this.router.snapshot.paramMap.get('success')) {
+      this.notificationService.success("Sua compra foi realizada com sucesso!");
+    }
   }
 
   buyCredits(): void {
