@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'carrinho', component: CartComponent },
   { path: 'restauracao-senha', component: PasswordRecoveryComponent },
   { path: 'minha-conta', component: MyAccountComponent },
+  { path: 'minha-conta/:success', component: MyAccountComponent },
   { path: 'checkout', component: CheckoutComponent }
 ];
 
