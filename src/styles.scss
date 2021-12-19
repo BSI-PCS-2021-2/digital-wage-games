@@ -78,3 +78,6 @@ background-color: $green !important; /*inner circle color change*/  }
 border-color: $green !important; /*outer ring color change*/  }
 
 
+.mat-body p, .mat-body-1 p, .mat-typography p {
+  margin: 0 !important; /*Re-writing margin from _typography.scss */
+}
