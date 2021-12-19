@@ -1,33 +1,33 @@
 <div class="dialog">
     <h1 mat-dialog-title>Carteira Virtual</h1>
-    <p>Seu saldo é: </p>
+    <p>Seu saldo é: <span>{{ formatPrice(walletFunds) }}</span></p>
     <p>Adicionar Crédito:</p>
     <div class="btn-input">
         <div class="btn-value">
-            <button mat-button>teste</button>
-            <button mat-button>teste</button>
-            <button mat-button>teste</button>
-            <button mat-button>teste</button>
+            <button mat-button (click)="setValueToIncrease(10000)">R$ 100,00</button>
+            <button mat-button (click)="setValueToIncrease(20000)">R$ 200,00</button>
+            <button mat-button (click)="setValueToIncrease(50000)">R$ 500,00</button>
+            <button mat-button (click)="setValueToIncrease(100000)">R$ 1000,00</button>
         </div>
         <div class="OU">
             <p>OU</p>
         </div>
         <mat-form-field class="input">
             <mat-label>Informe uma quantia:</mat-label>
-            <input type="text" matInput>
+            <input type="text" class="amount_input" (keyup.enter)="updateInput($event)" matInput autocomplete="off">
         </mat-form-field>
     </div>
     <div mat-dialog-actions class="actions">
         <button class="cancel" mat-button (click)="cancel()">Cancelar</button>
-        <button class="submit" mat-button>Continuar</button>
+        <button class="submit" mat-button (click)="finishPurshase()">Continuar</button>
     </div>
     <div class="container-methods">
         <h1 class="title-methods">Métodos de compra</h1>
         <mat-radio-group>
             <div class="methods-buttons">
-                <mat-radio-button value="1">Cartão</mat-radio-button>
-                <mat-radio-button value="2">Boleto</mat-radio-button>
-                <mat-radio-button value="3">Pix</mat-radio-button>
+                <mat-radio-button value="card">Cartão</mat-radio-button>
+                <mat-radio-button value="slip">Boleto</mat-radio-button>
+                <mat-radio-button value="pix">Pix</mat-radio-button>
             </div>
         </mat-radio-group>
     </div>

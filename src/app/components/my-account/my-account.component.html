@@ -4,33 +4,97 @@
     </div>
     <div class="body">
         <div class="avaliation-list">
-            <div class="avaliation" *ngFor="let produto of produto">
+            <div class="avaliation">
                 <div class="container-img">
-                    <img class="img-game" src="assets/images/game1.png">
+                    <img class="img-game" src="assets/images/game-images/halo-infinite.jpg">
                 </div>
                 <div class="avaliation-info">
                     <div class="name-rate">
-                        <h2 class="title-game">{{produto.name}}</h2>
+                        <h2 class="title-game">Halo Infinite - PS5</h2>
                         <div>
-                            <i class="fas fa-star" *ngFor="let star of rateArr"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
                     </div>
                     <div class="container-desc">
-                        <p class="desc">{{produto.desc}}</p>
+                        <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="avaliation">
+                <div class="container-img">
+                    <img class="img-game" src="assets/images/game-images/bf-2042.jpg">
+                </div>
+                <div class="avaliation-info">
+                    <div class="name-rate">
+                        <h2 class="title-game">Battlefield 2042 - PS5</h2>
+                        <div>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="container-desc">
+                        <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="avaliation">
+                <div class="container-img">
+                    <img class="img-game" src="assets/images/game-images/nioh-2.jpg">
+                </div>
+                <div class="avaliation-info">
+                    <div class="name-rate">
+                        <h2 class="title-game">Nioh II - PS5</h2>
+                        <div>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="container-desc">
+                        <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="avaliation">
+                <div class="container-img">
+                    <img class="img-game" src="assets/images/game-images/re-village.jpg">
+                </div>
+                <div class="avaliation-info">
+                    <div class="name-rate">
+                        <h2 class="title-game">Resident Evil Village - PS5</h2>
+                        <div>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="container-desc">
+                        <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="account-infos">
             <img class="img-perfil" src="assets/images/dwg-large.png">
-            <h2 class="username">{{usuario.name}}</h2>
+            <h2 class="username">Usuário Estático</h2>
             <h2 class="title-credits">Saldo na carteira:</h2>
             <div class="credits-aquisition">
-                <p class="credits">{{creditsReal}}</p>
+                <p class="credits">{{formatPrice(funds)}}</p>
                 <button mat-button class="add-credits" (click)="buyCredits()">Adquirir Saldo</button>
             </div>
-            <p class="avaliations">Análises: {{usuario.avaliations}}</p>
-            <p class="games">Jogos Adquiridos: {{usuario.games}}</p>
+            <p class="avaliations">Análises: 40</p>
+            <p class="games">Jogos Adquiridos: 42</p>
             <button mat-button class="delivery">Entregas</button>
         </div>
     </div>
