@@ -8,6 +8,7 @@ import { ProductService } from '../../shared/services/product.service';
 import { AddressService } from '../../shared/services/address.service';
 import { WalletService } from '../../shared/services/wallet.service';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-checkout',
@@ -24,21 +25,34 @@ export class CheckoutComponent implements OnInit {
     private productService: ProductService,
     private addressService: AddressService,
     private walletService: WalletService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
     ) { }
 
   ngOnInit(): void {
     this.cartId = parseInt(this.authenticationService.getCartId());
     this.username = this.authenticationService.getUsername();
     this.userId = parseInt(this.authenticationService.getUserId());
-    this.freight = this.freights[0];
     this.walletService.getWallet(this.username).subscribe(w => {
-      this.wallet.funds = w.funds;
-      this.wallet.id = w.id
+      this.wallet = {
+        id: w.id,
+        funds: w.funds,
+        userId: w.userId
+      }
     });
-    this.addressService.getAddressesByClient(this.userId).subscribe(a => {
-      this.addresses = a;
-    })
+    // this.addressService.getAddressesByClient(this.userId).subscribe(a => {
+    //   a.forEach((address) => {
+    //     this.addresses.push({
+    //       city: address.city,
+    //       district: address.district,
+    //       additionalInfo: address.additionalInfo,
+    //       number: address.number,
+    //       state: address.state,
+    //       street: address.street,
+    //       postalCode: address.postalCode
+    //     })
+    //   })
+    //})
     this.cartService.getCartItems(this.cartId).subscribe((items) => {
       items.forEach(item => {
         this.productService.getProduct(item.productId).subscribe(p => {
@@ -47,24 +61,22 @@ export class CheckoutComponent implements OnInit {
         })
       })
     });
-    this.addressId = this.addresses[0].id;
-    this.totalPrice += this.freight.price;
   }
 
   formatPrice(v: number) {
     return (v/100).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
   }
 
-  choicePaymentType(paymentType: any) {
-    this.paymentType = paymentType;
+  choicePaymentType(paymentId: number) {
+    this.paymentType = paymentId;
   }
 
   cancel() {
     this.router.navigate(["/catalogo"])
   }
 
-  choiceFreight(freightChoice: number) {
-    this.freight = this.freights[freightChoice];
+  choiceFreight(index: number) {
+    this.freight = this.freights[index];
     this.totalPrice = this.totalCart + this.freight.price;
   }
 
@@ -72,16 +84,51 @@ export class CheckoutComponent implements OnInit {
     this.addressId = addressId;
   }
 
+  validateFields(): boolean {
+    if (this.addressId == null) {
+      this.notificationService.error('Escolha um endereço para entrega.');
+      return false;;
+    }
+
+    if (this.paymentType == null) {
+      this.notificationService.error('Escolha uma forma de pagamento.');
+      return false;
+    }
+
+    if (this.freight == null) {
+      this.notificationService.error('Escolha uma entregadora para entrega.');
+      return false;
+    }
+
+    return true;
+  }
+
   finishPurshase() {
-    this.walletService.putWallet({
-      walletId: this.wallet.id,
-      value: this.wallet.funds - this.totalPrice
-    })
+    if (!this.validateFields()) return;
+
+    switch(this.paymentType) {
+      case 4:
+        if (this.wallet.funds < this.totalPrice) {
+          this.notificationService.error('Crédito insuficiente.');
+          return;
+        }
+        this.walletService.putWallet({
+          walletId: this.wallet.id,
+          value: this.wallet.funds - this.totalPrice
+        })
+        break;
+
+        /***
+         * TODO implementar outras formas de pagamento.
+         */
+
+    }
+
     this.cartService.cleanCart(this.cartId);
-    this.orderService.postOrder({
-      cartId: this.cartId,
-      addressId: this.addressId
-    });
+    // this.orderService.postOrder({
+    //   cartId: this.cartId,
+    //   addressId: this.addressId
+    // });
     this.router.navigate(["/minha-conta/success"]);
   }
 
@@ -103,16 +150,42 @@ export class CheckoutComponent implements OnInit {
     }
   ]
 
-  addresses: Address[];
-
-  public wallet: Wallet = {
-    id: null,
-    funds: null,
-    userId: null
-  }
+  public addresses: Address[] = [
+    {
+      id: 1,
+      city: 'Rio de Janeiro',
+      district: '',
+      additionalInfo: '',
+      number: '342',
+      state: 'Rio de Janeiro',
+      street: 'Avenida Getúlio Vargas',
+      postalCode: '21'
+    },
+    {
+      id: 2,
+      city: 'Rio de Janeiro',
+      district: '',
+      additionalInfo: '',
+      number: '342',
+      state: 'Rio de Janeiro',
+      street: 'Avenida Getúlio Vargas',
+      postalCode: '21'
+    },
+    {
+      id: 3,
+      city: 'Rio de Janeiro',
+      district: '',
+      additionalInfo: '',
+      number: '342',
+      state: 'Rio de Janeiro',
+      street: 'Avenida Getúlio Vargas',
+      postalCode: '21'
+    },
+  ];
+  public wallet: Wallet;
   public totalPrice: number = 0;
   public totalCart: number = 0;
-  public paymentType;
+  public paymentType: number;
   public addressId: number;
   public freight;
   public cartId: number;

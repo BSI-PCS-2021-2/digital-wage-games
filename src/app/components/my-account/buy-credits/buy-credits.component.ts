@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MyAccountComponent } from '../my-account.component';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { WalletService } from 'src/app/shared/services/wallet.service';
 import { Wallet } from 'src/app/shared/models/wallet.model';
-import { PutWallerDTO } from 'src/app/shared/models/dto/putWallet.dto';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { PaymentService } from 'src/app/shared/services/payment.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-buy-credits',
@@ -17,14 +17,12 @@ export class BuyCreditsComponent implements OnInit {
   ngOnInit(): void {
     this.clientId = this.authenticationService.getUserId();
     this.username = this.authenticationService.getUsername();
-    console.log(this.clientId)
     this.walletService.getWallet(this.username).subscribe(w => {
       this.wallet = {
         id: w.id,
         userId: w.userId,
         funds: w.funds
       }
-      this.walletFunds = w.funds;
     });
   }
 
@@ -32,7 +30,9 @@ export class BuyCreditsComponent implements OnInit {
     public dialogRef: MatDialogRef<BuyCreditsComponent>,
     public authenticationService: AuthenticationService,
     public walletService: WalletService,
-    public router: Router)
+    public paymentService: PaymentService,
+    public router: Router,
+    public notificationService: NotificationService)
     { }
 
   formatPrice(v: number) {
@@ -44,7 +44,11 @@ export class BuyCreditsComponent implements OnInit {
   }
 
   setValueToIncrease(value: any) {
-    this.wallet.funds = this.walletFunds + parseInt(value);
+    this.valueToIncrease = parseInt(value);
+  }
+
+  setPaymentType(type: number) {
+    this.paymentId = type;
   }
 
   updateInput(event: any) {
@@ -52,9 +56,38 @@ export class BuyCreditsComponent implements OnInit {
     this.setValueToIncrease(event.target.value * 100);
   }
 
+  validateFields(): boolean {
+    if (this.paymentId == null) {
+      this.notificationService.error("Escolha uma forma de pagamento.");
+      return false;
+    }
+    if (this.valueToIncrease == null) {
+      this.notificationService.error("Insira um valor para ser adicionado.");
+      return false;
+    }
+    return true;
+  }
+
   finishPurshase() {
+    if (!this.validateFields()) return;
+    
+    switch(this.paymentId) {
+      case 1:
+        this.paymentService.makeBankSlipPayment();
+        break;
+      case 2:
+        this.paymentService.makeCardPayment();
+        break;
+      /***
+       * TODO caso 4 realizar pagamento via pix.
+       */
+    }
+    /***
+       * TODO em caso de pagamento via pix ou cartão o valor só deve ser adicionado caso
+       * os dados sejam validos.
+       */
     this.walletService.putWallet({
-      value: this.wallet.funds,
+      value: this.wallet.funds + this.valueToIncrease,
       walletId: this.wallet.id
     })
     this.cancel();
@@ -62,9 +95,8 @@ export class BuyCreditsComponent implements OnInit {
   }
 
   wallet: Wallet;
-  walletFunds: number;
   valueToIncrease: number;
-  paymentType: string;
+  paymentId: number;
   clientId: string;
   username: string;
 

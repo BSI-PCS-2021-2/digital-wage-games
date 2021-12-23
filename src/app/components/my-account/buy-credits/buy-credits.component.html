@@ -1,13 +1,13 @@
 <div class="dialog">
     <h1 mat-dialog-title>Carteira Virtual</h1>
-    <p>Seu saldo é: <span>{{ formatPrice(walletFunds) }}</span></p>
+    <p>Seu saldo é: <span>{{ formatPrice(wallet.funds) }}</span></p>
     <p>Adicionar Crédito:</p>
     <div class="btn-input">
         <div class="btn-value">
-            <button mat-button (click)="setValueToIncrease(10000)">R$ 100,00</button>
-            <button mat-button (click)="setValueToIncrease(20000)">R$ 200,00</button>
-            <button mat-button (click)="setValueToIncrease(50000)">R$ 500,00</button>
-            <button mat-button (click)="setValueToIncrease(100000)">R$ 1000,00</button>
+            <button mat-button (click)="setValueToIncrease(10000)" [ngClass]="{'active': valueToIncrease === 10000}">R$ 100,00</button>
+            <button mat-button (click)="setValueToIncrease(20000)" [ngClass]="{'active': valueToIncrease === 20000}">R$ 200,00</button>
+            <button mat-button (click)="setValueToIncrease(50000)" [ngClass]="{'active': valueToIncrease === 50000}">R$ 500,00</button>
+            <button mat-button (click)="setValueToIncrease(100000)" [ngClass]="{'active': valueToIncrease === 100000}">R$ 1000,00</button>
         </div>
         <div class="OU">
             <p>OU</p>
@@ -25,9 +25,12 @@
         <h1 class="title-methods">Métodos de compra</h1>
         <mat-radio-group>
             <div class="methods-buttons">
-                <mat-radio-button value="card">Cartão</mat-radio-button>
-                <mat-radio-button value="slip">Boleto</mat-radio-button>
-                <mat-radio-button value="pix">Pix</mat-radio-button>
+                <!--
+                    TODO Id das formas de pagamento devem vir do banco de dados
+                -->
+                <mat-radio-button (click)="setPaymentType(2)" value="cartao">Cartão</mat-radio-button>
+                <mat-radio-button (click)="setPaymentType(1)" value="boleto">Boleto</mat-radio-button>
+                <mat-radio-button (click)="setPaymentType(4)" value="pix">Pix</mat-radio-button>
             </div>
         </mat-radio-group>
     </div>

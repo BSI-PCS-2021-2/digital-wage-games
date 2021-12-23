@@ -53,6 +53,16 @@
       button {
         background: $green;
         color: $dark-gray;
+        width: 120px;
+        height: 35px;
+        transition: .2s;
+      }
+
+      button.active {
+        border: 2px solid $green;
+        background: none;
+        color: $green;
+        
       }
     }
   }

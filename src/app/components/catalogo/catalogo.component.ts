@@ -29,7 +29,8 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
               public authenticationService: AuthenticationService,
               private walletService: WalletService,
               private cartService: CartService,
-              private router: Router) { }
+              private router: Router,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.cartId = this.authenticationService.getCartId();
@@ -89,13 +90,10 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
     this.cartService.postCartItem(postCartItemDTO);
     document.getElementById(`cart_actions_container_${productId}`).classList.add('active');
+    this.notificationService.success('Produto foi adicionado ao carrinho.')
     ++this.cartSize;
   }
-
-  goProduct(id: number) {
-    this.router.navigate(['/produto/2']);
-  }
-
+  
   getGameCover(productId: number): string {
     switch (productId) {
       case 2:

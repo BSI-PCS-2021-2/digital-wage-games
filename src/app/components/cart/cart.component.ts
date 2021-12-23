@@ -9,6 +9,8 @@ import { PutCartItemDTO } from '../../shared/models/dto/cartItem/putCartItem.dto
 import { CartService } from '../../shared/services/cart.service';
 import { Wallet } from '../../shared/models/wallet.model';
 import { WalletService } from '../../shared/services/wallet.service';
+import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 export interface CartProduct {
   cartItemId: number;
@@ -37,7 +39,9 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService,
               public authenticationService: AuthenticationService,
               private walletService: WalletService,
-              private productService: ProductService) { }
+              private productService: ProductService,
+              private router: Router,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.cartId = this.authenticationService.getCartId();
@@ -57,7 +61,7 @@ export class CartComponent implements OnInit {
             formatTotalPrice: this.formatPrice(product.price/100 * cartItems[i].amount),
             totalPrice: product.price * cartItems[i].amount
           })
-          // Quando esse método esta fora do loop a array de produtos está vazio (?)
+          // Quando esse método esta fora do loop, o array de produtos fica vazio (?)
           this.updateTotal();
         })
 
@@ -82,9 +86,8 @@ export class CartComponent implements OnInit {
   }
 
   clearCart() {
-    for (const [key, value] of this.cartProducts) {
-      this.deleteCartItem(key);
-    }
+    this.cartService.cleanCart(this.cartId);
+    this.cartProducts.clear();
   }
 
   formatPrice(v: number) {
@@ -137,6 +140,14 @@ export class CartComponent implements OnInit {
     this.changeDOMElementHTML(`price_${index}`, p.formatTotalPrice);
     this.updateCartItem({amount: p.amount}, p.cartItemId);
     this.updateTotal();
+  }
+
+  finishPurchase() {
+    if (this.cartProducts.size ==  0) {
+      this.notificationService.alert("O carrinho está vazio.");
+      return;
+    }
+    this.router.navigate(["/checkout"])
   }
 
   getGameCover(productId: number): string {
