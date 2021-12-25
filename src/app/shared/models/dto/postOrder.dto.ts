@@ -1,4 +1,6 @@
 export class PostOrderDTO {
     public cartId: number;
-    public addressId: number;
+    public deliveryId: number;
+    public totalPrice: number;
+    public paymentTypeId: number;
 }

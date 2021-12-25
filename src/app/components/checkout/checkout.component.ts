@@ -40,19 +40,6 @@ export class CheckoutComponent implements OnInit {
         userId: w.userId
       }
     });
-    // this.addressService.getAddressesByClient(this.userId).subscribe(a => {
-    //   a.forEach((address) => {
-    //     this.addresses.push({
-    //       city: address.city,
-    //       district: address.district,
-    //       additionalInfo: address.additionalInfo,
-    //       number: address.number,
-    //       state: address.state,
-    //       street: address.street,
-    //       postalCode: address.postalCode
-    //     })
-    //   })
-    //})
     this.cartService.getCartItems(this.cartId).subscribe((items) => {
       items.forEach(item => {
         this.productService.getProduct(item.productId).subscribe(p => {
@@ -107,7 +94,7 @@ export class CheckoutComponent implements OnInit {
     if (!this.validateFields()) return;
 
     switch(this.paymentType) {
-      case 4:
+      case 3:
         if (this.wallet.funds < this.totalPrice) {
           this.notificationService.error('Crédito insuficiente.');
           return;
@@ -124,14 +111,20 @@ export class CheckoutComponent implements OnInit {
 
     }
 
+    this.orderService.postOrder({
+      cartId: this.cartId,
+      totalPrice: this.totalPrice,
+      deliveryId: this.freight.id,
+      paymentTypeId: this.paymentType
+    });
     this.cartService.cleanCart(this.cartId);
-    // this.orderService.postOrder({
-    //   cartId: this.cartId,
-    //   addressId: this.addressId
-    // });
+
     this.router.navigate(["/minha-conta/success"]);
   }
 
+  /***
+   * TODO trazer transportadoras, formas de pagamento e endereços do banco.
+   */
   freights = [
     {
       id: 1,
