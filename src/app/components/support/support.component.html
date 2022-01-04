@@ -1,0 +1,22 @@
+<div class="main">
+    <div class="form-container">
+        <h1 class="title">Formulário de suporte</h1>
+        <mat-form-field class="reason" appearance="fill">
+            <mat-label>Assunto:</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="selection" appearance="fill">
+            <mat-label>Motivo:</mat-label>
+            <mat-select>
+                <mat-option value="one">Reembolso</mat-option>
+                <mat-option value="two">Número de rastreio inválido</mat-option>
+                <mat-option value="three">Depósito não realizado na carteira</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="text" appearance="fill">
+            <mat-label>Descrição:</mat-label>
+            <textarea rows="15" maxlength="1716" matInput></textarea>
+        </mat-form-field>
+        <button mat-button>Enviar</button>
+    </div>
+</div>

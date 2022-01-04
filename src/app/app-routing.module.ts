@@ -9,6 +9,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { PasswordRecoveryComponent } from './components/password-recovery/password-recovery.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SupportComponent } from './components/support/support.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'restauracao-senha', component: PasswordRecoveryComponent },
   { path: 'minha-conta', component: MyAccountComponent },
   { path: 'minha-conta/:success', component: MyAccountComponent },
-  { path: 'checkout', component: CheckoutComponent }
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'suporte', component: SupportComponent }
 ];
 
 @NgModule({
