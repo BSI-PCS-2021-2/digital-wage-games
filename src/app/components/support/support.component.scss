@@ -10,16 +10,10 @@
   background-color: $dark-gray;
 
   .form-container {
-    color: $light-gray;
-    gap: 10px;
-    padding: 1px;
-    overflow: hidden;
-    border-radius: 5px;
-    display: flex;
     flex-direction: column;
-    width: 70%;
-    height: 90%;
-    margin-top: 5em;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 
     .title {
       align-self: center;
@@ -27,17 +21,31 @@
       color: $light-gray;
     }
 
-    .text {
-      textarea {
-        resize: none;
-      }
-    }
+    .form {
+      align-self: center;
+      color: $light-gray;
+      gap: 10px;
+      padding: 1px;
+      overflow: hidden;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      height: 90%;
+      margin-top: 5em;
 
-    button {
-      background-color: $green;
-      color: white;
-      width: 10%;
-      align-self: flex-end;
+      .text {
+        textarea {
+          resize: none;
+        }
+      }
+
+      button {
+        background-color: $green;
+        color: white;
+        width: 10%;
+        align-self: flex-end;
+      }
     }
   }
 }
