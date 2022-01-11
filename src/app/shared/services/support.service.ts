@@ -14,10 +14,23 @@ export class SupportService {
   constructor(
     private http: HttpClient,
     private notificationService: NotificationService,
-   ) { }
+  ) { }
 
   sendSupportEmail(supportEmailDTO: SupportEmailDTO): Observable<boolean> {
     console.log(supportEmailDTO);
-    return this.http.post<boolean>(`${environment.baseUrl}/support/support`, supportEmailDTO);
+    return this.http.post<boolean>(`${environment.baseUrl}/support/support`, supportEmailDTO)
+    .pipe(
+      take(1),
+      tap((success: boolean) => {
+        if (success) {
+          this.notificationService.success('Mensagem enviada!');
+        }
+      }),
+      distinctUntilChanged(),
+      catchError(err => {
+        this.notificationService.error('Erro ao enviar mensagem');
+        throw new Error(err);
+      })
+    );
   }
 }

@@ -29,11 +29,11 @@ export class SupportComponent implements OnInit {
   }
   enviarMensagem(): void {
     const supportForm: SupportEmailDTO = {
-      email: "exemple@gmail.com",
-      clientEmail: "exemple@gmail.com",
+      email: undefined,
+      clientEmail: this.authenticationService.getUsername(),
       category: this.supportFormGroup.get('category').value,
       message: this.supportFormGroup.get('message').value
     }
-    this.supportService.sendSupportEmail(supportForm);
+    this.supportService.sendSupportEmail(supportForm).subscribe();
   }
 }
