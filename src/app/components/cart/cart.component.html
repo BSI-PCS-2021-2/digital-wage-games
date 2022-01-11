@@ -48,14 +48,16 @@
                 </div>
             </div>
         </div>
-        <div class="actions-cart">
-            <button class="limpar" mat-button (click)="clearCart()">Limpar Carrinho</button>
-            <button class="continuar" routerLink="/catalogo" mat-button>Continuar Comprando</button>
-            <button class="finalizar" mat-button (click)="finishPurchase()">Finalizar pedido</button>
-        </div>
-        <div class="final_price_container" >
-            <h2 *ngIf="cartProducts.size > 0">Subtotal: <span id="final_price">{{ formatFinalPrice }}</span> </h2>
-            <h2 *ngIf="cartProducts.size <= 0">- Não há itens no seu carrinho -</h2>
+        <div class="aside">
+            <div class="actions-cart">
+                <button class="limpar" mat-button (click)="clearCart()">Limpar Carrinho</button>
+                <button class="continuar" routerLink="/catalogo" mat-button>Continuar Comprando</button>
+                <button class="finalizar" mat-button (click)="finishPurchase()">Finalizar pedido</button>
+            </div>
+            <div class="final_price_container" >
+                <h2 *ngIf="cartProducts.size > 0">Subtotal: <span id="final_price">{{ formatFinalPrice }}</span> </h2>
+                <h2 *ngIf="cartProducts.size <= 0">- Não há itens no seu carrinho -</h2>
+            </div>
         </div>
     </div>
 </div>

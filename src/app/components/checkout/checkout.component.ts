@@ -82,7 +82,7 @@ export class CheckoutComponent implements OnInit {
       return false;
     }
 
-    if (this.freight == null) {
+    if (this.freight.id == 0) {
       this.notificationService.error('Escolha uma entregadora para entrega.');
       return false;
     }
@@ -94,7 +94,7 @@ export class CheckoutComponent implements OnInit {
     if (!this.validateFields()) return;
 
     switch(this.paymentType) {
-      case 3:
+      case 4:
         if (this.wallet.funds < this.totalPrice) {
           this.notificationService.error('Crédito insuficiente.');
           return;
@@ -180,7 +180,11 @@ export class CheckoutComponent implements OnInit {
   public totalCart: number = 0;
   public paymentType: number;
   public addressId: number;
-  public freight;
+  public freight = {
+    id: 0,
+    name: '',
+    price: 0
+  };
   public cartId: number;
   public userId: number;
   public username: string;
