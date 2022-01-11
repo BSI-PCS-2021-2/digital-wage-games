@@ -22,7 +22,7 @@
         <div class="input-container">
             <form [formGroup]="valueToIncreaseForm" (ngSubmit)="onSubmit()" class="form">
                 <mat-form-field class="input" [formGroup]="valueToIncreaseForm" (ngSubmit)="onSubmit()">
-                    <mat-label>Informe uma quantia:</mat-label>
+                    <mat-label>Informe uma quantia (R$):</mat-label>
                     <input type="text" class="amount_input" (keyup.enter)="updateInput($event)" matInput autocomplete="off" formControlName="value">
                 </mat-form-field>
                 <button mat-button class="input-button main-button" type="submit">Confirmar</button>

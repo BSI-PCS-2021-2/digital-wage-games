@@ -33,7 +33,6 @@ export class CheckoutComponent implements OnInit {
     this.cartId = parseInt(this.authenticationService.getCartId());
     this.username = this.authenticationService.getUsername();
     this.userId = parseInt(this.authenticationService.getUserId());
-    this.addresses = this.addressService.getAddressesByClient(this.userId);
     this.walletService.getWallet(this.username).subscribe(w => {
       this.wallet = {
         id: w.id,
@@ -143,40 +142,39 @@ export class CheckoutComponent implements OnInit {
       price: 9400
     }
   ]
-  public addresses: Map<number, Address>;
 
-  // public addresses: Address[] = [
-  //   {
-  //     id: 1,
-  //     city: 'Rio de Janeiro',
-  //     district: '',
-  //     additionalInfo: '',
-  //     number: '342',
-  //     state: 'Rio de Janeiro',
-  //     street: 'Avenida Getúlio Vargas',
-  //     postalCode: '21'
-  //   },
-  //   {
-  //     id: 2,
-  //     city: 'Rio de Janeiro',
-  //     district: '',
-  //     additionalInfo: '',
-  //     number: '342',
-  //     state: 'Rio de Janeiro',
-  //     street: 'Avenida Getúlio Vargas',
-  //     postalCode: '21'
-  //   },
-  //   {
-  //     id: 3,
-  //     city: 'Rio de Janeiro',
-  //     district: '',
-  //     additionalInfo: '',
-  //     number: '342',
-  //     state: 'Rio de Janeiro',
-  //     street: 'Avenida Getúlio Vargas',
-  //     postalCode: '21'
-  //   },
-  // ];
+  public addresses: Address[] = [
+    {
+      id: 1,
+      city: 'Rio de Janeiro',
+      district: '',
+      additionalInfo: '',
+      number: '342',
+      state: 'Rio de Janeiro',
+      street: 'Avenida Getúlio Vargas',
+      postalCode: '21'
+    },
+    {
+      id: 2,
+      city: 'Rio de Janeiro',
+      district: '',
+      additionalInfo: '',
+      number: '342',
+      state: 'Rio de Janeiro',
+      street: 'Avenida Getúlio Vargas',
+      postalCode: '21'
+    },
+    {
+      id: 3,
+      city: 'Rio de Janeiro',
+      district: '',
+      additionalInfo: '',
+      number: '342',
+      state: 'Rio de Janeiro',
+      street: 'Avenida Getúlio Vargas',
+      postalCode: '21'
+    },
+  ];
   public wallet: Wallet;
   public totalPrice: number = 0;
   public totalCart: number = 0;

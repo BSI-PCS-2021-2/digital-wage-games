@@ -74,7 +74,7 @@ export class BuyCreditsComponent implements OnInit {
       this.notificationService.error("Escolha uma forma de pagamento.");
       return false;
     }
-    if (this.valueToIncrease == null) {
+    if (this.valueToIncrease == 0) {
       this.notificationService.error("Insira um valor para ser adicionado.");
       return false;
     }
