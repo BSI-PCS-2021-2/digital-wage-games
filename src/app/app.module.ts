@@ -43,6 +43,7 @@ import { MyAccountComponent } from './components/my-account/my-account.component
 import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-credits.component';
 import { registerLocaleData } from '@angular/common';
 import { SupportComponent } from './components/support/support.component';
+import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -62,7 +63,8 @@ registerLocaleData(localePt, 'pt-BR');
     MyAccountComponent,
     BuyCreditsComponent,
     CheckoutComponent,
-    SupportComponent
+    SupportComponent,
+    AdmLoginComponent
   ],
   imports: [
     BrowserModule,

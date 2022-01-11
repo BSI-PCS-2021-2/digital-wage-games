@@ -10,6 +10,7 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SupportComponent } from './components/support/support.component';
+import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'minha-conta', component: MyAccountComponent },
   { path: 'minha-conta/:success', component: MyAccountComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'suporte', component: SupportComponent }
+  { path: 'suporte', component: SupportComponent },
+  {path: 'adm' , component: AdmLoginComponent}
 ];
 
 @NgModule({
