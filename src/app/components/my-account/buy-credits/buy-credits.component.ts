@@ -6,6 +6,7 @@ import { Wallet } from 'src/app/shared/models/wallet.model';
 import { Router } from '@angular/router';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-buy-credits',
@@ -32,7 +33,8 @@ export class BuyCreditsComponent implements OnInit {
     public walletService: WalletService,
     public paymentService: PaymentService,
     public router: Router,
-    public notificationService: NotificationService)
+    public notificationService: NotificationService,
+    private formBuilder: FormBuilder)
     { }
 
   formatPrice(v: number) {
@@ -43,8 +45,8 @@ export class BuyCreditsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  setValueToIncrease(value: any) {
-    this.valueToIncrease = parseInt(value);
+  setValueToIncrease(value: number) {
+    this.valueToIncrease = value;
   }
 
   setPaymentType(type: number) {
@@ -52,8 +54,19 @@ export class BuyCreditsComponent implements OnInit {
   }
 
   updateInput(event: any) {
-    if (!Number.isInteger(parseInt(event.target.value))) return;
-    this.setValueToIncrease(event.target.value * 100);
+    var val: any = event.target.value;
+    if (!this.isNumber(val)) return;
+    this.setValueToIncrease(val * 100);
+  }
+
+  isNumber(value: any): boolean {
+    return Number.isInteger(parseInt(value));
+  }
+
+  onSubmit(): void {
+    var val: any = this.valueToIncreaseForm.value.value;
+    if (!this.isNumber(val)) return;
+    this.setValueToIncrease(val * 100);
   }
 
   validateFields(): boolean {
@@ -95,9 +108,12 @@ export class BuyCreditsComponent implements OnInit {
   }
 
   wallet: Wallet;
-  valueToIncrease: number;
+  valueToIncrease: number = 0;
   paymentId: number;
   clientId: string;
   username: string;
+  valueToIncreaseForm = this.formBuilder.group({
+    value: ''
+  });
 
 }

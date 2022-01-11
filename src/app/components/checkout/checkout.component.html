@@ -35,9 +35,9 @@
       <div class="adresses select_container">
           <h3>Endereço</h3>
           <div class="select_buttons">
-            <div class="address select_button" *ngFor="let address of addresses" (click)="choiceAddress(address.id)" [ngClass]="{'active': addressId === address.id}">
-                <p>{{address.city}}</p>
-                <p>{{address.street}} - {{address.number}}</p>
+            <div class="address select_button" *ngFor="let address of addresses | keyvalue" (click)="choiceAddress(address.key)" [ngClass]="{'active': addressId === address.key}">
+                <p>{{address.value.city}}</p>
+                <p>{{address.value.street}} - {{address.value.number}}</p>
             </div>
           </div>
       </div>
