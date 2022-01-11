@@ -12,8 +12,7 @@ export class AddressService {
   constructor(
     private http: HttpClient) { }
 
-  getAddressesByClient(clientId: number): Observable<Address[]> {
+  getAddressesByClient(clientId: number) {
     return this.http.get<Address[]>(`${environment.baseUrl}/clients/user/${clientId}/addresses`)
-      
   }
 }

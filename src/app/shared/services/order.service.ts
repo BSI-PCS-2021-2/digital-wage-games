@@ -11,6 +11,6 @@ export class OrderService {
   constructor(private http:HttpClient) { }
 
   postOrder(postOrderDTO: PostOrderDTO){ 
-    return this.http.post<boolean>(`${environment.baseUrl}/store/order`, postOrderDTO).subscribe(); 
+    return this.http.post<number[]>(`${environment.baseUrl}/store/order`, postOrderDTO).subscribe(); 
   }
 }

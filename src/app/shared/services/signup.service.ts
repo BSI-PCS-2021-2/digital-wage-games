@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { catchError, distinctUntilChanged, Observable, take, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router"
-import { NotificationService } from '../../../../app/shared/services/notification.service';
-import { SignUpCodeDTO } from '../models/signUpCodeDTO';
-import { SignUpFormDTO } from '../models/signupformDTO';
+import { NotificationService } from '../../../app/shared/services/notification.service';
+import { SignUpCodeDTO } from '../models/dto/signUp/signUpCodeDTO'
+import { SignUpFormDTO } from '../models/dto/signUp/signupformDTO';
 
 @Injectable({
   providedIn: 'root'

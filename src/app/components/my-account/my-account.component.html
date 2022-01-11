@@ -1,6 +1,9 @@
 <div class="main">
     <div class="title">
-        <h2>Avaliações:</h2>
+        <h2>Ultimas compras</h2>
+        <button class="wallet-button" mat-button #tooltip="matTooltip" matTooltip="CARTEIRA">
+            {{ formatPrice(funds)}}
+          </button>
     </div>
     <div class="body">
         <div class="avaliation-list">
@@ -11,13 +14,6 @@
                 <div class="avaliation-info">
                     <div class="name-rate">
                         <h2 class="title-game">Halo Infinite - PS5</h2>
-                        <div>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
                     </div>
                     <div class="container-desc">
                         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
@@ -31,13 +27,6 @@
                 <div class="avaliation-info">
                     <div class="name-rate">
                         <h2 class="title-game">Battlefield 2042 - PS5</h2>
-                        <div>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
                     </div>
                     <div class="container-desc">
                         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
@@ -51,13 +40,7 @@
                 <div class="avaliation-info">
                     <div class="name-rate">
                         <h2 class="title-game">Nioh II - PS5</h2>
-                        <div>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+                       
                     </div>
                     <div class="container-desc">
                         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
@@ -71,13 +54,7 @@
                 <div class="avaliation-info">
                     <div class="name-rate">
                         <h2 class="title-game">Resident Evil Village - PS5</h2>
-                        <div>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
+                        
                     </div>
                     <div class="container-desc">
                         <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam accusamus error quae repellendus enim nulla!</p>
@@ -87,15 +64,16 @@
         </div>
         <div class="account-infos">
             <img class="img-perfil" src="assets/images/dwg-large.png">
-            <h2 class="username">{{ username }}</h2>
-            <h2 class="title-credits">Saldo na carteira:</h2>
+            <h2 class="username">@{{ username }}</h2>
+            <!-- <h2 class="title-credits">Saldo na carteira:</h2> -->
             <div class="credits-aquisition">
-                <p class="credits">{{formatPrice(funds)}}</p>
+                <!-- <p class="credits">{{formatPrice(funds)}}</p> -->
                 <button mat-button class="add-credits" (click)="buyCredits()">Adquirir Saldo</button>
+                <button mat-button class="delivery">Editar perfil</button>
             </div>
-            <p class="avaliations">Análises: 40</p>
-            <p class="games">Jogos Adquiridos: 42</p>
-            <button mat-button class="delivery">Entregas</button>
+            <!-- <p class="avaliations">Análises: 40</p> -->
+            <!-- <p class="games">Jogos Adquiridos: 42</p> -->
+            
         </div>
     </div>
 </div>

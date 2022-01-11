@@ -48,7 +48,6 @@ export class CartComponent implements OnInit {
     this.cartService.getCartItems(this.cartId).subscribe((cartItems) => {
       for (let i = 0; i< cartItems.length; i++) {
         this.productService.getProduct(cartItems[i].productId).subscribe((product) => {
-          product.description = 'loreada a asdaknaknk ask a nakjand sjan knaknd ksjaaknd asd kakasanknsdkadnadaskjdnankaj j k a  aksdn jakda kjdak nsaj '
           this.cartProducts.set(cartItems[i].id, {
             cartItemId: cartItems[i].id,
             index: i,

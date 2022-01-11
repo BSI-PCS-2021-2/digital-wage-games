@@ -2,9 +2,9 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepperIntl } from '@angular/material/stepper';
-import { SignupService } from './services/signup.service';
-import { SignUpCodeDTO } from './models/signUpCodeDTO';
-import { SignUpFormDTO } from './models/signupformDTO';
+import { SignupService } from '../../shared/services/signup.service';
+import { SignUpCodeDTO } from '../../shared/models/dto/signUp/signUpCodeDTO';
+import { SignUpFormDTO } from '../../shared/models/dto/signUp/signupformDTO';
 import { PasswordValidatorService } from 'src/app/shared/validators/passwordValidator.service';
 
 @Injectable()
