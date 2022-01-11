@@ -139,10 +139,4 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     floor: 0,
     ceil: 5
   };
-
-
-  // implementar logica para preencher os icones de avaliação.
-
-  rateArr = [1,2,3,4];
-
 }

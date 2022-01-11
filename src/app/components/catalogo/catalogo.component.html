@@ -11,7 +11,6 @@
               <mat-option value="rising-price">Preço crescente</mat-option>
               <mat-option value="decreasing-price">Preço decrescente</mat-option>
               <mat-option value="release-date">Data de lançamento</mat-option>
-              <mat-option value="best-rating">Melhor avaliação</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -36,15 +35,13 @@
           <a routerLink="/produto/{{ product.id }}">
             <img class="product-img" mat-card-image src="assets/images/{{getGameCover(product.id)}}">
             <mat-card-header>
-              <mat-card-title class="product-price">
-                {{ product.price / 100 | currency:'BRL': 'symbol' }}
-              </mat-card-title>
-              <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
+              <div class="mat-card-header-text">
+                <mat-card-title class="product-price">
+                  {{ product.price / 100 | currency:'BRL': 'symbol' }}
+                </mat-card-title>
+                <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
+              </div>
               <div class="rate-container">
-                <div class="product-rate">
-                  <i class="fas fa-star" *ngFor="let star of rateArr"></i>
-                </div>
-                <p class="product-rate-amount">453 Avaliações</p>
               </div>
               <div class="product-description">
                 {{ product.description }}
@@ -78,8 +75,6 @@
       </button>
       <p>Preço (R$)</p>
       <ngx-slider [value]="minPriceValue" [highValue]="maxPriceValue" [options]="priceOptions"></ngx-slider>
-      <p>Avaliação</p>
-      <ngx-slider [value]="minRatingValue" [highValue]="maxRatingValue" [options]="ratingOptions"></ngx-slider>
       <div class="plataform-filter">
         <mat-form-field appearance="fill">
           <mat-label>Plataforma </mat-label>
