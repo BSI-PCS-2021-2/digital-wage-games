@@ -1,0 +1,123 @@
+<main>
+    <div class="title-container">
+        <h1>Editar perfil</h1>
+    </div>
+    <div class="form-container">
+        <form class="form">
+            <div class="main-infos-container">
+                 <div class="container-img">    
+                    <img class="img-perfil" src="assets/images/dwg-large.png">
+                    <div class="add-photo-button">
+                        <mat-icon> insert_photo</mat-icon>
+                    </div>
+                </div>            
+                <div class="infos">
+                   <div class="form-inputs">
+                        <mat-form-field class="input-name-field" appearance="fill">
+                            <mat-label>Nome</mat-label>
+                            <input matInput autocomplete="off" value="{{username}}">
+                        </mat-form-field><br>
+                        <mat-form-field class="input-email-field" appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field>
+                   </div>
+                </div>
+               
+            </div>
+            <div class="secondary-infos-container">
+                <div class="contact">
+                    <h2>Contato</h2>
+                    <div class="form-inputs">
+                        <mat-form-field class="input-tel-field" appearance="fill">
+                            <mat-label>Telefone</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field><br>
+                        <mat-form-field class="input-phone-field" appearance="fill">
+                            <mat-label>Celular 1</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field><br>
+                        <mat-form-field class="input-phone-field" appearance="fill">
+                            <mat-label>Celular 2</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field><br>
+                    </div>
+                </div>
+                <div class="password-change">
+                    <h2>Mudar senha</h2>
+                    <div class="form-inputs">
+                        <mat-form-field class="input-old-password-field" appearance="fill">
+                            <mat-label>Senha antiga</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field><br>
+                        <mat-form-field class="input-new-password-field" appearance="fill">
+                            <mat-label>Nova senha</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field><br>
+                        <mat-form-field class="input-repear-password-field" appearance="fill">
+                            <mat-label>Repita senha</mat-label>
+                            <input matInput autocomplete="off">
+                        </mat-form-field><br>
+                    </div>
+                </div>
+               <div class="addresses">
+                <h2>Gerencie seus endereços</h2>
+                <div>
+                    <mat-accordion class="address-accordion" *ngFor="let address of addresses" multi>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              {{ address.city }}
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                      
+                          <div class="accordion-form-inputs">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Rua</mat-label>
+                                <input matInput type="text" value="{{ address.street }}">
+                              </mat-form-field>
+                          
+                              <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" value="{{ address.city }}">
+                              </mat-form-field>
+                              <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" value="{{ address.state }}">
+                              </mat-form-field>
+                              
+                              <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" value="{{ address.district }}">
+                              </mat-form-field>
+                              
+                              <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" value="{{ address.additionalInfo }}">
+                              </mat-form-field>
+
+                              <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" value="{{ address.postalCode }}">
+                              </mat-form-field>
+
+                              <mat-form-field appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input matInput type="text" value="{{ address.number }}">
+                              </mat-form-field>
+                          </div>
+                      
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                </div>
+               </div>
+               <div class="action-buttons">
+                
+                <button mat-button class="cancel-button">Cancelar</button>
+                <button mat-button class="main-button">Enviar</button>
+              </div>
+            </div>
+            
+        </form>
+    </div>    
+</main>

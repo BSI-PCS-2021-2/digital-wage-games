@@ -10,6 +10,7 @@ import { PasswordRecoveryComponent } from './components/password-recovery/passwo
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SupportComponent } from './components/support/support.component';
+import { EditProfileComponent } from './components/my-account/edit-profile/edit-profile.component';
 import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 
 
@@ -22,10 +23,11 @@ const routes: Routes = [
   { path: 'carrinho', component: CartComponent },
   { path: 'restauracao-senha', component: PasswordRecoveryComponent },
   { path: 'minha-conta', component: MyAccountComponent },
+  { path: 'minha-conta', children: [ { path: 'editar', component: EditProfileComponent }] },
   { path: 'minha-conta/:success', component: MyAccountComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'suporte', component: SupportComponent },
-  {path: 'adm' , component: AdmLoginComponent}
+  { path: 'adm' , component: AdmLoginComponent }
 ];
 
 @NgModule({
