@@ -24,6 +24,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -44,6 +46,7 @@ import { BuyCreditsComponent } from './components/my-account/buy-credits/buy-cre
 import { registerLocaleData } from '@angular/common';
 import { SupportComponent } from './components/support/support.component';
 import { AdmLoginComponent } from './components/adm-login/adm-login.component';
+import { EditProfileComponent } from './components/my-account/edit-profile/edit-profile.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -64,7 +67,8 @@ registerLocaleData(localePt, 'pt-BR');
     BuyCreditsComponent,
     CheckoutComponent,
     SupportComponent,
-    AdmLoginComponent
+    AdmLoginComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,8 @@ registerLocaleData(localePt, 'pt-BR');
     MatDialogModule,
     MatCheckboxModule,
     MatRadioModule,
-    NgxSliderModule
+    NgxSliderModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: MatSnackBar },
