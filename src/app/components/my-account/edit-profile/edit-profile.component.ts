@@ -47,7 +47,7 @@ export class EditProfileComponent implements OnInit {
     })
 
     this.userService.get(this.username).subscribe(u => {
-      this.mainInfosFormGroup.controls['name'].setValue(u.name);
+      this.mainInfosFormGroup.controls['name'].setValue(u.username);
       this.mainInfosFormGroup.controls['email'].setValue(u.email)
       this.contactFormGroup.controls['tel'].setValue(u.tel);
       this.contactFormGroup.controls['phone1'].setValue(u.cel2);
