@@ -14,14 +14,25 @@ mat-form-field {
 }
 
 .accordion-form-inputs {
-    margin-top: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    
+    .address-form {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     mat-form-field {
         width: 300px;
         margin-bottom: 24px;
+    }
+
+    .button-wrapper {
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
