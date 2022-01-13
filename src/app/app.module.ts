@@ -47,6 +47,7 @@ import { registerLocaleData } from '@angular/common';
 import { SupportComponent } from './components/support/support.component';
 import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 import { EditProfileComponent } from './components/my-account/edit-profile/edit-profile.component';
+import { NewAddressComponent } from './components/my-account/edit-profile/new-address/new-address.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -68,7 +69,8 @@ registerLocaleData(localePt, 'pt-BR');
     CheckoutComponent,
     SupportComponent,
     AdmLoginComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    NewAddressComponent
   ],
   imports: [
     BrowserModule,

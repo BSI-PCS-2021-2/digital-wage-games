@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { NewAddressComponent } from './new-address/new-address.component';
 import { MatAccordion } from '@angular/material/expansion';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { AddressService } from 'src/app/shared/services/address.service';
@@ -15,7 +17,8 @@ export class EditProfileComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(private authenticationService: AuthenticationService,
-              private addressService: AddressService) { }
+              private addressService: AddressService,
+              private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.username = this.authenticationService.getUsername();
@@ -34,6 +37,16 @@ export class EditProfileComponent implements OnInit {
     //     })
     //   })
     // })
+  }
+
+  addAddress(): void {
+    let dialogRef = this.matDialog.open(NewAddressComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   public addresses: Address[] = [

@@ -8,7 +8,7 @@
                  <div class="container-img">    
                     <img class="img-perfil" src="assets/images/dwg-large.png">
                     <div class="add-photo-button">
-                        <mat-icon> insert_photo</mat-icon>
+                      <mat-icon>add_a_photo</mat-icon>
                     </div>
                 </div>            
                 <div class="infos">
@@ -61,13 +61,18 @@
                     </div>
                 </div>
                <div class="addresses">
-                <h2>Gerencie seus endereços</h2>
+                <div class="address-title">
+                  <h2>Gerencie seus endereços</h2>
+                  <div class="add-address-button" (click)="addAddress()">
+                    <mat-icon> add_location</mat-icon>
+                  </div>
+                </div>
                 <div>
                     <mat-accordion class="address-accordion" *ngFor="let address of addresses" multi>
                         <mat-expansion-panel>
                           <mat-expansion-panel-header>
                             <mat-panel-title>
-                              {{ address.city }}
+                              {{ address.street }}, {{ address.number }} - {{ address.city }}
                             </mat-panel-title>
                           </mat-expansion-panel-header>
                       
@@ -78,11 +83,11 @@
                               </mat-form-field>
                           
                               <mat-form-field appearance="fill">
-                                <mat-label>Bairro</mat-label>
+                                <mat-label>Cidade</mat-label>
                                 <input matInput type="text" value="{{ address.city }}">
                               </mat-form-field>
                               <mat-form-field appearance="fill">
-                                <mat-label>Bairro</mat-label>
+                                <mat-label>Estado</mat-label>
                                 <input matInput type="text" value="{{ address.state }}">
                               </mat-form-field>
                               
@@ -92,17 +97,17 @@
                               </mat-form-field>
                               
                               <mat-form-field appearance="fill">
-                                <mat-label>Bairro</mat-label>
+                                <mat-label>Complemento</mat-label>
                                 <input matInput type="text" value="{{ address.additionalInfo }}">
                               </mat-form-field>
 
                               <mat-form-field appearance="fill">
-                                <mat-label>Bairro</mat-label>
+                                <mat-label>Código postal</mat-label>
                                 <input matInput type="text" value="{{ address.postalCode }}">
                               </mat-form-field>
 
                               <mat-form-field appearance="fill">
-                                <mat-label>Bairro</mat-label>
+                                <mat-label>Número</mat-label>
                                 <input matInput type="text" value="{{ address.number }}">
                               </mat-form-field>
                           </div>
@@ -113,7 +118,7 @@
                </div>
                <div class="action-buttons">
                 
-                <button mat-button class="cancel-button">Cancelar</button>
+                <button mat-button class="cancel-button" routerLink="/minha-conta">Cancelar</button>
                 <button mat-button class="main-button">Enviar</button>
               </div>
             </div>
