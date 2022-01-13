@@ -45,7 +45,7 @@
                 </div>
                 <div class="password-change">
                     <h2>Mudar senha</h2>
-                    <form class="form-inputs password-form" [formGroup]="passwordFormGroup">
+                    <form class="form-inputs password-form" [formGroup]="passwordFormGroup" (ngSubmit)="changePassword()">
                         <mat-form-field class="input-old-password-field" appearance="fill">
                             <mat-label>Senha antiga</mat-label>
                             <input matInput autocomplete="off" formControlName="old">
@@ -58,6 +58,7 @@
                             <mat-label>Repita senha</mat-label>
                             <input matInput autocomplete="off" formControlName="repeat">
                         </mat-form-field><br>
+                        <button mat-button class="main-button" type="submit">Redefinir</button>
                       </form>
                 </div>
                <div class="addresses">

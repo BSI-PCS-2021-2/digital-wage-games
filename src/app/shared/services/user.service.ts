@@ -21,6 +21,6 @@ export class UserService {
     return this.http.put<void>(`${environment.baseUrl}/clients/user/infos`, putUserDTO).subscribe();
   }
   changePassword(changePasswordDTO: ChangePasswordDTO) {
-    return this.http.post<boolean>(`${environment.baseUrl}/clients/change-password`, changePasswordDTO).subscribe();
+    return this.http.post<boolean>(`${environment.baseUrl}/clients/change-password`, changePasswordDTO);
   }
 }
