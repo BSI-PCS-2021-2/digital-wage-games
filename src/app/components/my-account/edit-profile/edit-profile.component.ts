@@ -86,6 +86,21 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
+  public changePassword() {
+    console.log('ad')
+    if (this.passwordFormGroup.controls['new'].value !== this.passwordFormGroup.controls['repeat'].value) {
+      this.notificationService.error("As senhas devem ser iguais.");
+      return;
+    }
+    let result = this.userService.changePassword({
+      newPass: this.passwordFormGroup.controls['new'].value,
+      oldPass: this.passwordFormGroup.controls['old'].value,
+      username: this.username
+    }).subscribe(e => {
+      e ? this.notificationService.success("Senha atualizada com sucesso!") : this.notificationService.error("Senha atual incorreta!");
+    })
+  }
+
   private createAddressFormGroup() {
     return this.formBuilder.group({
       id: new FormControl(),
@@ -104,12 +119,12 @@ export class EditProfileComponent implements OnInit {
     name: '',
     email: ''
   });
-  public contactFormGroup = this.formBuilder.group({
+  public contactFormGroup: FormGroup = this.formBuilder.group({
     tel: '',
     phone1: '',
     phone2: ''
   })
-  public passwordFormGroup = this.formBuilder.group({
+  public passwordFormGroup: FormGroup = this.formBuilder.group({
     old: '',
     new: '',
     repeat: ''
