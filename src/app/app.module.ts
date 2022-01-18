@@ -48,6 +48,7 @@ import { SupportComponent } from './components/support/support.component';
 import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 import { EditProfileComponent } from './components/my-account/edit-profile/edit-profile.component';
 import { NewAddressComponent } from './components/my-account/edit-profile/new-address/new-address.component';
+import { AdmHomeComponent } from './components/adm-home/adm-home.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -70,7 +71,8 @@ registerLocaleData(localePt, 'pt-BR');
     SupportComponent,
     AdmLoginComponent,
     EditProfileComponent,
-    NewAddressComponent
+    NewAddressComponent,
+    AdmHomeComponent
   ],
   imports: [
     BrowserModule,
