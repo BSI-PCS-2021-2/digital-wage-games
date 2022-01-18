@@ -11,12 +11,16 @@
   }
 
   .options {
-      margin-top: 5em;
-      margin-right:30%;
-      margin-left: 30%;
+    margin-top: 5em;
+    margin-right: 30%;
+    margin-left: 30%;
     justify-content: space-around;
     display: flex;
     flex-direction: row;
+
+    .opt-link {
+      text-decoration: none;
+    }
 
     .products,
     .users {

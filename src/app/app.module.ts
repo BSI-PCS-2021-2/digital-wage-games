@@ -25,7 +25,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -49,8 +50,10 @@ import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 import { EditProfileComponent } from './components/my-account/edit-profile/edit-profile.component';
 import { NewAddressComponent } from './components/my-account/edit-profile/new-address/new-address.component';
 import { AdmHomeComponent } from './components/adm-home/adm-home.component';
+import { ProductsManagementComponent } from './components/products-management/products-management.component';
 
 registerLocaleData(localePt, 'pt-BR');
+
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -72,7 +75,8 @@ registerLocaleData(localePt, 'pt-BR');
     AdmLoginComponent,
     EditProfileComponent,
     NewAddressComponent,
-    AdmHomeComponent
+    AdmHomeComponent,
+    ProductsManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,9 @@ registerLocaleData(localePt, 'pt-BR');
     MatCheckboxModule,
     MatRadioModule,
     NgxSliderModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [
     { provide: MatSnackBar },
