@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { AddressService } from 'src/app/shared/services/address.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validator, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { Router } from '@angular/router';
 
@@ -45,13 +45,13 @@ export class NewAddressComponent implements OnInit {
   }
   
   addressFormGroup = this.formBuider.group({
-    cep: '',
-    city: '',
-    state: '',
-    district: '',
-    street: '',
+    cep: ['', Validators.required],
+    city: ['', Validators.required],
+    state: ['', Validators.required],
+    district: ['', Validators.required],
+    street: ['', Validators.required],
     additional: '',
-    postalCode: '',
-    number: ''
+    postalCode: ['', Validators.required],
+    number: ['', Validators.required]
   })
 }

@@ -7,4 +7,5 @@ export class Address {
     number: string;
     additionalInfo: string;
     street: string;
+    cep: string;
 }
