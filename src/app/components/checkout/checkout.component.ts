@@ -40,6 +40,21 @@ export class CheckoutComponent implements OnInit {
         userId: w.userId
       }
     });
+    this.addressService.getAddressesByClient(this.userId).subscribe(as => {
+      as.forEach(a => {
+        this.addressArray.push({
+          id: a.id,
+          postalCode: a.postalCode,
+          city: a.city,
+          state: a.state,
+          district: a.district,
+          number: a.number,
+          additionalInfo: a.additionalInfo,
+          street: a.street,
+          cep: a.cep
+        })
+      })
+    })
     this.cartService.getCartItems(this.cartId).subscribe((items) => {
       items.forEach(item => {
         this.productService.getProduct(item.productId).subscribe(p => {
@@ -142,39 +157,7 @@ export class CheckoutComponent implements OnInit {
       price: 9400
     }
   ]
-
-  public addresses: Address[] = [
-    {
-      id: 1,
-      city: 'Rio de Janeiro',
-      district: '',
-      additionalInfo: '',
-      number: '342',
-      state: 'Rio de Janeiro',
-      street: 'Avenida Getúlio Vargas',
-      postalCode: '21'
-    },
-    {
-      id: 2,
-      city: 'Rio de Janeiro',
-      district: '',
-      additionalInfo: '',
-      number: '342',
-      state: 'Rio de Janeiro',
-      street: 'Avenida Getúlio Vargas',
-      postalCode: '21'
-    },
-    {
-      id: 3,
-      city: 'Rio de Janeiro',
-      district: '',
-      additionalInfo: '',
-      number: '342',
-      state: 'Rio de Janeiro',
-      street: 'Avenida Getúlio Vargas',
-      postalCode: '21'
-    },
-  ];
+  public addressArray: Address[] = [];
   public wallet: Wallet;
   public totalPrice: number = 0;
   public totalCart: number = 0;

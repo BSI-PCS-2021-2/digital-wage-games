@@ -17,6 +17,10 @@
                       <mat-label>Nome</mat-label>
                       <input matInput autocomplete="off" formControlName="name">
                       </mat-form-field><br>
+                    <mat-form-field class="input-username-field" appearance="fill">
+                      <mat-label>Nome de Usuário</mat-label>
+                      <input matInput autocomplete="off" formControlName="username">
+                    </mat-form-field><br>
                       <mat-form-field class="input-email-field" appearance="fill">
                           <mat-label>Email</mat-label>
                           <input matInput autocomplete="off" formControlName="email">
@@ -41,6 +45,10 @@
                             <mat-label>Celular 2</mat-label>
                             <input matInput autocomplete="off" formControlName="phone2">
                         </mat-form-field><br>
+                        <mat-form-field class="input-sec-email-field" appearance="fill">
+                          <mat-label>Email de contato</mat-label>
+                          <input matInput autocomplete="off" formControlName="secondaryEmail">
+                      </mat-form-field><br>
                       </form>
                 </div>
                 <div class="password-change">
@@ -48,15 +56,15 @@
                     <form class="form-inputs password-form" [formGroup]="passwordFormGroup" (ngSubmit)="changePassword()">
                         <mat-form-field class="input-old-password-field" appearance="fill">
                             <mat-label>Senha antiga</mat-label>
-                            <input matInput autocomplete="off" formControlName="old">
+                            <input matInput type="password" autocomplete="off" formControlName="old">
                         </mat-form-field><br>
                         <mat-form-field class="input-new-password-field" appearance="fill">
                             <mat-label>Nova senha</mat-label>
-                            <input matInput autocomplete="off" formControlName="new">
+                            <input matInput type="password" autocomplete="off" formControlName="new">
                         </mat-form-field><br>
                         <mat-form-field class="input-repear-password-field" appearance="fill">
                             <mat-label>Repita senha</mat-label>
-                            <input matInput autocomplete="off" formControlName="repeat">
+                            <input matInput type="password" autocomplete="off" formControlName="repeat">
                         </mat-form-field><br>
                         <button mat-button class="main-button" type="submit">Redefinir</button>
                       </form>
@@ -64,69 +72,85 @@
                <div class="addresses">
                 <div class="address-title">
                   <h2>Gerencie seus endereços</h2>
-                  <div class="add-address-button" (click)="addAddress()">
+                  <div class="add-address-button" (click)="openAddressDialog()">
                     <mat-icon> add_location</mat-icon>
                   </div>
                 </div>
                 <div>
-                    <mat-accordion class="address-accordion" *ngFor="let a of addresses" multi>
-                        <mat-expansion-panel >
+                    <ng-container [formGroup]="addressFormGroup">
+                      <mat-accordion formArrayName="addresses" class="address-accordion" multi>
+                        <mat-expansion-panel *ngFor="let addressForm of
+                        addressFormArray['controls']; let i = index"> 
                           <mat-expansion-panel-header>
                             <mat-panel-title>
-                              Endereço N
+                              {{
+                              addressFormArray.controls[i]['controls'].street.value
+                              }}, {{
+                              addressFormArray.controls[i]['controls'].number.value }}
+                              - {{
+                                addressFormArray.controls[i]['controls'].district.value }}
                             </mat-panel-title>
                           </mat-expansion-panel-header>
                       
                           <div class="accordion-form-inputs">
-                            <form class="address-form">
+                            <div class="address-form"
+                            [formGroupName]="i">
                               <mat-form-field appearance="fill">
                                 <mat-label>Rua</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text"
+                                formControlName="street">
                               </mat-form-field>
                           
                               <mat-form-field appearance="fill">
                                 <mat-label>Cidade</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text"
+                                formControlName="city">
                               </mat-form-field>
                               <mat-form-field appearance="fill">
                                 <mat-label>Estado</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text"
+                                formControlName="state">
                               </mat-form-field>
                               
                               <mat-form-field appearance="fill">
                                 <mat-label>Bairro</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text" formControlName="district">
                               </mat-form-field>
                               
                               <mat-form-field appearance="fill">
                                 <mat-label>Complemento</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text"
+                                formControlName="additionalInfo">
                               </mat-form-field>
 
                               <mat-form-field appearance="fill">
                                 <mat-label>Código postal</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text"
+                                formControlName="postalCode">
                               </mat-form-field>
 
                               <mat-form-field appearance="fill">
                                 <mat-label>Número</mat-label>
-                                <input matInput type="text">
+                                <input matInput type="text"
+                                formControlName="number">
                               </mat-form-field>
                               <div class="button-wrapper">
-                                <button mat-button class="cancel-button" (click)="removeAddress(a.id)">Remover</button>
+                                <button mat-button class="cancel-button" (click)="removeAddress(i)">Remover</button>
+                                <button mat-button class="main-button" (click)="updateAddress(i)">Atualizar</button>
                               </div>
-                            </form>
+                            </div >
                               
                           </div>
                       
                         </mat-expansion-panel>
                       </mat-accordion>
+                    </ng-container>
                 </div>
                </div>
                <div class="action-buttons">
                 
                 <button mat-button class="cancel-button" routerLink="/minha-conta">Cancelar</button>
-                <button mat-button class="main-button">Enviar</button>
+                <button mat-button class="main-button" (click)="update()">Enviar</button>
               </div>
             </div>
             
