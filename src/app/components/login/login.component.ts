@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { Router } from '@angular/router';
 import { SignInFormDTO } from './models/signInFormDTO';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
+    private notificationService: NotificationService,
     private router: Router
     ) { }
 
@@ -25,7 +27,6 @@ export class LoginComponent implements OnInit {
       usernameCtrl: [''],
       passwordCtrl: ['']
     });
-
   }
 
   public login(): void {
@@ -36,9 +37,19 @@ export class LoginComponent implements OnInit {
     }
 
     if (signInForm.username !== '' && signInForm.password !== '') {
-      this.authenticationService.login(signInForm).subscribe();
+      this.authenticationService.getAuthenticationInfo(signInForm.username).subscribe(r => {
+        if (r !== undefined && r.banned) {
+          this.notificationService.error(`Tentativas bloqueadas, espere ${(new Date(r.nextAllowedAccess).getTime() - new Date(Date.now()).getTime()) * 1000} segundos para tentar novamente.`)
+          this.loginFormGroup.disable();
+        } else {
+          this.authenticationService.login(signInForm).subscribe((response) => {
+            if (response.banned) {
+              this.notificationService.error(`Tentativas bloqueadas, espere ${(new Date(r.nextAllowedAccess).getTime() - new Date(Date.now()).getTime()) * 1000} segundos para tentar novamente.`)
+              this.loginFormGroup.disable();
+            }
+          });
+        }
+      })
     }
-
   }
-
 }
