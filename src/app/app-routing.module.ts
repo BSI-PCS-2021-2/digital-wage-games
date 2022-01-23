@@ -12,6 +12,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { SupportComponent } from './components/support/support.component';
 import { EditProfileComponent } from './components/my-account/edit-profile/edit-profile.component';
 import { AdmLoginComponent } from './components/adm-login/adm-login.component';
+import { AdmHomeComponent } from './components/adm-home/adm-home.component';
+import { ProductsManagementComponent } from './components/products-management/products-management.component';
 
 
 const routes: Routes = [
@@ -27,7 +29,9 @@ const routes: Routes = [
   { path: 'minha-conta/:success', component: MyAccountComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'suporte', component: SupportComponent },
-  { path: 'adm' , component: AdmLoginComponent }
+  { path: 'adm-login' , component: AdmLoginComponent },
+  { path: 'adm-home' , component: AdmHomeComponent },
+  { path: 'products-management', component: ProductsManagementComponent}
 ];
 
 @NgModule({
