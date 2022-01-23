@@ -1,17 +1,17 @@
 <div class="main">
     <h1 class="title">Cadastro de produtos</h1>
-    <form auto class="form-container">
+    <form auto class="form-container"  [formGroup]="registrationFormGroup" >
         <mat-form-field class="gameName" appearance="fill">
             <mat-label color="white">Nome do jogo:</mat-label>
-            <input matInput autocomplete="off">
+            <input formControlName="name" matInput autocomplete="off">
         </mat-form-field>
         <mat-form-field class="price" appearance="fill">
             <mat-label>Preço:</mat-label>
-            <input type="number" min="1" step="any" matInput placeholder="Preço">
+            <input formControlName="price" type="number" min="1" step="any" matInput placeholder="Preço">
         </mat-form-field>
         <mat-form-field class="ageRating" appearance="fill">
             <mat-label>Classificação indicativa:</mat-label>
-            <mat-select>
+            <mat-select formControlName="ageRating">
                 <mat-option value="L">L</mat-option>
                 <mat-option value="10">10</mat-option>
                 <mat-option value="12">12</mat-option>
@@ -22,19 +22,19 @@
         </mat-form-field>
         <mat-form-field class="description" appearance="fill">
             <mat-label>Descrição:</mat-label>
-            <textarea rows="15" maxlength="1716" matInput></textarea>
+            <textarea formControlName="description" rows="15" maxlength="1716" matInput></textarea>
         </mat-form-field>
         <img class="game-image" src={{image}}>
         <div class="image-amount">
             <mat-form-field class="amount" appearance="fill">
                 <mat-label>Quantidade:</mat-label>
-                <input type="number" min="1" matInput placeholder="Quantidade">
+                <input formControlName="amount" type="number" min="1" matInput placeholder="Quantidade">
             </mat-form-field>
             <mat-form-field class="image" appearance="fill">
                 <mat-label>Imagem:</mat-label>
-                <input matInput autocomplete="off" (keyup.enter)="atualizarImagem($event)" placeholder="Image">
+                <input formControlName="image" matInput autocomplete="off" (keyup.enter)="atualizarImagem($event)" placeholder="Image">
             </mat-form-field>
         </div>
-        <button class="btn-confirm" mat-button>Cadastrar</button>
+        <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>
     </form>
 </div>
