@@ -51,6 +51,7 @@ import { EditProfileComponent } from './components/my-account/edit-profile/edit-
 import { NewAddressComponent } from './components/my-account/edit-profile/new-address/new-address.component';
 import { AdmHomeComponent } from './components/adm-home/adm-home.component';
 import { ProductsManagementComponent } from './components/products-management/products-management.component';
+import { ProductsRegistrationComponent } from './components/products-registration/products-registration.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -76,7 +77,8 @@ registerLocaleData(localePt, 'pt-BR');
     EditProfileComponent,
     NewAddressComponent,
     AdmHomeComponent,
-    ProductsManagementComponent
+    ProductsManagementComponent,
+    ProductsRegistrationComponent
   ],
   imports: [
     BrowserModule,

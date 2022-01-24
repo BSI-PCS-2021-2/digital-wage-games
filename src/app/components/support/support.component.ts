@@ -23,11 +23,12 @@ export class SupportComponent implements OnInit {
     this.supportFormGroup = this.formBuilder.group({
       email: "exemple@gmail.com",
       clientEmail: [''],
-      message: [''],
-      category: ['']
+      message: ['',Validators.required],
+      category: ['', Validators.required]
     });
   }
-  enviarMensagem(): void {
+  public enviarMensagem(): void {
+    if(this.isFormValid){
     const supportForm: SupportEmailDTO = {
       email: undefined,
       clientEmail: this.authenticationService.getUsername(),
@@ -35,5 +36,9 @@ export class SupportComponent implements OnInit {
       message: this.supportFormGroup.get('message').value
     }
     this.supportService.sendSupportEmail(supportForm).subscribe();
+  }
+}
+  private isFormValid():boolean{
+    return this.supportFormGroup.valid;
   }
 }

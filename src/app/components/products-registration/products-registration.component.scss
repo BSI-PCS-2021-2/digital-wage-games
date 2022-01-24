@@ -1,0 +1,68 @@
+@import '../../../assets/styles/variables.scss';
+
+textarea::-webkit-scrollbar {
+    background-color: $gray;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background-color: $light-gray;
+    border-radius: 5px;
+  }
+
+.main {
+  padding: $padding-page;
+  padding-left: 28%;
+  padding-right: 28%;
+
+  .title {
+    font-size: 35px;
+    display: flex;
+    width: 100%;
+    color: $light-gray;
+    justify-content: center;
+  }
+
+  .form-container {
+    color:$light-gray;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;
+    display: flex;
+    padding: 10px;
+    background-color: $dark-gray;
+    border-radius: 5px;
+
+    .btn-confirm {
+      color: white;
+      background-color: $green;
+    }
+
+    .image-amount {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+    }
+
+    .gameName,
+    .ageRating,
+    .price,
+    .description,
+    .image-amount {
+      width: 30%;
+
+      .image,
+      .amount {
+        width: 100%;
+      }
+    }
+
+    .game-image {
+      width: 30%;
+      max-height: 15em;
+    }
+  }
+}
