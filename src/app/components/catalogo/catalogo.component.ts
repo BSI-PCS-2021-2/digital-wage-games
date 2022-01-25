@@ -117,8 +117,21 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
   selected = 'relevant';
 
+
+  arraySearch(event):void{
+    this.searchName = event.target.value;
+    this.products = this.products.filter(this.haveName);
+  }
+
+
+  haveName(element,index,array):boolean{
+    return element[1] == this.searchName || this.searchName == "";
+  }
+
   products: Product[];
   cartProductIds: number[];
+  
+  public searchName = "";
 
   public wallet: Wallet;
 
