@@ -14,6 +14,8 @@ import { EditProfileComponent } from './components/my-account/edit-profile/edit-
 import { AdmLoginComponent } from './components/adm-login/adm-login.component';
 import { AdmHomeComponent } from './components/adm-home/adm-home.component';
 import { ProductsManagementComponent } from './components/products-management/products-management.component';
+import { ProductsRegistrationComponent } from './components/products-registration/products-registration.component';
+import { ClientsManagementComponent } from './components/clients-management/clients-management.component';
 
 
 const routes: Routes = [
@@ -25,13 +27,15 @@ const routes: Routes = [
   { path: 'carrinho', component: CartComponent },
   { path: 'restauracao-senha', component: PasswordRecoveryComponent },
   { path: 'minha-conta', component: MyAccountComponent },
-  { path: 'minha-conta', children: [ { path: 'editar', component: EditProfileComponent }] },
+  { path: 'minha-conta', children: [{ path: 'editar', component: EditProfileComponent }] },
   { path: 'minha-conta/:success', component: MyAccountComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'suporte', component: SupportComponent },
-  { path: 'adm-login' , component: AdmLoginComponent },
-  { path: 'adm-home' , component: AdmHomeComponent },
-  { path: 'products-management', component: ProductsManagementComponent}
+  { path: 'adm-login', component: AdmLoginComponent },
+  { path: 'adm-home', component: AdmHomeComponent },
+  { path: 'products-management', component: ProductsManagementComponent },
+  { path: 'products-registration', component: ProductsRegistrationComponent },
+  {path: 'clients-management', component: ClientsManagementComponent}
 ];
 
 @NgModule({
