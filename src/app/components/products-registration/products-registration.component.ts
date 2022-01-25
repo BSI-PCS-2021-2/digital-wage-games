@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductRegistrationDTO } from '../../shared/models/dto/product-registration/productRegistrationDTO';
+import { ProductRegistrationDTO } from '../../shared/models/dto/product/productRegistrationDTO';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -38,15 +38,15 @@ export class ProductsRegistrationComponent implements OnInit {
 
   public registerProduct():void{
     if(this.isFormValid()){
-    const registrationForm: ProductRegistrationDTO = {
-      name: this.registrationFormGroup.get('name').value,
-      price: this.registrationFormGroup.get('price').value*100,
-      description: this.registrationFormGroup.get('description').value,
-      image: this.registrationFormGroup.get('image').value,
-      ageRating: this.registrationFormGroup.get('ageRating').value,
-      amount: this.registrationFormGroup.get('amount').value
-    }
-    console.log(registrationForm);
+    // const registrationForm: ProductRegistrationDTO = {
+    //   name: this.registrationFormGroup.get('name').value,
+    //   price: this.registrationFormGroup.get('price').value*100,
+    //   description: this.registrationFormGroup.get('description').value,
+    //   image: this.registrationFormGroup.get('image').value,
+    //   ageRating: this.registrationFormGroup.get('ageRating').value,
+    //   amount: this.registrationFormGroup.get('amount').value
+    // }
+    // console.log(registrationForm);
   }
   }
   private isFormValid (): boolean {
