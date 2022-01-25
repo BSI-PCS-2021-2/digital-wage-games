@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductRegistrationDTO } from '../../shared/models/dto/product/productRegistrationDTO';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-products-registration',
@@ -13,7 +16,9 @@ export class ProductsRegistrationComponent implements OnInit {
 
   image: string = "../../../assets/images/ImageField.png"
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +33,11 @@ export class ProductsRegistrationComponent implements OnInit {
       amount: ['',Validators.required],
       description: ['',Validators.required],
       image: ['',Validators.required],
-      ageRating:['',Validators.required]
+      releaseDate:['',Validators.required],
+      ageRating:['',Validators.required],
+      platform:['',Validators.required],
+      gender:['',Validators.required],
+      publisher:['',Validators.required]
     });
   }
 
@@ -37,17 +46,22 @@ export class ProductsRegistrationComponent implements OnInit {
   }
 
   public registerProduct():void{
+    const dto = {
+      name: this.registrationFormGroup.controls['name'].value,
+      price: this.registrationFormGroup.controls['price'].value,
+      amount: this.registrationFormGroup.controls['amount'].value,
+      description: this.registrationFormGroup.controls['name'].value,
+      releaseDate: moment().format('YYYY-MM-DD HH:mm:ss'),
+      ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
+      platformId: this.registrationFormGroup.controls['platform'].value,
+      genderId: this.registrationFormGroup.controls['gender'].value,
+      publisherId: this.registrationFormGroup.controls['publisher'].value,
+    }
+    console.log(dto)
+    this.productService.postProduct(dto);
     if(this.isFormValid()){
-    // const registrationForm: ProductRegistrationDTO = {
-    //   name: this.registrationFormGroup.get('name').value,
-    //   price: this.registrationFormGroup.get('price').value*100,
-    //   description: this.registrationFormGroup.get('description').value,
-    //   image: this.registrationFormGroup.get('image').value,
-    //   ageRating: this.registrationFormGroup.get('ageRating').value,
-    //   amount: this.registrationFormGroup.get('amount').value
-    // }
-    // console.log(registrationForm);
-  }
+     
+    }
   }
   private isFormValid (): boolean {
     return this.registrationFormGroup.valid;
