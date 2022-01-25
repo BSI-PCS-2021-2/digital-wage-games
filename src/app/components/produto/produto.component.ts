@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ProductService } from '../../shared/services/product.service';
 import { CartService } from '../../shared/services/cart.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';
-import { Product } from '../../shared/models/product.model';
+import { Product } from '../../shared/models/product/product.model';
 import { Wallet } from '../../shared/models/wallet.model';
 import { WalletService } from '../../shared/services/wallet.service';
 
@@ -26,27 +26,19 @@ export class ProdutoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartId = parseInt(this.authenticationService.getCartId());
+    let id = null;
     this.router.paramMap.subscribe((param) => {
-      this.product = {
-        id: parseInt(param.get('produto')),
-        name: null,
-        description: null,
-        price: null,
-        rate: null,
-        trailerPaths: []
-      }
+      id = parseInt(param.get('produto'))
     });
-    this.productService.getProduct(this.product.id).subscribe((product) => {
-      this.product = {
-        id: product.id,
-        name: product.name,
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: product.price,
-        rate: product.rate,
-        trailerPaths: ["../../../assets/videos/trailer.mp4", "../../../assets/videos/trailer2.mp4", "../../../assets/videos/trailer3.mp4", "../../../assets/videos/trailer4.mp4"]
-      }
-      this.selectedTrailer = "../../../assets/videos/trailer.mp4";
-    });
+    // this.productService.getProduct(this.product.id).subscribe((product) => {
+    //   this.product = {
+    //     id: product.id,
+    //     name: product.name,
+    //     description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    //     price: product.price,
+    //   }
+    //   this.selectedTrailer = "../../../assets/videos/trailer.mp4";
+    // });
    this.defineCartSize();
    this.defineProductsOnCart();
 

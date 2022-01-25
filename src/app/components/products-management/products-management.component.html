@@ -16,11 +16,11 @@
     <div class="products-table">
         <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
 
-            <ng-container matColumnDef="position">
+            <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
                     No.
                 </th>
-                <td mat-cell *matCellDef="let product"> {{product.position}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.id}} </td>
             </ng-container>
 
             <ng-container matColumnDef="name">
@@ -34,7 +34,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
                     Preço
                 </th>
-                <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.price / 100 | currency:'BRL':true}} </td>
             </ng-container>
 
             <ng-container matColumnDef="amount">
@@ -44,18 +44,39 @@
                 <td mat-cell *matCellDef="let product"> {{product.amount}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="ageRating">
-                <th mat-header-cell *matHeaderCellDef>
-                    Classificação indicativa
-                </th>
-                <td mat-cell *matCellDef="let product"> {{product.ageRating}} </td>
-            </ng-container>
-
             <ng-container matColumnDef="releaseDate">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date">
                     Data de lançamento
                 </th>
-                <td mat-cell *matCellDef="let product"> {{product.releaseDate}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.releaseDate | date:'medium'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="publisher">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by string">
+                    Publisher
+                </th>
+                <td mat-cell *matCellDef="let product"> {{product.publisher.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="platform">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by string">
+                    Plataforma
+                </th>
+                <td mat-cell *matCellDef="let product"> {{product.platform.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by string">
+                    Genero
+                </th>
+                <td mat-cell *matCellDef="let product"> {{product.gender.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ratingSystem">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by string">
+                    Classificação indicativa
+                </th>
+                <td mat-cell *matCellDef="let product"> {{product.ratingSystem.name}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

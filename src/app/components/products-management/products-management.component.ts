@@ -1,41 +1,27 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Product } from 'src/app/shared/models/product/product.model';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ProductService } from 'src/app/shared/services/product.service';
 
-export interface Product {
-  name: string;
-  position: number;
-  price: number;
-  amount: number;
-  ageRating: string;
-  releaseDate: string;
-}
 
-const products: Product[] = [
-  { position: 1, name: 'Jogo teste', price: 15000, amount: 250, ageRating: '10+', releaseDate: '10/02/2020' },
-  { position: 2, name: 'Jogo teste1', price: 25000, amount: 270, ageRating: '16+', releaseDate: '16/05/2021' },
-  { position: 3, name: 'Jogo teste2', price: 13000, amount: 200, ageRating: '16+', releaseDate: '05/01/2017' },
-  { position: 4, name: 'Jogo teste3', price: 17000, amount: 550, ageRating: 'L', releaseDate: '25/04/2015' },
-  { position: 5, name: 'Jogo teste4', price: 1000, amount: 300, ageRating: '18+', releaseDate: '23/10/2021' },
-  { position: 6, name: 'Jogo teste5', price: 35000, amount: 200, ageRating: '18+', releaseDate: '18/04/2016' },
-];
 
 @Component({
   selector: 'app-products-management',
   templateUrl: './products-management.component.html',
   styleUrls: ['./products-management.component.scss']
 })
-export class ProductsManagementComponent implements OnInit {
+export class ProductsManagementComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['position', 'name', 'price', 'amount', 'ageRating', 'releaseDate'];
-  dataSource = new MatTableDataSource(products);
-
-  constructor(private _liveAnnouncer: LiveAnnouncer) { }
+  constructor(private _liveAnnouncer: LiveAnnouncer,
+              private notificationService: NotificationService,
+              private productService: ProductService) { }
 
   @ViewChild(MatSort) sort: MatSort;
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
   }
 
@@ -51,4 +37,44 @@ export class ProductsManagementComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get products() {
+    const products: Product[] = [];
+    this.productService.getProducts().subscribe(p => {
+      p.forEach(item => {
+        const product: Product = {
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          amount: item.amount,
+          price: item.price,
+          releaseDate: item.releaseDate,
+          gender: {
+            id: item.gender.id,
+            name: item.gender.name
+          },
+          platform: {
+            id: item.platform.id,
+            name: item.platform.name
+          },
+          publisher: {
+            id: item.publisher.id,
+            name: item.publisher.name
+          },
+          ratingSystem: {
+            id: item.ratingSystem.id,
+            name: item.ratingSystem.name
+          }
+        }
+        console.log(product)
+        products.push(product);
+      })
+    })
+    console.log(products)
+    return products;
+  }
+  formatDate(date: Date) {
+    return date.toLocaleDateString('pt-BR');
+  }
+  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem'];
+  dataSource = new MatTableDataSource(this.products);
 }

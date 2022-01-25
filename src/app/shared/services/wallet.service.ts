@@ -1,4 +1,4 @@
-import { Product } from '../../../app/shared/models/product.model';
+import { Product } from '../models/product/product.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
