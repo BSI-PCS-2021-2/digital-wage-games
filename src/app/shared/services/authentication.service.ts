@@ -9,6 +9,8 @@ import { CartService } from "./cart.service";
 import * as moment from "moment";
 import { Jwt } from "../models/jwt.model";
 import { stringify } from "querystring";
+import { SignInResponse } from "../models/signInResponse.model";
+import { AuthenticationInfo } from "../models/authenticationInfo.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +25,15 @@ export class AuthenticationService {
     private cartService: CartService
     ) { }
 
-  public login(signInForm: SignInFormDTO): Observable<Jwt> {
+  public login(signInForm: SignInFormDTO): Observable<SignInResponse> {
 
-    return this.http.post<Jwt>(`${environment.baseUrl}/auth/authenticate`, signInForm)
+    return this.http.post<SignInResponse>(`${environment.baseUrl}/auth/authenticate`, signInForm)
       .pipe(
         take(1),
-        tap((jwt: Jwt) => {
-          if (jwt !== null) {
-            this.setSession(jwt);
+        tap((response: SignInResponse) => {
+          if (response.jwt !== undefined) {
+            console.log(response)
+            this.setSession(response.jwt);
             this.notificationService.success('Você está autenticado!');
             this.router.navigate(['/']);
           } else {
@@ -45,6 +48,10 @@ export class AuthenticationService {
         })
       );
 
+  }
+
+  public getAuthenticationInfo(username: string): Observable<AuthenticationInfo> {
+    return this.http.get<AuthenticationInfo>(`${environment.baseUrl}/clients/user/${username}`);
   }
 
   private setSession(jwt: Jwt) {
