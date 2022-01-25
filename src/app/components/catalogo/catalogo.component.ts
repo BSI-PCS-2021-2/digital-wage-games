@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable, AfterViewInit } from '@angular/core';
 import { MatStepperIntl } from '@angular/material/stepper';
-import { Product } from '../../../app/shared/models/product.model';
+import { Product } from '../../shared/models/product/product.model';
 import { PostCartItemDTO } from '../../../app/shared/models/dto/cartItem/postCartItem.dto';
 import { ProductService } from '../../shared/services/product.service';
 import { AuthenticationService } from '../../shared/services/authentication.service';

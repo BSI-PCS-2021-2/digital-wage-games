@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatStepperIntl } from '@angular/material/stepper';
 import { CartItem } from '../../shared/models/cartItem.model';
-import { Product } from '../../shared/models/product.model';
+import { Product } from '../../shared/models/product/product.model';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { ProductService } from '../../shared/services/product.service';
 import { PutCartItemDTO } from '../../shared/models/dto/cartItem/putCartItem.dto';
