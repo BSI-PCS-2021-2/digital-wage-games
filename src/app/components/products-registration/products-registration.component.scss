@@ -1,5 +1,6 @@
 @import '../../../assets/styles/variables.scss';
 
+
 textarea::-webkit-scrollbar {
     background-color: $gray;
     width: 10px;
@@ -30,7 +31,7 @@ textarea::-webkit-scrollbar {
     justify-content: space-around;
     gap: 10px;
     flex-wrap: wrap;
-    display: flex;
+    display: grid;
     padding: 10px;
     background-color: $dark-gray;
     border-radius: 5px;
@@ -48,12 +49,11 @@ textarea::-webkit-scrollbar {
     }
 
     .gameName,
-    .ageRating,
+    .releaseDate,
     .price,
     .description,
     .image-amount {
       width: 30%;
-
       .image,
       .amount {
         width: 100%;

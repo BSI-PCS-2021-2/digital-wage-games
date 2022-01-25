@@ -1,6 +1,6 @@
 <div class="main">
     <h1 class="title">Cadastro de produtos</h1>
-    <form auto class="form-container"  [formGroup]="registrationFormGroup" >
+    <form auto class="form-container" [formGroup]="registrationFormGroup">
         <mat-form-field class="gameName" appearance="fill">
             <mat-label color="white">Nome do jogo:</mat-label>
             <input formControlName="name" matInput autocomplete="off">
@@ -9,32 +9,31 @@
             <mat-label>Preço:</mat-label>
             <input formControlName="price" type="number" min="1" step="any" matInput placeholder="Preço">
         </mat-form-field>
-        <mat-form-field class="ageRating" appearance="fill">
-            <mat-label>Classificação indicativa:</mat-label>
-            <mat-select formControlName="ageRating">
-                <mat-option value="L">L</mat-option>
-                <mat-option value="10">10</mat-option>
-                <mat-option value="12">12</mat-option>
-                <mat-option value="14">14</mat-option>
-                <mat-option value="16">16</mat-option>
-                <mat-option value="18">18</mat-option>
-            </mat-select>
+        <mat-form-field class="releaseDate">
+            <mat-label color="white">Data de lançamento</mat-label>
+            <input formContolName="releaseDate" matInput [matDatepicker]="basicDatepicker">
+            <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #basicDatepicker>
+                <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancelar</button>
+                    <button mat-raised-button [ngStyle]="{'background-color':green, color: white}" matDatepickerApply>Confirmar</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
         </mat-form-field>
         <mat-form-field class="description" appearance="fill">
             <mat-label>Descrição:</mat-label>
             <textarea formControlName="description" rows="15" maxlength="1716" matInput></textarea>
         </mat-form-field>
         <img class="game-image" src={{image}}>
-        <div class="image-amount">
             <mat-form-field class="amount" appearance="fill">
                 <mat-label>Quantidade:</mat-label>
                 <input formControlName="amount" type="number" min="1" matInput placeholder="Quantidade">
             </mat-form-field>
             <mat-form-field class="image" appearance="fill">
                 <mat-label>Imagem:</mat-label>
-                <input formControlName="image" matInput autocomplete="off" (keyup.enter)="atualizarImagem($event)" placeholder="Image">
+                <input formControlName="image" matInput autocomplete="off" (keyup.enter)="atualizarImagem($event)"
+                    placeholder="Image">
             </mat-form-field>
-        </div>
         <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>
     </form>
 </div>

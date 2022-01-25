@@ -7,8 +7,11 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
   templateUrl: './products-registration.component.html',
   styleUrls: ['./products-registration.component.scss']
 })
+
 export class ProductsRegistrationComponent implements OnInit {
 
+  public green = 'green';  
+  public white = 'white';  
   public registrationFormGroup: FormGroup;
 
   image: string = "../../../assets/images/ImageField.png"
@@ -23,12 +26,15 @@ export class ProductsRegistrationComponent implements OnInit {
       }
     });
     this.registrationFormGroup = this.formBuilder.group({
-      name: ['', Validators.required],
-      price: ['',Validators.required],
-      amount: ['',Validators.required],
-      description: ['',Validators.required],
-      image: ['',Validators.required],
-      ageRating:['',Validators.required]
+    name:['',Validators.required],//OK
+    image:['',Validators.required],//OK
+    price:['',Validators.required],//OK
+    amount:['',Validators.required],//OK
+    description:['',Validators.required],//OK
+    releaseDate:['',Validators.required],//OK
+    genderId:['',Validators.required],
+    platformId:['',Validators.required],
+    publisherId:['',Validators.required],
     });
   }
 
