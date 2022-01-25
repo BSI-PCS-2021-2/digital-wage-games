@@ -3,7 +3,7 @@ export interface ProductRegistrationDTO{
     price?: number;
     amount?: number;
     description?: string;
-    releaseDate?: Date;
+    releaseDate?: string;
     genderId?: number;
     platformId?: number;
     publisherId?: number;
