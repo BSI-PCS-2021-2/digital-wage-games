@@ -26,11 +26,11 @@ export class StepperIntl extends MatStepperIntl {
 export class CatalogoComponent implements OnInit, AfterViewInit {
 
   constructor(private productService: ProductService,
-              public authenticationService: AuthenticationService,
-              private walletService: WalletService,
-              private cartService: CartService,
-              private router: Router,
-              private notificationService: NotificationService) { }
+    public authenticationService: AuthenticationService,
+    private walletService: WalletService,
+    private cartService: CartService,
+    private router: Router,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.cartId = this.authenticationService.getCartId();
@@ -53,12 +53,12 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
   defineProductsOnCart() {
 
-      this.cartService.getCartItems(this.cartId).subscribe((cartItems)  => {
-        cartItems.forEach(e => {
-          document.getElementById(`cart_actions_container_${e.productId}`).classList.add('active');
-          this.cartSize++;
-        })
-      });
+    this.cartService.getCartItems(this.cartId).subscribe((cartItems) => {
+      cartItems.forEach(e => {
+        document.getElementById(`cart_actions_container_${e.productId}`).classList.add('active');
+        this.cartSize++;
+      })
+    });
 
   }
 
@@ -93,7 +93,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     this.notificationService.success('Produto foi adicionado ao carrinho.')
     ++this.cartSize;
   }
-  
+
   getGameCover(productId: number): string {
     switch (productId) {
       case 2:
@@ -117,8 +117,23 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
   selected = 'relevant';
 
+
+  arrayEnter(event: any) {
+    this.searchName = event.target.value;
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products.filter(this.haveName.bind(null, this.searchName));
+    });
+  }
+
+
+  private haveName(search, element): boolean {
+    return element.name == search || search == "";
+  }
+
   products: Product[];
   cartProductIds: number[];
+
+  public searchName = "";
 
   public wallet: Wallet;
 

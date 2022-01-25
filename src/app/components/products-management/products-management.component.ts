@@ -33,7 +33,6 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   ngOnInit(): void {
   }
 
@@ -75,6 +74,10 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   formatDate(date: Date) {
     return date.toLocaleDateString('pt-BR');
   }
-  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem'];
+  remove(id: number) {
+    this.productService.deleteProduct(id);
+    this.notificationService.success("Produto removido com successo");
+  }
+  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove'];
   dataSource = new MatTableDataSource(this.products);
 }
