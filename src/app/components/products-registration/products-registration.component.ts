@@ -10,8 +10,11 @@ import * as moment from 'moment';
   templateUrl: './products-registration.component.html',
   styleUrls: ['./products-registration.component.scss']
 })
+
 export class ProductsRegistrationComponent implements OnInit {
 
+  public green = 'green';  
+  public white = 'white';  
   public registrationFormGroup: FormGroup;
 
   image: string = "../../../assets/images/ImageField.png"
@@ -45,13 +48,13 @@ export class ProductsRegistrationComponent implements OnInit {
     this.image = event.target.value;
   }
 
-  public registerProduct():void{
+  public registerProduct(): void {
     const dto = {
       name: this.registrationFormGroup.controls['name'].value,
       price: this.registrationFormGroup.controls['price'].value,
       amount: this.registrationFormGroup.controls['amount'].value,
       description: this.registrationFormGroup.controls['name'].value,
-      releaseDate: moment().format('YYYY-MM-DD HH:mm:ss'),
+      releaseDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
       genderId: this.registrationFormGroup.controls['gender'].value,

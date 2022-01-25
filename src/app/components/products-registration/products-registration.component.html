@@ -49,9 +49,20 @@
             <mat-label color="white">Nome do jogo:</mat-label>
             <input formControlName="name" matInput autocomplete="off">
         </mat-form-field>
+        <mat-form-field class="price" appearance="fill">
+            <mat-label>Preço:</mat-label>
+            <input formControlName="price" type="number" min="1" step="any" matInput placeholder="Preço">
+        </mat-form-field>
         <mat-form-field class="releaseDate">
             <mat-label color="white">Data de lançamento</mat-label>
-            <input formContolName="releaseDate" matInput type="date">
+            <input formContolName="releaseDate" matInput [matDatepicker]="basicDatepicker">
+            <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #basicDatepicker>
+                <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancelar</button>
+                    <button mat-raised-button [ngStyle]="{'background-color':green, color: white}" matDatepickerApply>Confirmar</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
         </mat-form-field>
         <div class="price-amount-container">
             <mat-form-field class="price" appearance="fill">
@@ -67,10 +78,6 @@
             <mat-label>Descrição:</mat-label>
             <textarea formControlName="description" rows="15" maxlength="1716" matInput></textarea>
         </mat-form-field>
-
-        <div class="image-amount">
-          
-        </div>
        </div>
         <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>
     </form>

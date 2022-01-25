@@ -27,6 +27,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
@@ -108,12 +110,16 @@ registerLocaleData(localePt, 'pt-BR');
     NgxSliderModule,
     MatExpansionModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
+    { provide: MatNativeDateModule },
     { provide: MatSnackBar },
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
   ],
   bootstrap: [AppComponent]
 })

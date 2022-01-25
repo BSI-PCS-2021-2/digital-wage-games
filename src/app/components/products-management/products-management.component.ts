@@ -15,14 +15,19 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class ProductsManagementComponent implements OnInit, AfterViewInit {
 
+  private products: Product[] = [];
+  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove']
+  dataSource = new MatTableDataSource(this.products);
+
   constructor(private _liveAnnouncer: LiveAnnouncer,
-              private notificationService: NotificationService,
-              private productService: ProductService) { }
+    private notificationService: NotificationService,
+    private productService: ProductService) { }
 
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
+    this.products = this.getProducts();
+    ;
   }
 
   announceSortChange(sortState: any) {
@@ -36,7 +41,7 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  get products() {
+  getProducts() {
     const products: Product[] = [];
     this.productService.getProducts().subscribe(p => {
       p.forEach(item => {
@@ -64,11 +69,12 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
             name: item.ratingSystem.name
           }
         }
-        console.log(product)
         products.push(product);
       })
+      console.log(products);
+      this.dataSource = new MatTableDataSource(products);
+      this.dataSource.sort = this.sort;
     })
-    console.log(products)
     return products;
   }
   formatDate(date: Date) {
@@ -78,6 +84,4 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
     this.productService.deleteProduct(id);
     this.notificationService.success("Produto removido com successo");
   }
-  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove'];
-  dataSource = new MatTableDataSource(this.products);
 }
