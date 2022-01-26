@@ -11,7 +11,7 @@
         </mat-form-field>
         <mat-form-field class="releaseDate">
             <mat-label color="white">Data de lançamento</mat-label>
-            <input formContolName="releaseDate" matInput [matDatepicker]="basicDatepicker">
+            <input matInput (dateInput)="onDate($event)" [matDatepicker]="basicDatepicker">
             <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #basicDatepicker>
                 <mat-datepicker-actions>

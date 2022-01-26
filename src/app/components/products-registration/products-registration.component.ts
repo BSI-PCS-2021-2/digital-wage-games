@@ -26,15 +26,15 @@ export class ProductsRegistrationComponent implements OnInit {
       }
     });
     this.registrationFormGroup = this.formBuilder.group({
-    name:['',Validators.required],//OK
-    image:['',Validators.required],//OK
-    price:['',Validators.required],//OK
-    amount:['',Validators.required],//OK
-    description:['',Validators.required],//OK
-    releaseDate:['',Validators.required],//OK
-    genderId:['',Validators.required],
-    platformId:['',Validators.required],
-    publisherId:['',Validators.required],
+    name:[''],//OK
+    image:[''],
+    price:[''],
+    amount:[''],
+    description:[''],
+    //releaseDate:['',Validators.required],//OK
+    //genderId:['',Validators.required],
+    //platformId:['',Validators.required],
+    //publisherId:['',Validators.required],
     });
   }
 
@@ -42,16 +42,21 @@ export class ProductsRegistrationComponent implements OnInit {
     this.image = event.target.value;
   }
 
+  onDate(event:any){
+    console.log(event.target.value);
+  }
+
   public registerProduct():void{
+    console.log(this.registrationFormGroup.get('releaseDate').value)
     if(this.isFormValid()){
-    // const registrationForm: ProductRegistrationDTO = {
+     const registrationForm: ProductRegistrationDTO = {
     //   name: this.registrationFormGroup.get('name').value,
     //   price: this.registrationFormGroup.get('price').value*100,
     //   description: this.registrationFormGroup.get('description').value,
     //   image: this.registrationFormGroup.get('image').value,
     //   ageRating: this.registrationFormGroup.get('ageRating').value,
-    //   amount: this.registrationFormGroup.get('amount').value
-    // }
+     //  amount: this.registrationFormGroup.get('amount').value
+     }
     // console.log(registrationForm);
   }
   }
