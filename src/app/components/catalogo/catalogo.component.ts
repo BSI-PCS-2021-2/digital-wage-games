@@ -129,7 +129,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   private haveName(search, element): boolean {
     return element.name.toUpperCase().indexOf(search.toUpperCase()) !=  -1 || search == "";
   }
-
+  
   products: Product[];
   cartProductIds: number[];
 
