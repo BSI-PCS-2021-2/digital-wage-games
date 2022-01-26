@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductRegistrationDTO } from '../../shared/models/dto/product/productRegistrationDTO';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import * as moment from 'moment';
@@ -12,9 +12,9 @@ import * as moment from 'moment';
 })
 
 export class ProductsRegistrationComponent implements OnInit {
-
-  public green = 'green';  
-  public white = 'white';  
+  private formDate;
+  public green = 'green';
+  public white = 'white';
   public registrationFormGroup: FormGroup;
 
   image: string = "../../../assets/images/ImageField.png"
@@ -32,15 +32,15 @@ export class ProductsRegistrationComponent implements OnInit {
     });
     this.registrationFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
-      price: ['',Validators.required],
-      amount: ['',Validators.required],
-      description: ['',Validators.required],
-      image: ['',Validators.required],
-      releaseDate:['',Validators.required],
-      ageRating:['',Validators.required],
-      platform:['',Validators.required],
-      gender:['',Validators.required],
-      publisher:['',Validators.required]
+      price: ['', Validators.required],
+      amount: ['', Validators.required],
+      description: ['', Validators.required],
+      image: ['', Validators.required],
+      releaseDate: ['', Validators.required],
+      ageRating: ['', Validators.required],
+      platform: ['', Validators.required],
+      gender: ['', Validators.required],
+      publisher: ['', Validators.required]
     });
   }
 
@@ -54,7 +54,7 @@ export class ProductsRegistrationComponent implements OnInit {
       price: this.registrationFormGroup.controls['price'].value,
       amount: this.registrationFormGroup.controls['amount'].value,
       description: this.registrationFormGroup.controls['name'].value,
-      releaseDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      releaseDate: moment(this.formDate).format('YYYY-MM-DD HH:mm:ss'),
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
       genderId: this.registrationFormGroup.controls['gender'].value,
@@ -62,15 +62,15 @@ export class ProductsRegistrationComponent implements OnInit {
     }
     console.log(dto)
     this.productService.postProduct(dto);
-    if(this.isFormValid()){
-     
+    if (this.isFormValid()) {
+
     }
   }
-  private isFormValid (): boolean {
+  private isFormValid(): boolean {
     return this.registrationFormGroup.valid;
   }
 
-  onDate(event){
-    return;
+  onDate(event) {
+    this.formDate = event.target.value;
   }
 }
