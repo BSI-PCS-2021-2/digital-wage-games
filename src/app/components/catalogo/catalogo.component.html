@@ -16,9 +16,9 @@
         </div>
 
         <div class="search">
-          <mat-form-field class="filter-search-bar" appearance="fill">
+          <mat-form-field [formGroup]="search" class="filter-search-bar" appearance="fill">
             <mat-label>Buscar</mat-label>
-            <input (keyup.enter)="arrayEnter($event)" matInput autocomplete="off">
+            <input (keyup.enter)="enterSearch()" formControlName="searchBar" matInput autocomplete="off">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
@@ -39,7 +39,7 @@
                 <mat-card-title class="product-price">
                   {{ product.price / 100 | currency:'BRL': 'symbol' }}
                 </mat-card-title>
-                <mat-card-subtitle class="product-name">{{ product.name }}</mat-card-subtitle>
+                <mat-card-subtitle class="product-name">{{ product.name }} - {{product.platform.name}}</mat-card-subtitle>
               </div>
               <div class="rate-container">
               </div>
@@ -76,10 +76,10 @@
       <p>Preço (R$)</p>
       <ngx-slider [value]="minPriceValue" [highValue]="maxPriceValue" [options]="priceOptions"></ngx-slider>
       <div class="plataform-filter">
-        <mat-form-field appearance="fill">
+        <mat-form-field [formGroup]="search" appearance="fill">
           <mat-label>Plataforma </mat-label>
-          <mat-select >
-            <mat-option value="none">Nenhum</mat-option>
+          <mat-select formControlName="plataforma" >
+            <mat-option value="">Nenhum</mat-option>
             <mat-option value="ps5">PS5</mat-option>
             <mat-option value="xbox-x">Xbox Series X</mat-option>
             <mat-option value="ps4">PS4</mat-option>
@@ -88,10 +88,10 @@
         </mat-form-field>
       </div>
       <div class="gender-filter">
-        <mat-form-field appearance="fill">
+        <mat-form-field [formGroup]="search" appearance="fill">
           <mat-label>Gênero </mat-label>
-          <mat-select >
-            <mat-option value="none">Nenhum</mat-option>
+          <mat-select formControlName="genero" >
+            <mat-option value="">Nenhum</mat-option>
             <mat-option value="acao">Ação e aventura</mat-option>
             <mat-option value="terror">Terror</mat-option>
             <mat-option value="rpg">RPG</mat-option>
@@ -100,10 +100,10 @@
         </mat-form-field>
       </div>
       <div class="publisher-filter">
-        <mat-form-field appearance="fill">
+        <mat-form-field [formGroup]="search" appearance="fill">
           <mat-label>Publisher </mat-label>
-          <mat-select >
-            <mat-option value="none">Nenhum</mat-option>
+          <mat-select formControlName="publisher" >
+            <mat-option value="">Nenhum</mat-option>
             <mat-option value="ea">EA</mat-option>
             <mat-option value="sony">Sony</mat-option>
             <mat-option value="blizzard">Blizzard</mat-option>

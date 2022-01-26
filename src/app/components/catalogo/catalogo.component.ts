@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 import { NotificationService } from '../../shared/services/notification.service';
 import { WalletService } from '../../shared/services/wallet.service';
 import { Wallet } from '../../shared/models/wallet.model';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { CartService } from '../../shared/services/cart.service';
 import { Options } from '@angular-slider/ngx-slider';
@@ -25,14 +26,22 @@ export class StepperIntl extends MatStepperIntl {
 
 export class CatalogoComponent implements OnInit, AfterViewInit {
 
+  public search: FormGroup;
   constructor(private productService: ProductService,
     public authenticationService: AuthenticationService,
     private walletService: WalletService,
     private cartService: CartService,
     private router: Router,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.search = this.formBuilder.group({
+      searchBar: [''],
+      plataforma: [''],
+      genero: [''],
+      publisher: [''],
+    })
     this.cartId = this.authenticationService.getCartId();
     this.getProducts();
   }
@@ -63,9 +72,37 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products;
-    });
+    const products: Product[] = [];
+    this.productService.getProducts().subscribe(p => {
+      p.forEach(item => {
+        const product: Product = {
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          amount: item.amount,
+          price: item.price,
+          releaseDate: item.releaseDate,
+          gender: {
+            id: item.gender.id,
+            name: item.gender.name
+          },
+          platform: {
+            id: item.platform.id,
+            name: item.platform.name
+          },
+          publisher: {
+            id: item.publisher.id,
+            name: item.publisher.name
+          },
+          ratingSystem: {
+            id: item.ratingSystem.id,
+            name: item.ratingSystem.name
+          }
+        }
+        products.push(product);
+      })
+    })
+    this.products = products;
 
     this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
       this.wallet = wallet;
@@ -118,18 +155,25 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   selected = 'relevant';
 
 
-  arrayEnter(event: any) {
-    this.searchName = event.target.value;
+  enterSearch() {
+    const name = this.search.get('searchBar').value;
+    const platform = this.search.get('plataforma').value;
+    const gender = this.search.get('genero').value;
+    const publisher = this.search.get('publisher').value;
     this.productService.getProducts().subscribe((products) => {
-      this.products = products.filter(this.haveName.bind(null, this.searchName));
+      this.products = products.filter(this.haveName.bind(null, name,platform,gender,publisher));
     });
   }
 
+  private haveName(name,platform,gender,publisher, element): boolean {
+     const hasName = (element.name.toUpperCase().indexOf(name.toUpperCase()) != -1 || name == "");
+     const hasGender = (element.gender.name.toUpperCase() == gender.toUpperCase() || gender == "");
+     const hasPlatform = (element.platform.name.toUpperCase() == platform.toUpperCase() || platform == "");
+     const hasPublisher = (element.publisher.name.toUpperCase() == publisher.toUpperCase() || publisher == "");
 
-  private haveName(search, element): boolean {
-    return element.name.toUpperCase().indexOf(search.toUpperCase()) !=  -1 || search == "";
+     return hasName && hasGender && hasPlatform && hasPublisher;
   }
-  
+
   products: Product[];
   cartProductIds: number[];
 
