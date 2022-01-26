@@ -2,12 +2,14 @@
     <div class="nav">
         <h1 class="title">Produtos</h1>
         <div class="search">
-            <button class="buttons" mat-button>Voltar</button>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Buscar</mat-label>
-                <input matInput autocomplete="off">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
+            <button routerLink="/adm-home" class="buttons" mat-button>Voltar</button>
+            <form class="search-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Buscar</mat-label>
+                    <input (keyup.enter)="enterSearch($event)" matInput autocomplete="off">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </form>
         </div>
         <div>
             <button class="buttons" routerLink="/products-registration" mat-button>Adicionar Produto</button>
@@ -39,7 +41,7 @@
 
             <ng-container matColumnDef="amount">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
-                    Plataforma
+                    Quantidade
                 </th>
                 <td mat-cell *matCellDef="let product"> {{product.amount}} </td>
             </ng-container>
@@ -83,7 +85,8 @@
                 <th mat-header-cell *matHeaderCellDef>
                     Apagar produto
                 </th>
-                <td mat-cell *matCellDef="let product"><button class="btnRemove" mat-button (click)="remove(product.id)">Apagar</button></td>
+                <td mat-cell *matCellDef="let product"><button class="btnRemove" mat-button
+                        (click)="remove(product.id)">Apagar</button></td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

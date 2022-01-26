@@ -7,7 +7,6 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ProductService } from 'src/app/shared/services/product.service';
 
 
-
 @Component({
   selector: 'app-products-management',
   templateUrl: './products-management.component.html',
@@ -15,19 +14,20 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class ProductsManagementComponent implements OnInit, AfterViewInit {
 
+  private searchName;
   private products: Product[] = [];
   displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove']
   dataSource = new MatTableDataSource(this.products);
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
     private notificationService: NotificationService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+   ) { }
 
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    this.products = this.getProducts();
-    ;
+    this.getProducts();
   }
 
   announceSortChange(sortState: any) {
@@ -39,6 +39,24 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    document.addEventListener("keydown", function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+      }
+    });
+  }
+
+ enterSearch(event: any) {
+    this.searchName = event.target.value;
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products.filter(this.haveName.bind(null, this.searchName));
+      this.reloadTableT();
+    });
+  }
+
+
+  private haveName(search, element): boolean {
+    return element.name.toUpperCase().indexOf(search.toUpperCase()) !=  -1 || search == "";
   }
 
   getProducts() {
@@ -71,12 +89,21 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
         }
         products.push(product);
       })
-      console.log(products);
-      this.dataSource = new MatTableDataSource(products);
-      this.dataSource.sort = this.sort;
+      this.reloadTable(products);
     })
     return products;
   }
+
+  reloadTable(products) {
+    this.dataSource = new MatTableDataSource(products);
+    this.dataSource.sort = this.sort;
+  }
+
+  reloadTableT() {
+    this.dataSource = new MatTableDataSource(this.products);
+    this.dataSource.sort = this.sort;
+  }
+
   formatDate(date: Date) {
     return date.toLocaleDateString('pt-BR');
   }

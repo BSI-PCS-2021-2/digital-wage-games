@@ -69,4 +69,8 @@ export class ProductsRegistrationComponent implements OnInit {
   private isFormValid (): boolean {
     return this.registrationFormGroup.valid;
   }
+
+  onDate(event){
+    return;
+  }
 }
