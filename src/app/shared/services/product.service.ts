@@ -25,15 +25,15 @@ export class ProductService {
     return this.http.get<Product>(`${environment.baseUrl}/store/product/${productId}`);
   }
 
-  postProduct(dto: ProductRegistrationDTO): Observable<number[]> {
-    return this.http.post<number[]>(`${environment.baseUrl}/store/product`, dto);
+  postProduct(dto: ProductRegistrationDTO): void {
+    this.http.post<number[]>(`${environment.baseUrl}/store/product`, dto).subscribe();
   }
 
-  putProduct(dto: PutProductDTO): Observable<void> {
-    return this.http.put<void>(`${environment.baseUrl}/store/product`, dto);
+  putProduct(dto: PutProductDTO): void {
+    this.http.put<void>(`${environment.baseUrl}/store/product`, dto).subscribe();
   }
 
-  deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>(`${environment.baseUrl}/store/product/${productId}`);
+  deleteProduct(productId: number): void {
+    this.http.delete<void>(`${environment.baseUrl}/store/product/${productId}`).subscribe();
   }
 }
