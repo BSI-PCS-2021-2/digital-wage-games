@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { SignInFormDTO } from '../login/models/signInFormDTO';
 
 @Component({
@@ -13,6 +14,7 @@ export class AdmLoginComponent implements OnInit {
 
   constructor(
     private formBuilder:FormBuilder,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -25,10 +27,13 @@ export class AdmLoginComponent implements OnInit {
   }
 
   public login(): void {
-
-    const signInForm: SignInFormDTO = {
-      username: this.loginFormGroup.get('usernameCtrl').value,
-      password: this.loginFormGroup.get('passwordCtrl').value,
+    const username: string =  this.loginFormGroup.get('usernameCtrl').value;
+    const password: string = this.loginFormGroup.get('passwordCtrl').value;
+      if (username !== '' && password !== '') {
+        this.authenticationService.loginAdm({
+          username: username,
+          password: password
+        }).subscribe();
+      }
     }
-  }
 }

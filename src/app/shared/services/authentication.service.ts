@@ -12,6 +12,7 @@ import { stringify } from 'querystring';
 import { SignInResponse } from '../models/signInResponse.model';
 import { AuthenticationInfo } from '../models/authenticationInfo.dto';
 import { GoogleSignInDTO } from 'src/app/components/login/models/googleSignInDTO';
+import { AdmLoginDTO } from 'src/app/components/adm-login/model/admLogin.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -82,6 +83,33 @@ export class AuthenticationService {
       );
   }
 
+  public loginAdm(dto: AdmLoginDTO): Observable<Jwt> {
+    return this.http
+      .post<Jwt>(
+        `${environment.baseUrl}/auth/authenticate/admin`,
+        dto
+      )
+      .pipe(
+        take(1),
+        tap((jwt: Jwt) => {
+          if (jwt !== null) {
+            this.setAdmSession(jwt);
+            this.notificationService.success('Você está autenticado como administrador!');
+            this.router.navigate(['/products-management']);
+          } else {
+            this.notificationService.alert(
+              'Nome de usuário ou senha inválidos'
+            );
+          }
+        }),
+        distinctUntilChanged(),
+        catchError((err) => {
+          this.notificationService.error('Erro ao autenticar usuário.');
+          throw new Error(err);
+        })
+      );
+  }
+
   public getAuthenticationInfo(
     username: string
   ): Observable<AuthenticationInfo> {
@@ -93,10 +121,18 @@ export class AuthenticationService {
   private setSession(jwt: Jwt) {
     const expiresAt = moment().add(jwt.expiresIn, 'second');
     const username = jwt.username;
-    console.log(jwt.userId);
     this.cartService.getCartByClient(jwt.userId).subscribe((cart) => {
       localStorage.setItem('cart_id', `${cart.id}`);
     });
+    localStorage.setItem('user_id', `${jwt.userId}`);
+    localStorage.setItem('id_token', jwt.idToken);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('username', username);
+  }
+
+  private setAdmSession(jwt: Jwt) {
+    const expiresAt = moment().add(jwt.expiresIn, 'second');
+    const username = jwt.username;
     localStorage.setItem('user_id', `${jwt.userId}`);
     localStorage.setItem('id_token', jwt.idToken);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
@@ -113,6 +149,15 @@ export class AuthenticationService {
     localStorage.removeItem('username');
     localStorage.removeItem('cart_id');
     localStorage.removeItem('user_id');
+    localStorage.removeItem('user_avatar');
+    this.notificationService.alert('Você está desconectado!');
+    this.router.navigate(['/']);
+  }
+
+  public logoutAdm() {
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
+    localStorage.removeItem('username');
     localStorage.removeItem('user_avatar');
     this.notificationService.alert('Você está desconectado!');
     this.router.navigate(['/']);
