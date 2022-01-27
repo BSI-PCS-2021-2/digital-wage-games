@@ -9,15 +9,14 @@ import { AddressService } from '../../shared/services/address.service';
 import { WalletService } from '../../shared/services/wallet.service';
 import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { GenerateBbDTO } from 'src/app/shared/models/dto/wallet/generateBb.dto';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
 })
-
 export class CheckoutComponent implements OnInit {
-
   constructor(
     private authenticationService: AuthenticationService,
     private orderService: OrderService,
@@ -27,21 +26,21 @@ export class CheckoutComponent implements OnInit {
     private walletService: WalletService,
     private router: Router,
     private notificationService: NotificationService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.cartId = parseInt(this.authenticationService.getCartId());
     this.username = this.authenticationService.getUsername();
     this.userId = parseInt(this.authenticationService.getUserId());
-    this.walletService.getWallet(this.username).subscribe(w => {
+    this.walletService.getWallet(this.username).subscribe((w) => {
       this.wallet = {
         id: w.id,
         funds: w.funds,
-        userId: w.userId
-      }
+        userId: w.userId,
+      };
     });
-    this.addressService.getAddressesByClient(this.userId).subscribe(as => {
-      as.forEach(a => {
+    this.addressService.getAddressesByClient(this.userId).subscribe((as) => {
+      as.forEach((a) => {
         this.addressArray.push({
           id: a.id,
           postalCode: a.postalCode,
@@ -51,22 +50,25 @@ export class CheckoutComponent implements OnInit {
           number: a.number,
           additionalInfo: a.additionalInfo,
           street: a.street,
-          cep: a.cep
-        })
-      })
-    })
+          cep: a.cep,
+        });
+      });
+    });
     this.cartService.getCartItems(this.cartId).subscribe((items) => {
-      items.forEach(item => {
-        this.productService.getProduct(item.productId).subscribe(p => {
-          this.totalPrice += (item.amount * p.price);
-          this.totalCart += (item.amount * p.price);
-        })
-      })
+      items.forEach((item) => {
+        this.productService.getProduct(item.productId).subscribe((p) => {
+          this.totalPrice += item.amount * p.price;
+          this.totalCart += item.amount * p.price;
+        });
+      });
     });
   }
 
   formatPrice(v: number) {
-    return (v/100).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
+    return (v / 100).toLocaleString('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+    });
   }
 
   choicePaymentType(paymentId: number) {
@@ -74,7 +76,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(["/catalogo"])
+    this.router.navigate(['/catalogo']);
   }
 
   choiceFreight(index: number) {
@@ -89,7 +91,7 @@ export class CheckoutComponent implements OnInit {
   validateFields(): boolean {
     if (this.addressId == null) {
       this.notificationService.error('Escolha um endereço para entrega.');
-      return false;;
+      return false;
     }
 
     if (this.paymentType == null) {
@@ -108,7 +110,7 @@ export class CheckoutComponent implements OnInit {
   finishPurshase() {
     if (!this.validateFields()) return;
 
-    switch(this.paymentType) {
+    switch (this.paymentType) {
       case 4:
         if (this.wallet.funds < this.totalPrice) {
           this.notificationService.error('Crédito insuficiente.');
@@ -116,25 +118,33 @@ export class CheckoutComponent implements OnInit {
         }
         this.walletService.putWallet({
           walletId: this.wallet.id,
-          value: this.wallet.funds - this.totalPrice
-        })
+          value: this.wallet.funds - this.totalPrice,
+        });
         break;
 
-        /***
-         * TODO implementar outras formas de pagamento.
-         */
+      /***
+       * TODO implementar outras formas de pagamento.
+       */
+    }
 
+    if (this.paymentType == 1) {
+      const generateBb: GenerateBbDTO = {
+        value: this.totalPrice,
+        username: this.authenticationService.getUsername(),
+      };
+
+      this.walletService.generateBB(generateBb).subscribe();
     }
 
     this.orderService.postOrder({
       cartId: this.cartId,
       totalPrice: this.totalPrice,
       deliveryId: this.freight.id,
-      paymentTypeId: this.paymentType
+      paymentTypeId: this.paymentType,
     });
     this.cartService.cleanCart(this.cartId);
 
-    this.router.navigate(["/minha-conta/success"]);
+    this.router.navigate(['/minha-conta/success']);
   }
 
   /***
@@ -144,19 +154,19 @@ export class CheckoutComponent implements OnInit {
     {
       id: 1,
       name: 'Transportadora 1',
-      price: 10000
+      price: 10000,
     },
     {
       id: 2,
       name: 'Transportadora 1',
-      price: 12400
+      price: 12400,
     },
     {
       id: 3,
       name: 'Transportadora 1',
-      price: 9400
-    }
-  ]
+      price: 9400,
+    },
+  ];
   public addressArray: Address[] = [];
   public wallet: Wallet;
   public totalPrice: number = 0;
@@ -166,10 +176,9 @@ export class CheckoutComponent implements OnInit {
   public freight = {
     id: 0,
     name: '',
-    price: 0
+    price: 0,
   };
   public cartId: number;
   public userId: number;
   public username: string;
-
 }

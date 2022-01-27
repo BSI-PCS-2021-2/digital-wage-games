@@ -7,23 +7,23 @@ import { Router } from '@angular/router';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { FormBuilder } from '@angular/forms';
+import { GenerateBbDTO } from 'src/app/shared/models/dto/wallet/generateBb.dto';
 
 @Component({
   selector: 'app-buy-credits',
   templateUrl: './buy-credits.component.html',
-  styleUrls: ['./buy-credits.component.scss']
+  styleUrls: ['./buy-credits.component.scss'],
 })
 export class BuyCreditsComponent implements OnInit {
-
   ngOnInit(): void {
     this.clientId = this.authenticationService.getUserId();
     this.username = this.authenticationService.getUsername();
-    this.walletService.getWallet(this.username).subscribe(w => {
+    this.walletService.getWallet(this.username).subscribe((w) => {
       this.wallet = {
         id: w.id,
         userId: w.userId,
-        funds: w.funds
-      }
+        funds: w.funds,
+      };
     });
   }
 
@@ -34,11 +34,14 @@ export class BuyCreditsComponent implements OnInit {
     public paymentService: PaymentService,
     public router: Router,
     public notificationService: NotificationService,
-    private formBuilder: FormBuilder)
-    { }
+    private formBuilder: FormBuilder
+  ) {}
 
   formatPrice(v: number) {
-    return (v/100).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'});
+    return (v / 100).toLocaleString('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+    });
   }
 
   cancel(): void {
@@ -71,11 +74,11 @@ export class BuyCreditsComponent implements OnInit {
 
   validateFields(): boolean {
     if (this.paymentId == null) {
-      this.notificationService.error("Escolha uma forma de pagamento.");
+      this.notificationService.error('Escolha uma forma de pagamento.');
       return false;
     }
     if (this.valueToIncrease == 0) {
-      this.notificationService.error("Insira um valor para ser adicionado.");
+      this.notificationService.error('Insira um valor para ser adicionado.');
       return false;
     }
     return true;
@@ -83,8 +86,8 @@ export class BuyCreditsComponent implements OnInit {
 
   finishPurshase() {
     if (!this.validateFields()) return;
-    
-    switch(this.paymentId) {
+
+    switch (this.paymentId) {
       case 1:
         this.paymentService.makeBankSlipPayment();
         break;
@@ -92,19 +95,26 @@ export class BuyCreditsComponent implements OnInit {
         this.paymentService.makeCardPayment();
         break;
       /***
-       * TODO caso 4 realizar pagamento via pix.
+       * TODO: caso 4 realizar pagamento via pix.
        */
     }
     /***
-       * TODO em caso de pagamento via pix ou cartão o valor só deve ser adicionado caso
-       * os dados sejam validos.
-       */
+     * TODO: em caso de pagamento via pix ou cartão o valor só deve ser adicionado caso
+     * os dados sejam validos.
+     */
+
+    const generateBb: GenerateBbDTO = {
+      value: this.valueToIncrease,
+      username: this.authenticationService.getUsername(),
+    };
+
+    this.walletService.generateBB(generateBb).subscribe();
     this.walletService.putWallet({
       value: this.wallet.funds + this.valueToIncrease,
-      walletId: this.wallet.id
-    })
+      walletId: this.wallet.id,
+    });
     this.cancel();
-    this.router.navigate(["/minha-conta/success"]);
+    this.router.navigate(['/minha-conta/success']);
   }
 
   wallet: Wallet;
@@ -113,7 +123,6 @@ export class BuyCreditsComponent implements OnInit {
   clientId: string;
   username: string;
   valueToIncreaseForm = this.formBuilder.group({
-    value: ''
+    value: '',
   });
-
 }

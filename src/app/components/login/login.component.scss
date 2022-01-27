@@ -1,4 +1,4 @@
-@import './../../../assets/styles/variables.scss';
+@import "./../../../assets/styles/variables.scss";
 
 .login {
   display: flex;
@@ -26,11 +26,21 @@
   }
 
   mat-card {
-    height: 400px;
+    height: 500px;
     width: 500px;
     background-color: $dark-gray;
-  }
 
+    .social-signin {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 h2 {
@@ -76,7 +86,7 @@ form {
   flex-direction: column;
   align-items: center;
   margin: 50px;
-  margin-top: 50px !important;
+  margin-top: 20px !important;
 
   mat-form-field {
     margin-top: 10px;
@@ -107,4 +117,33 @@ a {
 
 lottie-player {
   height: 400px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  color: $light-gray;
+  margin-top: 20px;
+}
+
+.divider:before,
+.divider:after {
+  content: "";
+  flex: 0 1 100%;
+  border-bottom: 3px solid $gray;
+  margin: 0 1rem;
+}
+
+.divider:before {
+  margin-left: 0;
+}
+
+.divider:after {
+  margin-right: 0;
+}
+
+.divider[text-position="right"]:after,
+.divider[text-position="left"]:before {
+  content: none;
 }
