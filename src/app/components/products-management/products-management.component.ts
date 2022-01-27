@@ -47,7 +47,7 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   search(event: any) {
     const pattern: string = event.target.value;
     this.filterProducts = this.products.filter(p => {
-      return p.name.toUpperCase().indexOf(pattern.toUpperCase()) !== -1;
+      return p.name.toUpperCase().startsWith(pattern.toUpperCase());
     })
     this.dataSource = new MatTableDataSource(this.filterProducts);
   }
