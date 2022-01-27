@@ -142,7 +142,6 @@ export class CheckoutComponent implements OnInit {
       deliveryId: this.freight.id,
       paymentTypeId: this.paymentType,
     });
-    this.cartService.cleanCart(this.cartId);
 
     this.router.navigate(['/minha-conta/success']);
   }

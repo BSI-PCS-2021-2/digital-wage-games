@@ -57,6 +57,7 @@ export class ProductsRegistrationComponent implements OnInit {
         description: this.registrationFormGroup.controls['name'].value,
         releaseDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
         ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
+        imgUrl: this.registrationFormGroup.controls['image'].value,
         platformId: this.registrationFormGroup.controls['platform'].value,
         genderId: this.registrationFormGroup.controls['gender'].value,
         publisherId: this.registrationFormGroup.controls['publisher'].value,
@@ -72,13 +73,14 @@ export class ProductsRegistrationComponent implements OnInit {
   }
 
   clearFields() {
-        this.registrationFormGroup.controls['name'].reset();
-        this.registrationFormGroup.controls['price'].value
-        this.registrationFormGroup.controls['amount'].value
-        this.registrationFormGroup.controls['name'].value
-        this.registrationFormGroup.controls['ageRating'].value
-        this.registrationFormGroup.controls['platform'].value
-        this.registrationFormGroup.controls['gender'].value
-        this.registrationFormGroup.controls['publisher'].value
+        this.registrationFormGroup.controls['name'].setValue('');
+        this.registrationFormGroup.controls['price'].setValue('')
+        this.registrationFormGroup.controls['amount'].setValue('')
+        this.registrationFormGroup.controls['name'].setValue('')
+        this.registrationFormGroup.controls['ageRating'].setValue('')
+        this.registrationFormGroup.controls['platform'].setValue('')
+        this.registrationFormGroup.controls['gender'].setValue('')
+        this.registrationFormGroup.controls['publisher'].setValue('')
+               
   }
 }
