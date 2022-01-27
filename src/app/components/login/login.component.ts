@@ -51,31 +51,16 @@ export class LoginComponent implements OnInit {
       this.authenticationService
         .getAuthenticationInfo(signInForm.username)
         .subscribe((r) => {
-          if (r !== undefined && r.banned) {
+          if (r !== null && r.banned) {
+            console.log(new Date(r.nextAllowedAccess))
             this.notificationService.error(
               `Tentativas bloqueadas, espere ${
-                (new Date(r.nextAllowedAccess).getTime() -
-                  new Date(Date.now()).getTime()) *
-                1000
+                Math.trunc((new Date(r.nextAllowedAccess).getTime() - Date.now()) / 1000)
               } segundos para tentar novamente.`
             );
-            this.loginFormGroup.disable();
           } else {
-            this.authenticationService
-              .login(signInForm)
-              .subscribe((response) => {
-                if (response.banned) {
-                  this.notificationService.error(
-                    `Tentativas bloqueadas, espere ${
-                      (new Date(r.nextAllowedAccess).getTime() -
-                        new Date(Date.now()).getTime()) *
-                      1000
-                    } segundos para tentar novamente.`
-                  );
-                  this.loginFormGroup.disable();
-                }
-              });
-          }
+            this.authenticationService.login(signInForm).subscribe();
+          } 
         });
     }
   }
