@@ -51,9 +51,9 @@ export class ProductsRegistrationComponent implements OnInit {
   public registerProduct(): void {
     const dto = {
       name: this.registrationFormGroup.controls['name'].value,
-      price: this.registrationFormGroup.controls['price'].value,
+      price: this.registrationFormGroup.controls['price'].value*100,
       amount: this.registrationFormGroup.controls['amount'].value,
-      description: this.registrationFormGroup.controls['name'].value,
+      description: this.registrationFormGroup.controls['description'].value,
       releaseDate: moment(this.formDate).format('YYYY-MM-DD HH:mm:ss'),
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
@@ -62,6 +62,7 @@ export class ProductsRegistrationComponent implements OnInit {
     }
     console.log(dto)
     this.productService.postProduct(dto);
+    this.notificationService.success("Produto adiconado com sucesso");
     if (this.isFormValid()) {
 
     }

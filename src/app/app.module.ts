@@ -55,6 +55,7 @@ import { AdmHomeComponent } from './components/adm-home/adm-home.component';
 import { ProductsManagementComponent } from './components/products-management/products-management.component';
 import { ProductsRegistrationComponent } from './components/products-registration/products-registration.component';
 import { ClientsManagementComponent } from './components/clients-management/clients-management.component';
+import { ProductEditionComponent } from './components/product-edition/product-edition.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -82,7 +83,8 @@ registerLocaleData(localePt, 'pt-BR');
     AdmHomeComponent,
     ProductsManagementComponent,
     ProductsRegistrationComponent,
-    ClientsManagementComponent
+    ClientsManagementComponent,
+    ProductEditionComponent
   ],
   imports: [
     BrowserModule,

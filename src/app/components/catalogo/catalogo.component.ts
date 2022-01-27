@@ -148,7 +148,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
       case 8:
         return 'game-images/nioh-2.jpg';
       default:
-        return 'game1.png';
+        return 'game-images/nioh-2.jpg';
     }
   }
 

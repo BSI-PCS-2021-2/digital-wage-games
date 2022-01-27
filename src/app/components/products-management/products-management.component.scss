@@ -1,5 +1,11 @@
 @import '../../../assets/styles/variables.scss';
 
+
+td, th{
+ text-align: center;
+ border-right-style:ridge;
+ border-right-color: $dark-gray;
+}
 .buttons{
     background-color: $green;
     color: $white;

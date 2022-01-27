@@ -16,7 +16,7 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
 
   private searchName;
   private products: Product[] = [];
-  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove']
+  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove', 'edit']
   dataSource = new MatTableDataSource(this.products);
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
@@ -107,7 +107,7 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   formatDate(date: Date) {
     return date.toLocaleDateString('pt-BR');
   }
-  remove(id: number) {
+  async remove(id: number) {
     this.productService.deleteProduct(id);
     this.notificationService.success("Produto removido com successo");
   }

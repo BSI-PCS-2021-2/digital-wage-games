@@ -16,6 +16,7 @@ import { AdmHomeComponent } from './components/adm-home/adm-home.component';
 import { ProductsManagementComponent } from './components/products-management/products-management.component';
 import { ProductsRegistrationComponent } from './components/products-registration/products-registration.component';
 import { ClientsManagementComponent } from './components/clients-management/clients-management.component';
+import { ProductEditionComponent } from './components/product-edition/product-edition.component';
 
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
   { path: 'adm-home', component: AdmHomeComponent },
   { path: 'products-management', component: ProductsManagementComponent },
   { path: 'products-registration', component: ProductsRegistrationComponent },
-  {path: 'clients-management', component: ClientsManagementComponent}
+  {path: 'clients-management', component: ClientsManagementComponent},
+  {path: 'product-edition/:produto', component: ProductEditionComponent}
 ];
 
 @NgModule({
