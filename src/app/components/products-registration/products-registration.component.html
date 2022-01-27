@@ -50,13 +50,9 @@
             <mat-label color="white">Nome do jogo:</mat-label>
             <input formControlName="name" matInput autocomplete="off">
         </mat-form-field>
-        <mat-form-field class="price" appearance="fill">
-            <mat-label>Preço:</mat-label>
-            <input formControlName="price" type="number" min="1" step="any" matInput placeholder="Preço">
-        </mat-form-field>
         <mat-form-field class="releaseDate">
             <mat-label color="white">Data de lançamento</mat-label>
-            <input matInput (dateInput)="onDate($event)" [matDatepicker]="basicDatepicker">
+            <input matInput [matDatepicker]="basicDatepicker">
             <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #basicDatepicker>
                 <mat-datepicker-actions>
@@ -76,6 +72,9 @@
             <textarea formControlName="description" rows="15" maxlength="1716" matInput></textarea>
         </mat-form-field>
        </div>
-        <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>
+        <div class="buttons-container">
+            <button mat-button type="button" class="cancel-button" routerLink="/products-management">Voltar</button>
+            <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>            
+        </div>
     </form>
 </div>

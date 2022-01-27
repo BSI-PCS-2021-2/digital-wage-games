@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductRegistrationDTO } from '../../shared/models/dto/product/productRegistrationDTO';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import * as moment from 'moment';
@@ -49,22 +49,23 @@ export class ProductsRegistrationComponent implements OnInit {
   }
 
   public registerProduct(): void {
-    const dto = {
-      name: this.registrationFormGroup.controls['name'].value,
-      price: this.registrationFormGroup.controls['price'].value*100,
-      amount: this.registrationFormGroup.controls['amount'].value,
-      description: this.registrationFormGroup.controls['description'].value,
-      releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
-      ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
-      platformId: this.registrationFormGroup.controls['platform'].value,
-      genderId: this.registrationFormGroup.controls['gender'].value,
-      publisherId: this.registrationFormGroup.controls['publisher'].value,
-    }
-    console.log(dto)
-    this.productService.postProduct(dto);
-    this.notificationService.success("Produto adiconado com sucesso");
-    if (this.isFormValid()) {
-
+    if(this.isFormValid()){
+      const dto = {
+        name: this.registrationFormGroup.controls['name'].value,
+        price: this.registrationFormGroup.controls['price'].value * 100,
+        amount: this.registrationFormGroup.controls['amount'].value,
+        description: this.registrationFormGroup.controls['name'].value,
+        releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
+        ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
+        imgUrl: this.registrationFormGroup.controls['image'].value,
+        platformId: this.registrationFormGroup.controls['platform'].value,
+        genderId: this.registrationFormGroup.controls['gender'].value,
+        publisherId: this.registrationFormGroup.controls['publisher'].value,
+      }
+      this.productService.postProduct(dto);
+      this.notificationService.success('Produto adicionado com sucesso!')
+    } else {
+      this.notificationService.error('Preencha todos os campos obrigatórios.')
     }
   }
   private isFormValid(): boolean {
@@ -73,5 +74,15 @@ export class ProductsRegistrationComponent implements OnInit {
 
   onDate(event) {
     this.formDate = event.target.value;
+ }
+  clearFields() {
+        this.registrationFormGroup.controls['name'].setValue('');
+        this.registrationFormGroup.controls['price'].setValue('')
+        this.registrationFormGroup.controls['amount'].setValue('')
+        this.registrationFormGroup.controls['name'].setValue('')
+        this.registrationFormGroup.controls['ageRating'].setValue('')
+        this.registrationFormGroup.controls['platform'].setValue('')
+        this.registrationFormGroup.controls['gender'].setValue('')
+        this.registrationFormGroup.controls['publisher'].setValue('')
   }
 }

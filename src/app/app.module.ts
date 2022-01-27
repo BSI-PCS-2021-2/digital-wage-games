@@ -56,9 +56,13 @@ import { ProductsManagementComponent } from './components/products-management/pr
 import { ProductsRegistrationComponent } from './components/products-registration/products-registration.component';
 import { ClientsManagementComponent } from './components/clients-management/clients-management.component';
 import { ProductEditionComponent } from './components/product-edition/product-edition.component';
+import {
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule,
+} from 'angularx-social-login';
 
 registerLocaleData(localePt, 'pt-BR');
-
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -106,6 +110,7 @@ registerLocaleData(localePt, 'pt-BR');
     HttpClientModule,
     MatSelectModule,
     RecaptchaModule,
+    SocialLoginModule,
     MatDialogModule,
     MatCheckboxModule,
     MatRadioModule,
@@ -114,7 +119,7 @@ registerLocaleData(localePt, 'pt-BR');
     MatTableModule,
     MatSortModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
     { provide: MatNativeDateModule },
@@ -122,7 +127,21 @@ registerLocaleData(localePt, 'pt-BR');
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '534368527819-14qvnvn0mf4q19n7ftc5aqfd7b26v5ui'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
