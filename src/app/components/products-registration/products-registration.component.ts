@@ -54,7 +54,7 @@ export class ProductsRegistrationComponent implements OnInit {
       price: this.registrationFormGroup.controls['price'].value*100,
       amount: this.registrationFormGroup.controls['amount'].value,
       description: this.registrationFormGroup.controls['description'].value,
-      releaseDate: moment(this.formDate).format('YYYY-MM-DD HH:mm:ss'),
+      releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
       genderId: this.registrationFormGroup.controls['gender'].value,

@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 import { NotificationService } from '../../shared/services/notification.service';
 import { WalletService } from '../../shared/services/wallet.service';
 import { Wallet } from '../../shared/models/wallet.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 import { CartService } from '../../shared/services/cart.service';
 import { Options } from '@angular-slider/ngx-slider';
@@ -25,7 +25,7 @@ export class StepperIntl extends MatStepperIntl {
 })
 
 export class CatalogoComponent implements OnInit, AfterViewInit {
-
+  public sliderControl;
   public search: FormGroup;
   constructor(private productService: ProductService,
     public authenticationService: AuthenticationService,
@@ -36,6 +36,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.sliderControl = new FormControl([0, 1000]);
     this.search = this.formBuilder.group({
       searchBar: [''],
       plataforma: [''],
@@ -161,17 +162,18 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     const gender = this.search.get('genero').value;
     const publisher = this.search.get('publisher').value;
     this.productService.getProducts().subscribe((products) => {
-      this.products = products.filter(this.haveName.bind(null, name,platform,gender,publisher));
+      this.products = products.filter(this.haveName.bind(null, name, platform, gender, publisher));
     });
   }
 
-  private haveName(name,platform,gender,publisher, element): boolean {
-     const hasName = (element.name.toUpperCase().indexOf(name.toUpperCase()) != -1 || name == "");
-     const hasGender = (element.gender.name.toUpperCase() == gender.toUpperCase() || gender == "");
-     const hasPlatform = (element.platform.name.toUpperCase() == platform.toUpperCase() || platform == "");
-     const hasPublisher = (element.publisher.name.toUpperCase() == publisher.toUpperCase() || publisher == "");
+  private haveName(name, platform, gender, publisher, element): boolean {
+    const hasName = (element.name.toUpperCase().indexOf(name.toUpperCase()) != -1 || name == "");
+    const hasGender = (element.gender.id == gender || gender == "");
+    const hasPlatform = (element.platform.id == platform || platform == "");
+    const hasPublisher = (element.publisher.id == publisher || publisher == "");
+    const isInLimitPrice = (this.sliderControl[0] > element.price && element.price > this.sliderControl[1]);;
 
-     return hasName && hasGender && hasPlatform && hasPublisher;
+    return hasName && hasGender && hasPlatform && hasPublisher && isInLimitPrice;
   }
 
   products: Product[];
