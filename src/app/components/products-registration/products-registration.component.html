@@ -75,6 +75,9 @@
             <textarea formControlName="description" rows="15" maxlength="1716" matInput></textarea>
         </mat-form-field>
        </div>
-        <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>
+        <div class="buttons-container">
+            <button mat-button type="button" class="cancel-button" routerLink="/products-management">Voltar</button>
+            <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>            
+        </div>
     </form>
 </div>
