@@ -8,7 +8,7 @@ export interface Product {
   price?: number;
   amount?: number;
   description?: string;
-  releaseDate?: Date;
+  releaseDate?: string;
   imgUrl?: string;
   gender?: Gender;
   platform?: Platform;

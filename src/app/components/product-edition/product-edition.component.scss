@@ -12,7 +12,6 @@ textarea::-webkit-scrollbar {
     background-color: $light-gray;
     border-radius: 5px;
   }
-
 .main {
   padding: $padding-page;
   padding-left: 28%;
@@ -105,23 +104,17 @@ textarea::-webkit-scrollbar {
       }
     }
 
-    
+    .btn-confirm {
+      color: white;
+      background-color: $green;
+      margin: auto;
+    }
 
     .image-amount {
       display: flex;
       flex-direction: column;
       gap: 15px;
 
-    }
-    .buttons-container {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-
-      .btn-confirm {
-        color: white;
-        background-color: $green;
-      }
     }
   }
 }

@@ -8,22 +8,22 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ProductService } from 'src/app/shared/services/product.service';
 
 
-
 @Component({
   selector: 'app-products-management',
   templateUrl: './products-management.component.html',
   styleUrls: ['./products-management.component.scss']
 })
 export class ProductsManagementComponent implements OnInit, AfterViewInit {
-
+  
   products: Product[] = [];
   filterProducts: Product[];
-  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove']
+  displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove', 'edit']
   dataSource = new MatTableDataSource([]);
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
     private notificationService: NotificationService,
-    private productService: ProductService) { }
+    private productService: ProductService,
+   ) { }
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -42,6 +42,24 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    document.addEventListener("keydown", function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+      }
+    });
+  }
+
+ enterSearch(event: any) {
+    this.searchName = event.target.value;
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products.filter(this.haveName.bind(null, this.searchName));
+      this.reloadTableT();
+    });
+  }
+
+
+  private haveName(search, element): boolean {
+    return element.name.toUpperCase().indexOf(search.toUpperCase()) !=  -1 || search == "";
   }
 
   search(event: any) {
@@ -82,16 +100,28 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
         }
         products.push(product);
       })
-      this.dataSource = new MatTableDataSource(this.filterProducts);
-      this.dataSource.sort = this.sort;
+
+      this.reloadTable(products);
     })
     return products;
   }
+
+  reloadTable(products) {
+    this.dataSource = new MatTableDataSource(products);
+    this.dataSource.sort = this.sort;
+  }
+
+  reloadTableT() {
+    this.dataSource = new MatTableDataSource(this.products);
+    this.dataSource.sort = this.sort;
+  }
+
   formatDate(date: Date) {
     return date.toLocaleDateString('pt-BR');
   }
   remove(id: number) {
     this.removeFromArray(id);
+
     this.productService.deleteProduct(id);
     this.dataSource = new MatTableDataSource(this.filterProducts);
     this.notificationService.success("Produto removido com successo");

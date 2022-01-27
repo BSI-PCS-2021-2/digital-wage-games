@@ -12,9 +12,9 @@ import * as moment from 'moment';
 })
 
 export class ProductsRegistrationComponent implements OnInit {
-
-  public green = 'green';  
-  public white = 'white';  
+  private formDate;
+  public green = 'green';
+  public white = 'white';
   public registrationFormGroup: FormGroup;
 
   image: string = "../../../assets/images/ImageField.png"
@@ -32,15 +32,15 @@ export class ProductsRegistrationComponent implements OnInit {
     });
     this.registrationFormGroup = this.formBuilder.group({
       name: ['', Validators.required],
-      price: ['',Validators.required],
-      amount: ['',Validators.required],
-      description: ['',Validators.required],
-      image: ['',Validators.required],
-      releaseDate: new FormControl(),
-      ageRating:['',Validators.required],
-      platform:['',Validators.required],
-      gender:['',Validators.required],
-      publisher:['',Validators.required]
+      price: ['', Validators.required],
+      amount: ['', Validators.required],
+      description: ['', Validators.required],
+      image: ['', Validators.required],
+      releaseDate: ['', Validators.required],
+      ageRating: ['', Validators.required],
+      platform: ['', Validators.required],
+      gender: ['', Validators.required],
+      publisher: ['', Validators.required]
     });
   }
 
@@ -55,7 +55,7 @@ export class ProductsRegistrationComponent implements OnInit {
         price: this.registrationFormGroup.controls['price'].value * 100,
         amount: this.registrationFormGroup.controls['amount'].value,
         description: this.registrationFormGroup.controls['name'].value,
-        releaseDate: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+        releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
         ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
         imgUrl: this.registrationFormGroup.controls['image'].value,
         platformId: this.registrationFormGroup.controls['platform'].value,
@@ -68,10 +68,13 @@ export class ProductsRegistrationComponent implements OnInit {
       this.notificationService.error('Preencha todos os campos obrigatórios.')
     }
   }
-  private isFormValid (): boolean {
+  private isFormValid(): boolean {
     return this.registrationFormGroup.valid;
   }
 
+  onDate(event) {
+    this.formDate = event.target.value;
+ }
   clearFields() {
         this.registrationFormGroup.controls['name'].setValue('');
         this.registrationFormGroup.controls['price'].setValue('')
@@ -81,6 +84,5 @@ export class ProductsRegistrationComponent implements OnInit {
         this.registrationFormGroup.controls['platform'].setValue('')
         this.registrationFormGroup.controls['gender'].setValue('')
         this.registrationFormGroup.controls['publisher'].setValue('')
-               
   }
 }

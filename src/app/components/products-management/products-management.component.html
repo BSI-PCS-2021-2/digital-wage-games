@@ -2,12 +2,14 @@
     <div class="nav">
         <h1 class="title">Produtos</h1>
         <div class="search">
-            <button class="buttons" mat-button>Voltar</button>
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Buscar</mat-label>
-                <input matInput autocomplete="off" (keyup.enter)="search($event)">
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
+            <button routerLink="/adm-home" class="buttons" mat-button>Voltar</button>
+            <form class="search-form">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Buscar</mat-label>
+                    <input (keyup.enter)="enterSearch($event)" matInput autocomplete="off">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </form>
         </div>
         <div>
             <button class="buttons" routerLink="/products-registration" mat-button>Adicionar Produto</button>
@@ -48,7 +50,7 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by string">
                     Data de lançamento
                 </th>
-                <td mat-cell *matCellDef="let product"> {{product.releaseDate | date:'medium'}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.releaseDate | date:'dd/MM/YYYY'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="publisher">
@@ -83,7 +85,16 @@
                 <th mat-header-cell *matHeaderCellDef>
                     Apagar produto
                 </th>
-                <td mat-cell *matCellDef="let product"><button class="btnRemove" mat-button (click)="remove(product.id)">Apagar</button></td>
+                <td mat-cell *matCellDef="let product"><button class="btnRemove" mat-button
+                        (click)="remove(product.id)">Apagar</button></td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef>
+                    Editar produto
+                </th>
+                <td mat-cell *matCellDef="let product"><button class="buttons" mat-button
+                        routerLink="/product-edition/{{ product.id }}">Editar</button></td>
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
