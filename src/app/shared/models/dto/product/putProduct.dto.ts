@@ -4,7 +4,8 @@ export interface PutProductDTO {
     price?: number;
     amount?: number;
     description?: string;
-    releaseDate?: Date;
+    releaseDate?: string;
+    imgUrl?: string;
     genderId?: number;
     platformId?: number;
     publisherId?: number;

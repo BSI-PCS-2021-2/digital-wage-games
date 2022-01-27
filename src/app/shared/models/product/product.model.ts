@@ -9,6 +9,7 @@ export interface Product {
   amount?: number;
   description?: string;
   releaseDate?: Date;
+  imgUrl?: string;
   gender?: Gender;
   platform?: Platform;
   publisher?: Publisher;
