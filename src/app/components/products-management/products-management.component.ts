@@ -2,6 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { filter } from 'rxjs';
 import { Product } from 'src/app/shared/models/product/product.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -13,11 +14,11 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./products-management.component.scss']
 })
 export class ProductsManagementComponent implements OnInit, AfterViewInit {
-
-  private searchName;
-  private products: Product[] = [];
+  
+  products: Product[] = [];
+  filterProducts: Product[];
   displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove', 'edit']
-  dataSource = new MatTableDataSource(this.products);
+  dataSource = new MatTableDataSource([]);
 
   constructor(private _liveAnnouncer: LiveAnnouncer,
     private notificationService: NotificationService,
@@ -27,7 +28,9 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    this.getProducts();
+    this.products = this.getProducts();
+    this.filterProducts = this.products;
+    this.dataSource = new MatTableDataSource(this.products);
   }
 
   announceSortChange(sortState: any) {
@@ -57,6 +60,14 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
 
   private haveName(search, element): boolean {
     return element.name.toUpperCase().indexOf(search.toUpperCase()) !=  -1 || search == "";
+  }
+
+  search(event: any) {
+    const pattern: string = event.target.value;
+    this.filterProducts = this.products.filter(p => {
+      return p.name.toUpperCase().startsWith(pattern.toUpperCase());
+    })
+    this.dataSource = new MatTableDataSource(this.filterProducts);
   }
 
   getProducts() {
@@ -89,6 +100,7 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
         }
         products.push(product);
       })
+
       this.reloadTable(products);
     })
     return products;
@@ -107,8 +119,20 @@ export class ProductsManagementComponent implements OnInit, AfterViewInit {
   formatDate(date: Date) {
     return date.toLocaleDateString('pt-BR');
   }
-  async remove(id: number) {
+  remove(id: number) {
+    this.removeFromArray(id);
+
     this.productService.deleteProduct(id);
+    this.dataSource = new MatTableDataSource(this.filterProducts);
     this.notificationService.success("Produto removido com successo");
+  }
+
+  removeFromArray(id: number) {
+    this.products = this.products.filter(p => {
+      return p.id !== id;
+    })
+    this.filterProducts = this.filterProducts.filter(p => {
+      return p.id !== id;
+    })
   }
 }
