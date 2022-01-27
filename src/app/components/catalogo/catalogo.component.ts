@@ -171,9 +171,9 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     const hasGender = (element.gender.id == gender || gender == "");
     const hasPlatform = (element.platform.id == platform || platform == "");
     const hasPublisher = (element.publisher.id == publisher || publisher == "");
-    const isInLimitPrice = (this.sliderControl[0] > element.price && element.price > this.sliderControl[1]);;
+    //const isInLimitPrice = (this.sliderControl[0] > element.price && element.price > this.sliderControl[1]);
 
-    return hasName && hasGender && hasPlatform && hasPublisher && isInLimitPrice;
+    return hasName && hasGender && hasPlatform && hasPublisher /*&& isInLimitPrice*/;
   }
 
   products: Product[];
