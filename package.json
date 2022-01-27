@@ -24,6 +24,7 @@
     "@lottiefiles/lottie-player": "^1.5.3",
     "@types/angular-material": "^1.1.73",
     "angularx-social-login": "^4.0.1",
+    "g": "^2.0.1",
     "moment": "^2.29.1",
     "ng-recaptcha": "^9.0.0",
     "rxjs": "~7.4.0",

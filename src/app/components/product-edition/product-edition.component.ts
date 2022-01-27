@@ -105,6 +105,7 @@ export class ProductEditionComponent implements OnInit {
       amount: this.registrationFormGroup.controls['amount'].value,
       description: this.registrationFormGroup.controls['description'].value,
       releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
+      imgUrl: this.registrationFormGroup.controls['image'].value,
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
       genderId: this.registrationFormGroup.controls['gender'].value,

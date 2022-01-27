@@ -14,7 +14,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./products-management.component.scss']
 })
 export class ProductsManagementComponent implements OnInit, AfterViewInit {
-  
+  public searchName;
   products: Product[] = [];
   filterProducts: Product[];
   displayedColumns: string[] = ['id', 'name', 'price', 'amount', 'releaseDate', 'gender', 'publisher', 'platform', 'ratingSystem', 'remove', 'edit']
