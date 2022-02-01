@@ -50,21 +50,20 @@
             <mat-label color="white">Nome do jogo:</mat-label>
             <input formControlName="name" matInput autocomplete="off">
         </mat-form-field>
-        <mat-form-field class="releaseDate">
-            <mat-label color="white">Data de lançamento</mat-label>
-            <input matInput [matDatepicker]="basicDatepicker">
-            <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #basicDatepicker>
-                <mat-datepicker-actions>
-                    <button mat-button matDatepickerCancel>Cancelar</button>
-                    <button mat-raised-button [ngStyle]="{'background-color':green, color: white}" matDatepickerApply>Confirmar</button>
-                </mat-datepicker-actions>
-            </mat-datepicker>
-        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Data de Lançamento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="releaseDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         <div class="price-amount-container">
             <mat-form-field class="amount" appearance="fill">
                 <mat-label>Quantidade:</mat-label>
                 <input formControlName="amount" type="number" min="1" matInput placeholder="Quantidade">
+            </mat-form-field>
+            <mat-form-field class="price" appearance="fill">
+                <mat-label>Preço:</mat-label>
+                <input formControlName="price" type="number" min="0" matInput placeholder="Preço">
             </mat-form-field>
         </div>
         <mat-form-field class="description" appearance="fill">
@@ -74,7 +73,7 @@
        </div>
         <div class="buttons-container">
             <button mat-button type="button" class="cancel-button" routerLink="/products-management">Voltar</button>
-            <button class="btn-confirm" (click)="registerProduct()" mat-button>Cadastrar</button>            
+            <button class="btn-confirm" type="submit" (click)="registerProduct()" mat-button>Cadastrar</button>            
         </div>
     </form>
 </div>

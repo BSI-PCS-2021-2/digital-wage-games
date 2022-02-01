@@ -1,5 +1,7 @@
 @import '../../../assets/styles/variables.scss';
-
+@import './../../../assets/styles/select.scss';
+@import './../../../assets/styles/input.scss';
+@import './../../../assets/styles/button.scss';
 
 textarea::-webkit-scrollbar {
     background-color: $gray;
@@ -100,7 +102,7 @@ textarea::-webkit-scrollbar {
           width: 50%;
         }
         .amount{
-          width: 100%;
+          width: 50%;
         }
       }
     }

@@ -12,9 +12,6 @@ import * as moment from 'moment';
 })
 
 export class ProductsRegistrationComponent implements OnInit {
-  private formDate;
-  public green = 'green';
-  public white = 'white';
   public registrationFormGroup: FormGroup;
 
   image: string = "../../../assets/images/ImageField.png"
@@ -55,7 +52,7 @@ export class ProductsRegistrationComponent implements OnInit {
         price: this.registrationFormGroup.controls['price'].value * 100,
         amount: this.registrationFormGroup.controls['amount'].value,
         description: this.registrationFormGroup.controls['name'].value,
-        releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
+        releaseDate: moment(this.registrationFormGroup.controls['releaseDate'].value).format('YYYY-MM-DD'),
         ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
         imgUrl: this.registrationFormGroup.controls['image'].value,
         platformId: this.registrationFormGroup.controls['platform'].value,
@@ -64,6 +61,7 @@ export class ProductsRegistrationComponent implements OnInit {
       }
       this.productService.postProduct(dto);
       this.notificationService.success('Produto adicionado com sucesso!')
+      this.clearFields();
     } else {
       this.notificationService.error('Preencha todos os campos obrigatórios.')
     }
@@ -71,12 +69,8 @@ export class ProductsRegistrationComponent implements OnInit {
   private isFormValid(): boolean {
     return this.registrationFormGroup.valid;
   }
-
-  onDate(event) {
-    this.formDate = event.target.value;
- }
-  clearFields() {
-        this.registrationFormGroup.controls['name'].setValue('');
+  
+  clearFields() {     
         this.registrationFormGroup.controls['price'].setValue('')
         this.registrationFormGroup.controls['amount'].setValue('')
         this.registrationFormGroup.controls['name'].setValue('')
@@ -84,5 +78,18 @@ export class ProductsRegistrationComponent implements OnInit {
         this.registrationFormGroup.controls['platform'].setValue('')
         this.registrationFormGroup.controls['gender'].setValue('')
         this.registrationFormGroup.controls['publisher'].setValue('')
+        this.registrationFormGroup.controls['releaseDate'].setValue('');
+        this.registrationFormGroup.controls['description'].setValue('');
+        this.registrationFormGroup.controls['image'].setValue('');
+        this.registrationFormGroup.controls['price'].setErrors(null);
+        this.registrationFormGroup.controls['amount'].setErrors(null);
+        this.registrationFormGroup.controls['name'].setErrors(null);
+        this.registrationFormGroup.controls['ageRating'].setErrors(null);
+        this.registrationFormGroup.controls['platform'].setErrors(null);
+        this.registrationFormGroup.controls['gender'].setErrors(null);
+        this.registrationFormGroup.controls['publisher'].setErrors(null);
+        this.registrationFormGroup.controls['releaseDate'].setErrors(null);
+        this.registrationFormGroup.controls['description'].setErrors(null);
+        this.registrationFormGroup.controls['image'].setErrors(null);
   }
 }
