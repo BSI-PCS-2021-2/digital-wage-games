@@ -1,0 +1,17 @@
+@import 'variables.scss';
+
+.main-button {
+    height: 40px !important;
+    min-width: 100px;
+    color: $light-gray !important;
+    background: $green;
+    width: 120px;
+    height: 35px;
+  }
+  
+  .cancel-button {
+    height: 40px;
+    min-width: 100px;
+    border: 2px solid $red !important;
+    color: $red !important;
+  }
