@@ -1,5 +1,7 @@
 @import 'variables.scss';
 
+// Input date type
+
 ::ng-deep .mat-form-field:not(.mat-form-field-appearance-legacy) 
 ::ng-deep .mat-form-field-suffix .mat-icon-button 
 ::ng-deep .mat-datepicker-toggle-default-icon{
@@ -25,6 +27,15 @@
   margin: 0;
 }
 
+// Input number type
+
 ::ng-deep input[type=number] {
   -moz-appearance: textfield;
+}
+
+// Auto complete
+
+::ng-deep input { 
+  box-shadow: 0 0 0px 1000px $gray inset;
+  -webkit-text-fill-color: $light-gray !important;
 }

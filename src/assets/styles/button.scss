@@ -9,9 +9,16 @@
     height: 35px;
   }
   
-  .cancel-button {
-    height: 40px;
-    min-width: 100px;
-    border: 2px solid $red !important;
-    color: $red !important;
-  }
+.cancel-button {
+  height: 40px;
+  min-width: 100px;
+  border: 2px solid $red !important;
+  color: $red !important;
+}
+
+.selected-button {
+  height: 40px;
+  min-width: 100px;
+  border: 2px solid $green !important;
+  color: $red !important;
+}
