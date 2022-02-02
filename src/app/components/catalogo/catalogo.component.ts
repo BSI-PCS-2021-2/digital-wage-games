@@ -25,6 +25,7 @@ export class StepperIntl extends MatStepperIntl {
 })
 
 export class CatalogoComponent implements OnInit, AfterViewInit {
+  public products: Product[];
   public sliderControl;
   public search: FormGroup;
   constructor(private productService: ProductService,
@@ -73,8 +74,9 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   }
 
   getProducts() {
-    const products: Product[] = [];
+    
     this.productService.getProducts().subscribe(p => {
+      this.products = [];
       p.forEach(item => {
         const product: Product = {
           id: item.id,
@@ -83,6 +85,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
           amount: item.amount,
           price: item.price,
           releaseDate: item.releaseDate,
+          imgUrl: item.imgUrl,
           gender: {
             id: item.gender.id,
             name: item.gender.name
@@ -100,10 +103,10 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
             name: item.ratingSystem.name
           }
         }
-        products.push(product);
+        this.products.push(product);
       })
     })
-    this.products = products;
+    this.products = this.products;
 
     this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
       this.wallet = wallet;
@@ -175,8 +178,6 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
     return hasName && hasGender && hasPlatform && hasPublisher /*&& isInLimitPrice*/;
   }
-
-  products: Product[];
   cartProductIds: number[];
 
   public searchName = "";

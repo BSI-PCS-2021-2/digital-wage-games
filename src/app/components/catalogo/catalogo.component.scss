@@ -1,9 +1,10 @@
 @import './../../../assets/styles/variables.scss';
-
 @import './../../../assets/styles/select.scss';
 @import './../../../assets/styles/slider.scss';
 @import './../../../assets/styles/spinner.scss';
 @import './../../../assets/styles/badge.scss';
+@import './../../../assets/styles/rsIcon.scss';
+
 
 mat-form-field {
   padding: 0 5px;
@@ -101,11 +102,13 @@ a {
           background-color: $dark-gray;
           color: $light-gray;
           border-radius: 5px;
-          max-width: 350px;
+          max-width: 300px;
 
           .product-img {
-            margin: 20px 0;
+            margin: 0;
             width: 100%;
+            height: 140px;
+            object-fit: cover;
           }
 
           .product-price {
@@ -125,35 +128,23 @@ a {
 
             .mat-card-header-text {
               margin: 0 !important;
+
+              .header-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;              
+              }
             }
+            
           }
 
         
           .product-description {
             display: -webkit-box;
-            -webkit-line-clamp: 6;
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-          }
-
-          .rate-container {
-
-            margin: 0 16px;
-
-            .product-rate {
-              display: flex;
-
-
-              i {
-                color: $golden;
-                margin: 10px 3px 10px 0;
-              }
-            }
-
-            .product-rate-amount {
-              color: $light-gray;
-            }
           }
 
           mat-card-actions {

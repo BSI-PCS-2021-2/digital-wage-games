@@ -33,15 +33,22 @@
         <div class="item" *ngFor="let product of products">
         <mat-card>
           <a routerLink="/produto/{{ product.id }}">
-            <img class="product-img" mat-card-image src="assets/images/{{getGameCover(product.id)}}">
+            <img class="product-img" mat-card-image src="{{product.imgUrl}}">
             <mat-card-header>
               <div class="mat-card-header-text">
+               <div class="header-wrapper">
                 <mat-card-title class="product-price">
                   {{ product.price / 100 | currency:'BRL': 'symbol' }}
                 </mat-card-title>
+                <div class="rs" [ngClass]="{'rs10' : product.ratingSystem.name === '10+', 
+                'rs12' : product.ratingSystem.name === '12+', 
+                'rs14' : product.ratingSystem.name === '14+', 
+                'rs16' : product.ratingSystem.name === '16+', 
+                'rs18' : product.ratingSystem.name === '18+', 
+                'rsL' : product.ratingSystem.name === 'L'}">
+                </div>
+               </div>
                 <mat-card-subtitle class="product-name">{{ product.name }} - {{product.platform.name}}</mat-card-subtitle>
-              </div>
-              <div class="rate-container">
               </div>
               <div class="product-description">
                 {{product.description}}

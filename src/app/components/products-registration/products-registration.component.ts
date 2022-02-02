@@ -51,7 +51,7 @@ export class ProductsRegistrationComponent implements OnInit {
         name: this.registrationFormGroup.controls['name'].value,
         price: this.registrationFormGroup.controls['price'].value * 100,
         amount: this.registrationFormGroup.controls['amount'].value,
-        description: this.registrationFormGroup.controls['name'].value,
+        description: this.registrationFormGroup.controls['description'].value,
         releaseDate: moment(this.registrationFormGroup.controls['releaseDate'].value).format('YYYY-MM-DD'),
         ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
         imgUrl: this.registrationFormGroup.controls['image'].value,
@@ -91,5 +91,6 @@ export class ProductsRegistrationComponent implements OnInit {
         this.registrationFormGroup.controls['releaseDate'].setErrors(null);
         this.registrationFormGroup.controls['description'].setErrors(null);
         this.registrationFormGroup.controls['image'].setErrors(null);
+        this.image = "../../../assets/images/ImageField.png";
   }
 }
