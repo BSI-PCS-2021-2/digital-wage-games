@@ -19,12 +19,18 @@
                     <mat-select formControlName="gender">
                         <mat-option value="1">Acao e Aventura</mat-option>
                         <mat-option value="2">First Person Shooter</mat-option>
+                        <mat-option value="3">Terror</mat-option>
+                        <mat-option value="4">RPG</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="platform" appearance="fill">
                     <mat-label>Plataforma:</mat-label>
                     <mat-select formControlName="platform">
                         <mat-option value="1">PS5</mat-option>
+                        <mat-option value="2">XBOX X</mat-option>
+                        <mat-option value="3">PS4</mat-option>
+                        <mat-option value="4">XBOX ONE</mat-option>
+                        <mat-option value="5">PC</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="publisher" appearance="fill">
@@ -54,17 +60,12 @@
             <mat-label>Preço:</mat-label>
             <input formControlName="price" type="number" min="1" step="any" matInput placeholder="Preço">
         </mat-form-field>
-        <mat-form-field class="releaseDate">
-            <mat-label color="white">Data de lançamento</mat-label>
-            <input matInput (dateInput)="onDate($event)" [matDatepicker]="basicDatepicker">
-            <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #basicDatepicker>
-                <mat-datepicker-actions>
-                    <button mat-button matDatepickerCancel>Cancelar</button>
-                    <button mat-raised-button [ngStyle]="{'background-color':green, color: white}" matDatepickerApply>Confirmar</button>
-                </mat-datepicker-actions>
-            </mat-datepicker>
-        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Data de Lançamento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="releaseDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         <div class="price-amount-container">
             <mat-form-field class="amount" appearance="fill">
                 <mat-label>Quantidade:</mat-label>
@@ -76,6 +77,9 @@
             <textarea formControlName="description" rows="15" maxlength="1716" matInput></textarea>
         </mat-form-field>
        </div>
-        <button class="btn-confirm" (click)="registerProduct()" mat-button>Editar</button>
+       <div class="buttons-container">
+        <button class="cancel-button" type="button" routerLink="/products-management" mat-button>Voltar</button>
+        <button class="main-button" (click)="registerProduct()" mat-button>Editar</button>  
+       </div>      
     </form>
 </div>

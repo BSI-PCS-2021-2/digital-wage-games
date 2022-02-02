@@ -14,6 +14,7 @@ import { Product } from 'src/app/shared/models/product/product.model';
 })
 
 export class ProductEditionComponent implements OnInit {
+  public product: Product;
   private id;
   private formDate;
   public green = 'green';
@@ -52,15 +53,15 @@ export class ProductEditionComponent implements OnInit {
   }
 
   getProduct():void {
-    let product:Product;
     this.productService.getProduct(this.id).subscribe(p => {
-      product = {
+      this.product = {
         id: p.id,
         name: p.name,
         description: p.description,
         amount: p.amount,
         price: p.price,
         releaseDate: p.releaseDate,
+        imgUrl: p.imgUrl,
         gender: {
           id: p.gender.id,
           name: p.gender.name
@@ -79,17 +80,18 @@ export class ProductEditionComponent implements OnInit {
         }
       }
       this.registrationFormGroup = this.formBuilder.group({
-        name: [product.name, Validators.required],
-        price: [product.price/100, Validators.required],
-        amount: [product.amount, Validators.required],
-        description: [product.description, Validators.required],
-        image: ['', Validators.required],
-        releaseDate: [product.releaseDate, Validators.required],
-        ageRating: [product.ratingSystem, Validators.required],
-        platform: [product.platform, Validators.required],
-        gender: [product.gender, Validators.required],
-        publisher: [product.publisher, Validators.required]
+        name: [this.product.name, Validators.required],
+        price: [this.product.price/100, Validators.required],
+        amount: [this.product.amount, Validators.required],
+        description: [this.product.description, Validators.required],
+        image: [this.product.imgUrl, Validators.required],
+        releaseDate: [this.product.releaseDate, Validators.required],
+        ageRating: [this.product.ratingSystem.id.toString(), Validators.required],
+        platform: [this.product.platform.id.toString(), Validators.required],
+        gender: [this.product.gender.id.toString(), Validators.required],
+        publisher: [this.product.publisher.id.toString(), Validators.required]
       });
+      this.image = this.product.imgUrl;
     })
   }
 
@@ -104,7 +106,7 @@ export class ProductEditionComponent implements OnInit {
       price: this.registrationFormGroup.controls['price'].value * 100,
       amount: this.registrationFormGroup.controls['amount'].value,
       description: this.registrationFormGroup.controls['description'].value,
-      releaseDate: moment(this.formDate).format('YYYY-MM-DD'),
+      releaseDate: moment(this.registrationFormGroup.controls['releaseDate'].value).format('YYYY-MM-DD'),
       imgUrl: this.registrationFormGroup.controls['image'].value,
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
