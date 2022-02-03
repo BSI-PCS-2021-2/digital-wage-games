@@ -1,8 +1,15 @@
 @import './../../../assets/styles/variables.scss';
-
+@import './../../../assets/styles/button.scss';
+@import './../../../assets/styles/rsIcon.scss';
+iframe {
+  border: none;
+}
 
 .main {
   padding: $padding-page;
+  display: block;
+  margin: auto;
+  max-width: 1200px;
 
   div::-webkit-scrollbar {
     background-color: $gray;
@@ -28,29 +35,6 @@
     h2 {
       font-size: 35px;
     }
-
-    .action-menu {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      .wallet-button {
-        background-color: #131313 !important;
-        color: $green;
-        border: 2px solid $green;
-      }
-
-      .cart-button {
-        background-color: $green;
-        color: $white;
-        height: 37px;
-        margin-left: 6px;
-        border-radius: 3px;
-        margin-right: 2px;
-        text-align: center;
-      }
-    }
-
   }
 
   .grid-content {
@@ -71,36 +55,91 @@
 
       .container-trailer {
         width: 100%;
-        height: fit-content;
+        height: 480px;
+
+        iframe {
+          width: 100%;
+          height: 100%
+        }
       }
 
       .container-extras {
+        margin-top: .6em;
         display: flex;
         align-items: left;
         grid-column-start: 1;
         grid-column-end: 2;
         overflow-x: auto;
+        gap: 1em;
 
-        video {
-          max-width: 17.77em;
-          margin: 1.25px;
-          border-radius: 5px;
+        .thumb-trailer-container {
+          position: relative;
+          width: 240px;
+          height: 190px;
+          cursor: pointer;
+
+          img, .mask {
+            transition: .4s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .mask {
+            background: transparent;
+          }
+
+          .mask:hover {
+            background-color: rgba(0,0,0,.5);
+          }
         }
       }
     }
     .container-description-price {
-
-      padding: 20px;
+      position: relative;
       background-color: $dark-gray;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       width: 30%;
+      justify-content: space-between;
+
+      .button-actions {
+        width: 100%;
+        position: absolute;
+        top: -50px;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .banner-container {
+        position: relative;
+        width: 100%;
+        height: 144px;
+
+        img {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+      } 
 
       .container-description {
         text-align: justify;
         overflow-y: auto;
         line-height: 1.6;
+        padding: 1em;
+
+        .description-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
 
         p {
           color: $light-gray;
@@ -112,91 +151,21 @@
 
           font-size: 24px;
           color: $light-gray;
-          text-align: center;
         }
       }
 
       .container-price {
 
+        padding: 0 1em 1.6em 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
         p {
           margin: 50px 0;
           font-size: 24px;
-          text-align: center;
           color: $light-gray;
         }
-
-        .buy-button {
-          display: block;
-          background-color: $green;
-          color: $white;
-          border-radius: 3px;
-          border-color: $green;
-          margin: auto;
-        }
-
-
-        .added-button {
-          display: none;
-          border: 2px solid $green;
-          color: $green;
-          margin: auto;
-        }
-      }
-      .container-price.active {
-        .buy-button {
-          display: none;
-        }
-
-        .added-button {
-          display: block;
-        }
-      }
-    }
-  }
-
-  .more_info_container {
-    display: flex;
-    margin-top: 30px;
-
-    .description_more {
-      background-color: $dark-gray;
-      padding: 30px;
-      line-height: 1.6;
-      min-width: 768px;
-      margin-right: 30px;
-      width: 70%;
-
-      p {
-        color: $light-gray;
-      }
-    }
-
-    .rating {
-
-      background-color: $light-gray;
-      padding: 30px;
-      width: 30%;
-
-      .rating_header {
-        display: flex;
-
-        .rating_number {
-          font-size: 24px;
-          margin-right: 5px;
-        }
-
-        .rating_stars {
-          display: flex;
-          padding-top: 3px;
-
-          i {
-            margin-right: 3px;
-          }
-        }
-      }
-
-      .rating_body {
-        line-height: 1.6;
       }
     }
   }

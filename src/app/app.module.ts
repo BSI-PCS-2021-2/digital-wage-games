@@ -61,6 +61,7 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule,
 } from 'angularx-social-login';
+import { SafePipe } from './shared/pipes/safePipe';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -88,7 +89,8 @@ registerLocaleData(localePt, 'pt-BR');
     ProductsManagementComponent,
     ProductsRegistrationComponent,
     ClientsManagementComponent,
-    ProductEditionComponent
+    ProductEditionComponent,
+    SafePipe
   ],
   imports: [
     BrowserModule,
