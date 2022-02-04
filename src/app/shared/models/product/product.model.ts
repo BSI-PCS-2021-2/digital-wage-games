@@ -10,6 +10,7 @@ export interface Product {
   description?: string;
   releaseDate?: string;
   imgUrl?: string;
+  youtubeIds?: string[];
   gender?: Gender;
   platform?: Platform;
   publisher?: Publisher;

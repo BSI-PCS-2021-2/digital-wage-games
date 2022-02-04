@@ -44,6 +44,7 @@ export class ProductEditionComponent implements OnInit {
       amount: ['', Validators.required],
       description: ['', Validators.required],
       image: ['', Validators.required],
+      youtubeIds: [''],
       releaseDate: ['', Validators.required],
       ageRating: ['', Validators.required],
       platform: ['', Validators.required],
@@ -62,6 +63,7 @@ export class ProductEditionComponent implements OnInit {
         price: p.price,
         releaseDate: p.releaseDate,
         imgUrl: p.imgUrl,
+        youtubeIds: p.youtubeIds,
         gender: {
           id: p.gender.id,
           name: p.gender.name
@@ -85,6 +87,7 @@ export class ProductEditionComponent implements OnInit {
         amount: [this.product.amount, Validators.required],
         description: [this.product.description, Validators.required],
         image: [this.product.imgUrl, Validators.required],
+        youtubeIds: [this.product.youtubeIds.join(',')],
         releaseDate: [this.product.releaseDate, Validators.required],
         ageRating: [this.product.ratingSystem.id.toString(), Validators.required],
         platform: [this.product.platform.id.toString(), Validators.required],
@@ -108,12 +111,12 @@ export class ProductEditionComponent implements OnInit {
       description: this.registrationFormGroup.controls['description'].value,
       releaseDate: moment(this.registrationFormGroup.controls['releaseDate'].value).format('YYYY-MM-DD'),
       imgUrl: this.registrationFormGroup.controls['image'].value,
+      youtubeIds: this.registrationFormGroup.controls['youtubeIds'].value.split(','),
       ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
       platformId: this.registrationFormGroup.controls['platform'].value,
       genderId: this.registrationFormGroup.controls['gender'].value,
       publisherId: this.registrationFormGroup.controls['publisher'].value,
     }
-    console.log(dto)
     this.productService.putProduct(dto);
     this.notificationService.success("Produto editado com sucesso");
     if (this.isFormValid()) {
