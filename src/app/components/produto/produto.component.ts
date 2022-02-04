@@ -24,7 +24,6 @@ export class ProdutoComponent implements OnInit {
               private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-  this.selectedTrailer = `https://www.youtube.com/embed/${this.idVideos[0]}`;
   this.cartId = parseInt(this.authenticationService.getCartId());
   this.getProduct();
   this.defineCart();
@@ -50,6 +49,7 @@ export class ProdutoComponent implements OnInit {
         price: product.price,
         releaseDate: product.releaseDate,
         imgUrl: product.imgUrl,
+        youtubeIds: product.youtubeIds,
         gender: {
           id: product.gender.id,
           name: product.gender.name
@@ -68,6 +68,7 @@ export class ProdutoComponent implements OnInit {
         }
       }
       this.defineCart();
+      this.selectedTrailer = product.youtubeIds.length !== 0 ? `https://www.youtube.com/embed/${product.youtubeIds[0]}` : null;
     });
   }
 
@@ -103,5 +104,4 @@ export class ProdutoComponent implements OnInit {
   public wallet: Wallet;
   public selectedTrailer: string;
   public onCart: boolean = false;
-  public idVideos: string[] = ['PyMlV5_HRWk', 'OQ1CwPhE8KQ', '9DM7NsxOS0Q']
 }

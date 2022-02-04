@@ -8,7 +8,7 @@
                 <iframe [src]="selectedTrailer | safe"></iframe>
             </div>
             <div class="container-extras">
-                <div class="thumb-trailer-container" *ngFor="let id of idVideos" (click)="selected(id)">
+                <div class="thumb-trailer-container" *ngFor="let id of product.youtubeIds" (click)="selected(id)">
                     <img src="https://img.youtube.com/vi/{{ id }}/hqdefault.jpg">
                     <div class="mask">
 

@@ -40,12 +40,17 @@
             </div>
             <mat-form-field class="image" appearance="fill">
                 <mat-label>Imagem:</mat-label>
-                <input formControlName="image" matInput autocomplete="off" (keyup.enter)="atualizarImagem($event)" placeholder="Image">
+                <input formControlName="image" matInput autocomplete="off" (keyup.enter)="atualizarImagem($event)">
             </mat-form-field>
            </div>
         </div>
        
        <div class="form-section-2">
+        <mat-form-field class="youtubeIds" appearance="fill">
+            <mat-label>Trailers</mat-label>
+            <input formControlName="youtubeIds" matInput autocomplete="off">
+            <mat-hint align="end"><strong>Adicione os ids do youtube separados por ,</strong></mat-hint>
+        </mat-form-field>
         <mat-form-field class="gameName" appearance="fill">
             <mat-label color="white">Nome do jogo:</mat-label>
             <input formControlName="name" matInput autocomplete="off">

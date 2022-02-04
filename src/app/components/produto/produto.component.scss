@@ -65,14 +65,13 @@ iframe {
 
       .container-extras {
         margin-top: .6em;
-        display: flex;
-        align-items: left;
-        grid-column-start: 1;
-        grid-column-end: 2;
         overflow-x: auto;
-        gap: 1em;
+        overflow-y: hidden;
+        white-space: nowrap;
 
         .thumb-trailer-container {
+          margin-bottom: -.8em;
+          display: inline-block;
           position: relative;
           width: 240px;
           height: 190px;

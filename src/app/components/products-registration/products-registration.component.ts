@@ -33,6 +33,7 @@ export class ProductsRegistrationComponent implements OnInit {
       amount: ['', Validators.required],
       description: ['', Validators.required],
       image: ['', Validators.required],
+      youtubeIds: [''],
       releaseDate: ['', Validators.required],
       ageRating: ['', Validators.required],
       platform: ['', Validators.required],
@@ -55,6 +56,7 @@ export class ProductsRegistrationComponent implements OnInit {
         releaseDate: moment(this.registrationFormGroup.controls['releaseDate'].value).format('YYYY-MM-DD'),
         ratingSystemId: this.registrationFormGroup.controls['ageRating'].value,
         imgUrl: this.registrationFormGroup.controls['image'].value,
+        youtubeIds: this.registrationFormGroup.controls['youtubeIds'].value.split(','),
         platformId: this.registrationFormGroup.controls['platform'].value,
         genderId: this.registrationFormGroup.controls['gender'].value,
         publisherId: this.registrationFormGroup.controls['publisher'].value,
@@ -81,6 +83,7 @@ export class ProductsRegistrationComponent implements OnInit {
         this.registrationFormGroup.controls['releaseDate'].setValue('');
         this.registrationFormGroup.controls['description'].setValue('');
         this.registrationFormGroup.controls['image'].setValue('');
+        this.registrationFormGroup.controls['youtubeIds'].setValue('');
         this.registrationFormGroup.controls['price'].setErrors(null);
         this.registrationFormGroup.controls['amount'].setErrors(null);
         this.registrationFormGroup.controls['name'].setErrors(null);
@@ -91,6 +94,7 @@ export class ProductsRegistrationComponent implements OnInit {
         this.registrationFormGroup.controls['releaseDate'].setErrors(null);
         this.registrationFormGroup.controls['description'].setErrors(null);
         this.registrationFormGroup.controls['image'].setErrors(null);
+        this.registrationFormGroup.controls['youtubeIds'].setErrors(null);
         this.image = "../../../assets/images/ImageField.png";
   }
 }
