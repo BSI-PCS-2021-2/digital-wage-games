@@ -138,13 +138,16 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
 
   enterSearch() {
+    // console.log(this.sliderControl)
     const name = this.search.get('searchBar').value;
     const platform = this.search.get('plataforma').value;
     const gender = this.search.get('genero').value;
     const publisher = this.search.get('publisher').value;
+    const floor = this.sliderControl.value[0] * 100;
+    const ceil = this.sliderControl.value[1] * 100;
     this.products = undefined;
     this.productService.getProducts().subscribe((products) => {
-      this.products = products.filter(this.haveName.bind(null, name, platform, gender, publisher));
+      this.products = products.filter(this.haveName.bind(null, name, platform, gender, publisher, floor, ceil));
     });
   }
 
@@ -153,17 +156,19 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     this.search.get('plataforma').setValue('');
     this.search.get('genero').setValue('');
     this.search.get('publisher').setValue('');
+    this.sliderControl.value[0] = this.minPriceValue;
+    this.sliderControl.value[1] = this.maxPriceValue;
     this.enterSearch();
   }
 
-  private haveName(name, platform, gender, publisher, element): boolean {
+  private haveName(name, platform, gender, publisher, floor, ceil, element): boolean {
     const hasName = (element.name.toUpperCase().indexOf(name.toUpperCase()) != -1 || name == "");
     const hasGender = (element.gender.id == gender || gender == "");
     const hasPlatform = (element.platform.id == platform || platform == "");
     const hasPublisher = (element.publisher.id == publisher || publisher == "");
-    //const isInLimitPrice = (this.sliderControl[0] > element.price && element.price > this.sliderControl[1]);
+    const isInLimitPrice = (ceil >= element.price && element.price >= floor);
 
-    return hasName && hasGender && hasPlatform && hasPublisher /*&& isInLimitPrice*/;
+    return hasName && hasGender && hasPlatform && hasPublisher && isInLimitPrice;
   }
   cartProductIds: number[];
 
@@ -180,12 +185,5 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   priceOptions: Options = {
     floor: 0,
     ceil: 1000
-  };
-
-  minRatingValue: number = 0;
-  maxRatingValue: number = 1000;
-  ratingOptions: Options = {
-    floor: 0,
-    ceil: 5
   };
 }
