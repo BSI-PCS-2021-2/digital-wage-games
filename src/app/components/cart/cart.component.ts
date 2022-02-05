@@ -55,12 +55,12 @@ export class CartComponent implements OnInit {
             name: product.name,
             description: product.description,
             price: product.price,
+            imgUrl: product.imgUrl,
             formatPrice: this.formatPrice(product.price/100),
             amount: cartItems[i].amount,
             formatTotalPrice: this.formatPrice(product.price/100 * cartItems[i].amount),
             totalPrice: product.price * cartItems[i].amount
           })
-          // Quando esse método esta fora do loop, o array de produtos fica vazio (?)
           this.updateTotal();
         })
 
@@ -147,27 +147,6 @@ export class CartComponent implements OnInit {
       return;
     }
     this.router.navigate(["/checkout"])
-  }
-
-  getGameCover(productId: number): string {
-    switch (productId) {
-      case 2:
-        return 'game-images/halo-infinite.jpg';
-      case 3:
-        return 'game-images/deathloop.jpg';
-      case 4:
-        return 'game-images/back4blood.jpg';
-      case 5:
-        return 'game-images/psychonauts-2.jpg';
-      case 6:
-        return 'game-images/bf-2042.jpg';
-      case 7:
-        return 'game-images/re-village.jpg';
-      case 8:
-        return 'game-images/nioh-2.jpg';
-      default:
-        return 'game1.png';
-    }
   }
 
   ptBRLocale =  Intl.NumberFormat('pt-br');

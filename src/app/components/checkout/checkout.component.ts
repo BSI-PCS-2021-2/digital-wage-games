@@ -121,19 +121,13 @@ export class CheckoutComponent implements OnInit {
           value: this.wallet.funds - this.totalPrice,
         });
         break;
-
-      /***
-       * TODO implementar outras formas de pagamento.
-       */
-    }
-
-    if (this.paymentType == 1) {
-      const generateBb: GenerateBbDTO = {
-        value: this.totalPrice,
-        username: this.authenticationService.getUsername(),
-      };
-
-      this.walletService.generateBB(generateBb).subscribe();
+      case 1:
+        const generateBb: GenerateBbDTO = {
+          value: this.totalPrice,
+          username: this.authenticationService.getUsername(),
+        };
+  
+        this.walletService.generateBB(generateBb).subscribe();
     }
 
     this.orderService.postOrder({
