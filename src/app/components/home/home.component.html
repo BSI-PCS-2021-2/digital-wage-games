@@ -1,0 +1,24 @@
+<div class="main">
+    <div *ngIf="!products">
+        <mat-progress-spinner mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+    <h2 *ngIf="products" class="featuredTitle">Jogos novos</h2>
+    <div *ngIf="products" class="featured-games">
+        <div class="numberOne">
+            <img src={{products[0].imgUrl}}>
+        </div>
+        <div class="numberTwo">
+            <img src={{products[1].imgUrl}}>
+        </div>
+        <div class="numberThree">
+            <img src={{products[2].imgUrl}}>
+        </div>
+    </div>
+    <div *ngFor="let category of categoryCounts" class="category">
+        <h2 class="categoryTitle">{{category}}</h2>
+        <div class="games">
+            <img *ngFor="let image of imageCount(category)" src={{image}}>
+        </div>
+    </div>
+</div>
