@@ -74,7 +74,6 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   }
 
   getProducts() {
-    
     this.productService.getProducts().subscribe(p => {
       this.products = [];
       p.forEach(item => {
@@ -105,9 +104,9 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
         }
         this.products.push(product);
       })
+      this.defineProductsOnCart();
     })
-    this.products = this.products;
-
+    
     this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
       this.wallet = wallet;
       this.wallet.funds = this.wallet.funds / 100;
@@ -135,27 +134,6 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     ++this.cartSize;
   }
 
-  getGameCover(productId: number): string {
-    switch (productId) {
-      case 2:
-        return 'game-images/halo-infinite.jpg';
-      case 3:
-        return 'game-images/deathloop.jpg';
-      case 4:
-        return 'game-images/back4blood.jpg';
-      case 5:
-        return 'game-images/psychonauts-2.jpg';
-      case 6:
-        return 'game-images/bf-2042.jpg';
-      case 7:
-        return 'game-images/re-village.jpg';
-      case 8:
-        return 'game-images/nioh-2.jpg';
-      default:
-        return 'game-images/nioh-2.jpg';
-    }
-  }
-
   selected = 'relevant';
 
 
@@ -164,9 +142,18 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     const platform = this.search.get('plataforma').value;
     const gender = this.search.get('genero').value;
     const publisher = this.search.get('publisher').value;
+    this.products = undefined;
     this.productService.getProducts().subscribe((products) => {
       this.products = products.filter(this.haveName.bind(null, name, platform, gender, publisher));
     });
+  }
+
+  clearFilter() {
+    this.search.get('searchBar').setValue('');
+    this.search.get('plataforma').setValue('');
+    this.search.get('genero').setValue('');
+    this.search.get('publisher').setValue('');
+    this.enterSearch();
   }
 
   private haveName(name, platform, gender, publisher, element): boolean {

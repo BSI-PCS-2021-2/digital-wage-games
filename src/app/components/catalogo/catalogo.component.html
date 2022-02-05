@@ -25,7 +25,7 @@
       </div>
 
       <div class="catalog-container">
-        <div *ngIf="!products">
+        <div *ngIf="!products" class="spinner-container">
           <mat-progress-spinner
           mode="indeterminate">
           </mat-progress-spinner>
@@ -116,6 +116,10 @@
             <mat-option value="3">Bandai Nanco</mat-option>
           </mat-select>
         </mat-form-field>
+      </div>
+      <div class="buttons-container">
+        <button mat-button class="main-button" type="button" (click)="enterSearch()">Filtrar</button>
+        <button mat-button class="cancel-button" type="button" (click)="clearFilter()">Limpar fltros</button>
       </div>
     </div>
   </div>
