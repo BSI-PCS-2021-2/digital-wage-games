@@ -3,15 +3,21 @@
 .main-button {
     height: 40px !important;
     min-width: 100px;
-    color: $light-gray !important;
+    color: $white !important;
     background: $green;
-    width: 120px;
     height: 35px;
   }
   
-  .cancel-button {
-    height: 40px;
-    min-width: 100px;
-    border: 2px solid $red !important;
-    color: $red !important;
-  }
+.cancel-button {
+  height: 40px;
+  min-width: 100px;
+  border: 2px solid $red !important;
+  color: $red !important;
+}
+
+.selected-button {
+  height: 40px;
+  min-width: 100px;
+  border: 2px solid $green !important;
+  color: $green !important;
+}
