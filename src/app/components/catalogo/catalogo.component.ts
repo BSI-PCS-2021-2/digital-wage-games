@@ -28,7 +28,8 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
   public products: Product[];
   public sliderControl;
   public search: FormGroup;
-  constructor(private productService: ProductService,
+  constructor(
+    private productService: ProductService,
     public authenticationService: AuthenticationService,
     private walletService: WalletService,
     private cartService: CartService,
@@ -43,6 +44,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
       plataforma: [''],
       genero: [''],
       publisher: [''],
+      orderBy:"nothing"
     })
     this.cartId = this.authenticationService.getCartId();
     this.getProducts();
@@ -106,7 +108,7 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
       })
       this.defineProductsOnCart();
     })
-    
+
     this.walletService.getWallet(this.authenticationService.getUsername()).subscribe((wallet: Wallet) => {
       this.wallet = wallet;
       this.wallet.funds = this.wallet.funds / 100;
@@ -138,7 +140,6 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
 
 
   enterSearch() {
-    // console.log(this.sliderControl)
     const name = this.search.get('searchBar').value;
     const platform = this.search.get('plataforma').value;
     const gender = this.search.get('genero').value;
@@ -147,8 +148,10 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     const ceil = this.sliderControl.value[1] * 100;
     this.products = undefined;
     this.productService.getProducts().subscribe((products) => {
+      products = this.sorterProducts(products);
       this.products = products.filter(this.haveName.bind(null, name, platform, gender, publisher, floor, ceil));
     });
+
   }
 
   clearFilter() {
@@ -169,6 +172,44 @@ export class CatalogoComponent implements OnInit, AfterViewInit {
     const isInLimitPrice = (ceil >= element.price && element.price >= floor);
 
     return hasName && hasGender && hasPlatform && hasPublisher && isInLimitPrice;
+  }
+
+  sorterProducts(products):Product[]{
+    let orderBy = this.search.get('orderBy').value;
+    switch (orderBy) {
+      case "nothing":{
+        break;
+      }
+      case "rising-price":{
+        products.sort((a,b)=>{
+          let priceOne = a.price; 
+          let priceTwo = b.price;
+          return priceOne - priceTwo;
+        });
+        break;
+      }
+      case "decreasing-price":{
+        products.sort((a,b)=>{
+          let priceOne = a.price; 
+          let priceTwo = b.price;
+          return priceTwo - priceOne;
+        });
+        break;
+      }
+      case "release-date":{
+        products.sort((a,b)=>{
+          let dateOne = new Date(a.releaseDate); 
+          let dateTwo = new Date(b.releaseDate);
+          return dateTwo.getTime() - dateOne.getTime();
+        });
+        break;
+      }
+      default:{
+        console.log("Error in switchCase OrderBy")
+        break;
+      }
+    }
+    return products;
   }
   cartProductIds: number[];
 

@@ -5,9 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
-  background-color: $dark-gray;
+  padding: $padding-page;
 
   .form-container {
     flex-direction: column;
