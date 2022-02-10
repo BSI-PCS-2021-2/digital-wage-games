@@ -25,7 +25,7 @@
             <div class="order-infos">
               <p>Entregue em {{ order.expectedDeliveryDate }}</p>
               <p>Comprado em <span>{{ order.purchaseDate }}</span></p>
-              <p>Total pago de <span>{{ order.totalPrice | currency:'BRL': 'symbol' }}</span></p>
+              <p>Total pago de <span>{{ order.totalPrice*100 | currency:'BRL': 'symbol' }}</span></p>
               
             </div>
           </div>
