@@ -39,7 +39,6 @@ export class MyAccountComponent implements OnInit {
           for (let orderItem of orderItems) {
             let productView: ProductView;
             this.productService.getProduct(orderItem.productId).subscribe(product => {
-              // console.log(product)
               productView = {
                 id: product.id,
                 imgUrl: product.imgUrl,
@@ -53,9 +52,7 @@ export class MyAccountComponent implements OnInit {
                 productPrice: orderItem.unitPrice
               })  
             })            
-            // console.log(orderItemView);        
           }
-          // console.log(orderItemView);
           this.orders.push({
             id: order.id,
             expectedDeliveryDate: moment(order.expectedDeliveryDate).format("DD/MM/YYYY"),
@@ -65,7 +62,7 @@ export class MyAccountComponent implements OnInit {
           }) 
         })
       }
-      console.log(this.orders)
+      orders.reverse();
     })
     this.walletService.getWallet(this.username).subscribe((w) => {
       this.funds = w.funds;
