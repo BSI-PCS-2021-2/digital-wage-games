@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.products.sort((a,b)=>{
         let dateOne = new Date(a.releaseDate); 
         let dateTwo = new Date(b.releaseDate);
-        return dateOne.getTime() - dateTwo.getTime();
+        return dateTwo.getTime() - dateOne.getTime();
       })
       this.categoryCounts = this.countCategory(this.products);
       console.log(this.products);

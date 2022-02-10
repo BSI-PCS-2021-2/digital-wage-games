@@ -4,10 +4,9 @@
       <div class="bar-container">
 
         <div class="filter-container">
-          <mat-form-field appearance="fill">
+          <mat-form-field [formGroup]="search" appearance="fill">
             <mat-label>Ordenar por</mat-label>
-            <mat-select [(value)]="selected">
-              <mat-option value="relevant">Maior relevância</mat-option>
+            <mat-select formControlName="orderBy" [(value)]="selected">
               <mat-option value="rising-price">Preço crescente</mat-option>
               <mat-option value="decreasing-price">Preço decrescente</mat-option>
               <mat-option value="release-date">Data de lançamento</mat-option>
