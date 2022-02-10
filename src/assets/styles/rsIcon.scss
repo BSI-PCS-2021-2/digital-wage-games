@@ -19,11 +19,13 @@
 .rs10::after {
     content: "10+";
     background-color: $rs10;
+    color: $dark-gray;
 }
 
 .rs12::after {
     content: "12+";
     background-color: $rs12;
+    color: $dark-gray;
 }
 
 .rs14::after {
