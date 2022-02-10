@@ -73,13 +73,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return productsCategories;
   }
 
-  imageCount(category){
-    let productsImage = [];
+  productByCategory(category){
+    let productsBycategory = [];
     this.products.forEach(product =>{
       if(product.gender.name == category){
-        productsImage.push(product.imgUrl)
+        productsBycategory.push(product)
       }
     })
-    return productsImage;
+    return productsBycategory;
   }
 }

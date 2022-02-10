@@ -6,19 +6,27 @@
     <h2 *ngIf="products" class="featuredTitle">Jogos novos</h2>
     <div *ngIf="products" class="featured-games">
         <div class="numberOne">
-            <img src={{products[0].imgUrl}}>
+            <a routerLink="/produto/{{products[0].id}}">
+                <img src={{products[0].imgUrl}}>
+            </a>
         </div>
         <div class="numberTwo">
+            <a routerLink="/produto/{{products[1].id}}">
             <img src={{products[1].imgUrl}}>
+            </a>
         </div>
         <div class="numberThree">
+            <a routerLink="/produto/{{products[2].id}}">
             <img src={{products[2].imgUrl}}>
+            </a>
         </div>
     </div>
     <div *ngFor="let category of categoryCounts" class="category">
         <h2 class="categoryTitle">{{category}}</h2>
         <div class="games">
-            <img *ngFor="let image of imageCount(category)" src={{image}}>
+            <a routerLink="/produto/{{ product.id }}" *ngFor="let product of productByCategory(category)">
+                <img src={{product.imgUrl}}>
+            </a>
         </div>
     </div>
 </div>
