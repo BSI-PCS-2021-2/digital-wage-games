@@ -7,65 +7,27 @@
   </div>
   <div class="body">
     <div class="avaliation-list">
-      <div class="avaliation">
+      <div class="avaliation" *ngFor="let order of orders; let i = index">
+        <!-- <div class="avaliation"> -->
+       <div class="package-img-container">
         <div class="container-img">
-          <img class="img-game" src="assets/images/game-images/halo-infinite.jpg">
+          <img class="img-game" src="{{ order.orderItems[0].imgUrl }}">
         </div>
+       </div>
         <div class="avaliation-info">
           <div class="name-rate">
-            <h2 class="title-game">Halo Infinite - PS5</h2>
+            <h2 class="title-game">Pacote {{ i + 1 }}</h2>
           </div>
-          <div class="container-desc">
-            <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum
-              maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam
-              accusamus error quae repellendus enim nulla!</p>
-          </div>
-        </div>
-      </div>
-      <div class="avaliation">
-        <div class="container-img">
-          <img class="img-game" src="assets/images/game-images/bf-2042.jpg">
-        </div>
-        <div class="avaliation-info">
-          <div class="name-rate">
-            <h2 class="title-game">Battlefield 2042 - PS5</h2>
-          </div>
-          <div class="container-desc">
-            <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum
-              maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam
-              accusamus error quae repellendus enim nulla!</p>
-          </div>
-        </div>
-      </div>
-      <div class="avaliation">
-        <div class="container-img">
-          <img class="img-game" src="assets/images/game-images/nioh-2.jpg">
-        </div>
-        <div class="avaliation-info">
-          <div class="name-rate">
-            <h2 class="title-game">Nioh II - PS5</h2>
-
-          </div>
-          <div class="container-desc">
-            <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum
-              maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam
-              accusamus error quae repellendus enim nulla!</p>
-          </div>
-        </div>
-      </div>
-      <div class="avaliation">
-        <div class="container-img">
-          <img class="img-game" src="assets/images/game-images/re-village.jpg">
-        </div>
-        <div class="avaliation-info">
-          <div class="name-rate">
-            <h2 class="title-game">Resident Evil Village - PS5</h2>
-
-          </div>
-          <div class="container-desc">
-            <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium facilis alias eum
-              maiores excepturi hic cumque fugit, autem, adipisci nesciunt distinctio, quibusdam delectus laboriosam
-              accusamus error quae repellendus enim nulla!</p>
+          <div class="container-desc" >
+            <div class="product-names" >
+              <p *ngFor="let orderItem of order.orderItems">{{ orderItem.productName }}</p>
+            </div>
+            <div class="order-infos">
+              <p>Entregue em {{ order.expectedDeliveryDate }}</p>
+              <p>Comprado em <span>{{ order.purchaseDate }}</span></p>
+              <p>Total pago de <span>{{ order.totalPrice | currency:'BRL': 'symbol' }}</span></p>
+              
+            </div>
           </div>
         </div>
       </div>

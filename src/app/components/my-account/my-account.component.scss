@@ -54,6 +54,7 @@ div::-webkit-scrollbar-thumb {
       gap: 10px;
       display: flex;
       flex-direction: column;
+      height: 650px;
 
       .avaliation {
         padding: 15px;
@@ -62,13 +63,16 @@ div::-webkit-scrollbar-thumb {
         flex-direction: row;
         background-color: $dark-gray;
 
-        .container-img {
-          align-self: center;
-
-          .img-game {
-            height: 100%;
-            width: 100%;
-          }
+        .package-img-container {
+          width: 680px;
+          .container-img {
+            width:100%;
+  
+            .img-game {
+              height: 100%;
+              width: 100%;
+            }
+        }
         }
 
         .avaliation-info {
@@ -91,9 +95,16 @@ div::-webkit-scrollbar-thumb {
           }
 
           .container-desc {
-            height: 65%;
+            display: flex;
+            justify-content: space-between;
             color: $light-gray;
-            overflow-y: auto;
+
+            .order-infos {
+              max-width: 250px;
+              p {
+                text-align: end;
+              }
+            }
           }
         }
       }
