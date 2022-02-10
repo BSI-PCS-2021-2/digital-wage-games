@@ -62,7 +62,6 @@ export class MyAccountComponent implements OnInit {
           }) 
         })
       }
-      orders.reverse();
     })
     this.walletService.getWallet(this.username).subscribe((w) => {
       this.funds = w.funds;
